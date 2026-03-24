@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phonics Friend | Rachel Terra Norton, MS, CCC-SLP</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--white:#fff;--offwhite:#fdfcfb;--cream:#f9f6f2;--warm-gray:#f0ece6;--sand:#e4ddd4;--text-dark:#2e2a26;--text-body:#4a4540;--text-muted:#8a8279;--text-light:#b0a89e;--pink:#d4829e;--pink-soft:#e8a5bc;--pink-light:#f3d1df;--lavender:#9b8cbf;--lavender-soft:#b5a8d1;--lavender-deep:#7e6da8;--sky:#7baac8;--sky-soft:#a3c5da;--sky-light:#d6e8f2;--periwinkle:#8b9fd4;--mint:#8cc5a7;--mint-soft:#b5dbc7;--amber:#d4a855;--amber-soft:#e8cb8a;--radius:10px;--radius-lg:14px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Nunito Sans',-apple-system,sans-serif;font-size:16px;background:var(--white);color:var(--text-body);min-height:100vh;-webkit-font-smoothing:antialiased;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bounce{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-5px);opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes confetti-fall{0%{opacity:1;transform:translateY(-20px) rotate(0deg) scale(1)}70%{opacity:1}100%{opacity:0;transform:translateY(100vh) rotate(720deg) scale(.3)}}
+@keyframes wobble{0%{transform:rotate(0)}15%{transform:rotate(-3deg)}30%{transform:rotate(2deg)}45%{transform:rotate(-1deg)}60%{transform:rotate(0)}}
+@keyframes glow-pulse{0%,100%{box-shadow:0 0 5px rgba(140,197,167,.2)}50%{box-shadow:0 0 20px rgba(140,197,167,.5)}}
+@keyframes card-pop{0%{transform:scale(.95);opacity:0}70%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
+@keyframes star-burst{0%{transform:scale(0) rotate(0);opacity:1}50%{transform:scale(1.2) rotate(180deg);opacity:.8}100%{transform:scale(0) rotate(360deg);opacity:0}}
+@keyframes progress-fill{from{width:0}to{width:var(--progress)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.confetti-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;}
+.confetti-piece{position:absolute;width:8px;height:8px;border-radius:2px;animation:confetti-fall 2.5s ease-out forwards;opacity:0;}
+.hero{background:linear-gradient(170deg,#eef3f0 0%,var(--offwhite) 100%);padding:36px 32px 28px;text-align:center;border-bottom:1px solid var(--warm-gray);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(140,197,167,.1) 0%,transparent 70%);}
+.hero::after{content:'';position:absolute;bottom:-40px;left:-40px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(155,140,191,.06) 0%,transparent 70%);}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-light);margin-bottom:10px;justify-content:center;}
+.hero-eyebrow-dot{width:7px;height:7px;border-radius:50%;background:var(--mint);}
+.hero-icon-wrap{display:flex;justify-content:center;margin-bottom:10px;}
+.hero-app-icon{width:72px;height:72px;object-fit:contain;border-radius:18px;box-shadow:0 4px 18px rgba(140,197,167,0.28),0 1px 4px rgba(109,180,142,0.12);transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+.hero-app-icon:hover{transform:scale(1.08) rotate(-3deg);}
+.hero-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;font-weight:400;color:var(--text-dark);line-height:1.15;margin-bottom:8px;}
+.hero-title em{font-style:italic;color:var(--mint);}
+.hero-desc{font-size:15px;font-weight:300;color:var(--text-muted);line-height:1.7;max-width:560px;margin:0 auto;}
+.main{max-width:1060px;margin:0 auto;padding:24px 20px 60px;}
+.view-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
+.view-tab{font-family:'Nunito Sans',sans-serif;font-size:15px;font-weight:600;padding:10px 22px;border-radius:24px;border:2px solid var(--warm-gray);background:var(--white);color:var(--text-muted);cursor:pointer;transition:all .2s;}
+.view-tab:hover{border-color:var(--mint);color:var(--mint);}
+.view-tab.active{background:var(--mint);border-color:var(--mint);color:white;}
+.cat-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.cat-tab{font-family:'Nunito Sans',sans-serif;font-size:14px;font-weight:600;padding:7px 16px;border-radius:20px;border:1.5px solid var(--warm-gray);background:var(--white);color:var(--text-muted);cursor:pointer;transition:all .2s;white-space:nowrap;}
+.cat-tab:hover{border-color:var(--lavender);color:var(--lavender);}
+.cat-tab.active{background:var(--lavender);border-color:var(--lavender);color:white;}
+.streak-bar{background:linear-gradient(135deg,#fdf5e6 0%,#faf0d8 100%);border:1.5px solid var(--amber-soft);border-radius:var(--radius);padding:8px 14px;margin-bottom:14px;font-size:14px;color:var(--amber);font-weight:600;display:flex;align-items:center;gap:8px;}
+.explore-layout{display:grid;grid-template-columns:320px 1fr;gap:20px;}
+.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-height:520px;overflow-y:auto;padding-right:4px;}
+.cards-grid::-webkit-scrollbar{width:4px;}
+.cards-grid::-webkit-scrollbar-thumb{background:var(--sand);border-radius:2px;}
+.phon-card{background:var(--white);border:2px solid var(--warm-gray);border-radius:var(--radius);padding:16px 12px;cursor:pointer;text-align:center;position:relative;transition:all .2s ease;animation:card-pop .35s ease backwards;}
+.phon-card:hover{border-color:var(--lavender-soft);box-shadow:0 4px 16px rgba(46,42,38,.1);transform:translateY(-3px) scale(1.02);}
+.phon-card.selected{box-shadow:0 0 0 3px var(--card-color,var(--lavender));border-color:var(--card-color,var(--lavender));animation:none;transform:scale(1.02);}
+.phon-card:nth-child(1){animation-delay:0s}
+.phon-card:nth-child(2){animation-delay:.04s}
+.phon-card:nth-child(3){animation-delay:.08s}
+.phon-card:nth-child(4){animation-delay:.12s}
+.phon-card:nth-child(5){animation-delay:.16s}
+.phon-card:nth-child(6){animation-delay:.2s}
+.phon-card:nth-child(7){animation-delay:.24s}
+.phon-card:nth-child(8){animation-delay:.28s}
+.phon-card:nth-child(9){animation-delay:.32s}
+.phon-card:nth-child(10){animation-delay:.36s}
+.phon-card .check-badge{position:absolute;top:5px;right:7px;font-size:13px;opacity:0;transition:opacity .3s;}
+.phon-card .check-badge.visible{opacity:1;}
+.card-pattern{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:600;margin-bottom:2px;transition:color .2s;}
+.card-sound{font-size:13px;color:var(--text-muted);margin-bottom:2px;}
+.card-meaning{font-size:12px;font-weight:700;color:var(--pink);margin-bottom:2px;letter-spacing:.3px;}
+.card-example{font-size:14px;color:var(--text-light);font-style:italic;}
+.lesson-panel{background:var(--white);border:1.5px solid var(--warm-gray);border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 2px 16px rgba(46,42,38,.06);animation:fadeIn .3s ease;}
+.lesson-header{padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1.5px solid var(--warm-gray);}
+.lesson-header-icon{width:50px;height:50px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:800;color:white;flex-shrink:0;}
+.lesson-header-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:600;}
+.lesson-header-sub{font-size:14px;color:var(--text-muted);}
+.lesson-header-sub em{font-style:italic;}
+.lesson-body{padding:20px 22px;display:flex;flex-direction:column;gap:16px;}
+.lesson-block{border-radius:var(--radius);padding:13px 15px;}
+.lesson-block-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:5px;}
+.lesson-block-text{font-size:16px;color:var(--text-dark);line-height:1.7;}
+.examples-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:6px;}
+.example-chip{display:inline-block;padding:6px 14px;border-radius:20px;font-size:14px;font-weight:600;color:white;}
+.qa-section{border-top:1.5px solid var(--warm-gray);padding:14px 20px 18px;}
+.qa-title{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;}
+.qa-item{margin-bottom:10px;}
+.qa-q{font-size:15px;font-weight:600;color:var(--text-dark);cursor:pointer;display:flex;align-items:center;gap:6px;padding:9px 12px;border-radius:8px;transition:background .15s;}
+.qa-q:hover{background:var(--cream);}
+.qa-q .qa-arrow{font-size:11px;color:var(--text-muted);transition:transform .2s;}
+.qa-q.open .qa-arrow{transform:rotate(90deg);}
+.qa-a{font-size:15px;color:var(--text-body);line-height:1.7;padding:8px 10px 2px 28px;display:none;animation:slideIn .2s ease;}
+.qa-a.visible{display:block;}
+.empty-state{background:var(--white);border:2px dashed var(--sand);border-radius:var(--radius-lg);height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:40px;}
+.empty-icon{font-size:52px;opacity:.4;}
+.empty-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;color:var(--text-dark);}
+.empty-hint{font-size:16px;color:var(--text-muted);max-width:240px;line-height:1.6;}
+.builder-card{background:var(--white);border:1.5px solid var(--warm-gray);border-radius:var(--radius-lg);padding:32px;box-shadow:0 2px 16px rgba(46,42,38,.06);animation:fadeIn .3s ease;}
+.builder-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:500;color:var(--text-dark);margin-bottom:6px;}
+.builder-desc{font-size:15px;color:var(--text-muted);margin-bottom:22px;line-height:1.6;}
+.builder-input-row{display:flex;gap:10px;margin-bottom:28px;}
+.builder-input{flex:1;padding:13px 18px;border-radius:var(--radius);border:1.5px solid var(--warm-gray);font-size:17px;font-family:'Nunito Sans',sans-serif;outline:none;color:var(--text-dark);transition:border-color .2s;}
+.builder-input:focus{border-color:var(--lavender-soft);}
+.builder-input::placeholder{color:var(--sand);}
+.builder-analyze-btn{padding:13px 24px;border-radius:var(--radius);border:none;background:var(--mint);color:white;font-weight:700;font-size:16px;cursor:pointer;font-family:'Nunito Sans',sans-serif;transition:all .2s;white-space:nowrap;}
+.builder-analyze-btn:hover{background:#6db48e;transform:translateY(-1px);}
+.morph-row{display:flex;gap:10px;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin-bottom:24px;}
+.morph-chip-wrap{text-align:center;min-width:90px;}
+.morph-plus{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;color:var(--sand);margin-top:12px;}
+.morph-chip{display:inline-block;padding:10px 18px;border-radius:var(--radius);font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:700;color:white;}
+.morph-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
+.morph-meaning{font-size:13px;color:var(--text-muted);margin-top:3px;max-width:120px;margin-left:auto;margin-right:auto;}
+.result-box{border-radius:var(--radius);padding:14px 16px;margin-bottom:12px;}
+.result-box-label{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;}
+.result-box-text{font-size:16px;color:var(--text-dark);font-family:'Nunito Sans',sans-serif;line-height:1.5;}
+.result-box-sub{font-size:14px;color:var(--text-muted);margin-top:4px;}
+.builder-empty{text-align:center;padding:40px;color:var(--sand);font-size:48px;}
+.builder-error{color:var(--pink);text-align:center;padding:16px;font-weight:600;}
+.curated-section{margin-bottom:28px;}
+.curated-title{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px;}
+.curated-chips{display:flex;flex-wrap:wrap;gap:7px;}
+.curated-chip{padding:6px 14px;border-radius:20px;font-size:14px;font-weight:600;border:1.5px solid var(--warm-gray);background:var(--white);color:var(--text-dark);cursor:pointer;transition:all .2s;}
+.curated-chip:hover{border-color:var(--lavender);color:var(--lavender);}
+.curated-chip.active{background:var(--lavender);border-color:var(--lavender);color:white;}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--text-dark);color:white;padding:11px 22px;border-radius:var(--radius);font-family:'Nunito Sans',sans-serif;font-size:14.5px;font-weight:500;z-index:1000;opacity:0;transition:all .35s cubic-bezier(.4,0,.2,1);pointer-events:none;max-width:90vw;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;animation:fadeIn .3s ease;}
+.ref-section{margin-bottom:28px;}
+.ref-section-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:500;color:var(--text-dark);margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--warm-gray);}
+.ref-card{background:var(--white);border:1.5px solid var(--warm-gray);border-radius:var(--radius);padding:16px;transition:all .2s;}
+.ref-card:hover{box-shadow:0 3px 12px rgba(46,42,38,.06);}
+.ref-card-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;font-weight:600;margin-bottom:4px;}
+.ref-card-desc{font-size:15px;color:var(--text-body);line-height:1.7;}
+.ref-card-example{font-size:14px;color:var(--text-muted);margin-top:6px;font-style:italic;}
+.ref-card-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:12px;color:white;margin-bottom:6px;}
+.scope-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px;}
+.scope-table th{background:var(--cream);padding:8px 10px;text-align:left;font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);border-bottom:2px solid var(--warm-gray);}
+.scope-table td{padding:8px 10px;border-bottom:1px solid var(--warm-gray);vertical-align:top;}
+.scope-table tr:hover{background:var(--cream);}
+.scope-num{font-weight:700;color:var(--lavender);width:30px;}
+
+/* Speak button on cards */
+.speak-btn{position:absolute;bottom:6px;right:6px;background:none;border:none;font-size:18px;cursor:pointer;opacity:.4;transition:all .2s;padding:2px;}
+.speak-btn:hover{opacity:1;transform:scale(1.2);}
+
+/* Progress bar per category */
+.cat-progress{height:4px;background:var(--warm-gray);border-radius:2px;margin-bottom:14px;overflow:hidden;}
+.cat-progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--mint),var(--lavender));transition:width .5s ease;animation:progress-fill .8s ease;}
+
+/* Collection / My Patterns toolbar */
+.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
+.toolbar-btn{font-family:'Nunito Sans',sans-serif;font-size:14px;font-weight:600;padding:9px 18px;border-radius:24px;border:2px solid var(--warm-gray);background:var(--white);color:var(--text-body);cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.toolbar-btn:hover{border-color:var(--mint);color:var(--mint);transform:translateY(-1px);}
+.toolbar-btn.active{background:var(--mint);border-color:var(--mint);color:white;}
+.toolbar-count{font-size:12px;font-weight:700;background:var(--lavender);color:white;padding:2px 7px;border-radius:10px;min-width:20px;text-align:center;}
+
+/* Collection panel */
+.collection-panel{background:var(--white);border:1.5px solid var(--warm-gray);border-radius:var(--radius-lg);padding:24px;animation:fadeIn .3s ease;margin-bottom:20px;}
+.collection-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;color:var(--text-dark);margin-bottom:6px;}
+.collection-desc{font-size:14px;color:var(--text-muted);margin-bottom:18px;}
+.collection-group{margin-bottom:18px;}
+.collection-group-title{font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.collection-item{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:14px;font-weight:600;margin:3px;border:1.5px solid var(--warm-gray);background:var(--offwhite);color:var(--text-dark);transition:all .2s;}
+.collection-item:hover{box-shadow:0 2px 8px rgba(46,42,38,.08);}
+.collection-empty{text-align:center;padding:30px;color:var(--text-muted);font-size:15px;}
+.collection-empty-icon{font-size:40px;margin-bottom:8px;opacity:.5;}
+
+/* Quiz mode */
+.quiz-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(46,42,38,.5);z-index:900;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s ease;}
+.quiz-card{background:var(--white);border-radius:var(--radius-lg);padding:32px;max-width:480px;width:90%;box-shadow:0 8px 40px rgba(46,42,38,.15);animation:card-pop .3s ease;}
+.quiz-question{font-family:'Cormorant Garamond',Georgia,serif;font-size:22px;font-weight:500;color:var(--text-dark);margin-bottom:18px;text-align:center;}
+.quiz-options{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.quiz-option{padding:12px 18px;border-radius:var(--radius);border:2px solid var(--warm-gray);background:var(--white);font-size:15px;font-family:'Nunito Sans',sans-serif;cursor:pointer;transition:all .2s;text-align:left;}
+.quiz-option:hover{border-color:var(--lavender);background:var(--cream);}
+.quiz-option.correct{border-color:var(--mint);background:#eef3f0;color:var(--mint);font-weight:700;}
+.quiz-option.wrong{border-color:var(--pink);background:#fdf0f4;color:var(--pink);}
+.quiz-close{position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:var(--text-muted);}
+.quiz-result{text-align:center;font-size:16px;font-weight:600;padding:12px;border-radius:var(--radius);margin-top:10px;}
+
+/* Floating reaction emojis */
+.reaction{position:fixed;z-index:9998;font-size:28px;pointer-events:none;animation:float-up 1.5s ease-out forwards;}
+@keyframes float-up{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-120px) scale(1.3)}}
+
+/* Print styles */
+@media print{
+  body{font-size:12pt;color:#000;background:#fff;}
+  .hero,.view-tabs,.cat-tabs,.streak-bar,.toolbar,.toast,.confetti-container,.speak-btn,.cat-progress,.quiz-overlay{display:none!important;}
+  .main{max-width:100%;padding:0;}
+  .collection-panel{border:1px solid #ccc;box-shadow:none;page-break-inside:avoid;}
+  .collection-item{border:1px solid #999;background:#f9f9f9;}
+  .collection-group{page-break-inside:avoid;}
+  .print-header{display:block!important;text-align:center;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid #333;}
+  .print-header h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:24pt;margin-bottom:4px;}
+  .print-header p{font-size:11pt;color:#666;}
+}
+.print-header{display:none;}
+
+@media(max-width:768px){
+  .hero-title{font-size:30px;}.hero-app-icon{width:60px;height:60px;border-radius:14px;}
+  .main{padding:20px 14px 40px;}.explore-layout{grid-template-columns:1fr;}
+  .cards-grid{max-height:300px;grid-template-columns:1fr 1fr;}
+  .empty-state{height:auto;min-height:200px;padding:24px;}
+  .builder-input-row{flex-direction:column;}.builder-card{padding:20px;}
+  .ref-grid{grid-template-columns:1fr;}
+  .toolbar{justify-content:center;}
+  .quiz-card{padding:24px 18px;max-width:95%;}
+  .collection-panel{padding:18px;}
+  .lesson-body{padding:16px;}
+  .cat-tab{font-size:13px;padding:6px 12px;}
+  .view-tab{font-size:14px;padding:8px 16px;}
+}
+
+/* ── Back-to-toolkit nav ── */
+.rrc-topnav { position: sticky; top: 0; z-index: 999; background: rgba(254,252,250,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #ede6df; padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
+.rrc-topnav a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: "DM Sans", -apple-system, sans-serif; font-size: 13px; font-weight: 600; color: #76706a; transition: color 0.2s, transform 0.2s; }
+.rrc-topnav a:hover { color: #2d2a26; transform: translateX(-2px); }
+.rrc-topnav a svg { width: 14px; height: 14px; fill: currentColor; }
+.rrc-topnav .rrc-topnav-title { margin-left: auto; font-family: "Fraunces", Georgia, serif; font-size: 13px; font-weight: 400; color: #a8a19a; letter-spacing: 0.5px; }
+@media print { .rrc-topnav { display: none; } }
+
+</style>
+</head>
+<body>
+<nav class="rrc-topnav" aria-label="Toolkit navigation">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back to Toolkit</a>
+  <span class="rrc-topnav-title">Rachel&#8217;s Reading Companion</span>
+</nav>
+
+<div class="confetti-container" id="confettiContainer"></div>
+<header class="hero">
+  <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div>Rachel's Reading Companion</div>
+  <div class="hero-icon-wrap">
+    <img src="https://static.wixstatic.com/media/517494_b299f5b0dacb42789c261d032b2d8e67~mv2.png" alt="Phonics Tutor icon" class="hero-app-icon" />
+  </div>
+  <h1 class="hero-title">Phonics <em>Friend</em></h1>
+  <p class="hero-desc">The most comprehensive, evidence-based phonics tool — explore sounds, patterns, spelling rules, and word structure.</p>
+</header>
+<div class="toast" id="toast"></div>
+<div class="main">
+  <div class="toolbar">
+    <div class="view-tabs" style="display:flex;gap:8px;flex-wrap:wrap;flex:1;">
+      <button class="view-tab active" data-view="explore" onclick="switchView('explore')">🗺️ Explore Patterns</button>
+      <button class="view-tab" data-view="builder" onclick="switchView('builder')">🔧 Word Builder</button>
+      <button class="view-tab" data-view="reference" onclick="switchView('reference')">📖 Quick Reference</button>
+    </div>
+    <button class="toolbar-btn" onclick="showCollection()">🧩 My Collection <span class="toolbar-count" id="collectionCount">0</span></button>
+    <button class="toolbar-btn" onclick="startQuiz()">🎯 Quiz Me!</button>
+  </div>
+  <div id="view-explore">
+    <div class="explore-layout">
+      <div>
+        <div class="cat-tabs" id="catTabs"></div>
+        <div class="cat-progress" id="catProgress"></div>
+        <div class="streak-bar" id="streakBar" style="display:none;"></div>
+        <div class="cards-grid" id="cardsGrid"></div>
+      </div>
+      <div id="chatArea">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-icon">👈</div>
+          <div class="empty-title">Pick a card to start</div>
+          <div class="empty-hint" id="emptyHint">Tap any card and your tutor will walk you through it!</div>
+        </div>
+        <div id="lessonPanel" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+  <div id="view-builder" style="display:none;">
+    <div class="builder-card">
+      <div class="builder-title">🔧 Word Builder &amp; Morpheme Analyzer</div>
+      <div class="builder-desc">Type any English word — or tap a curated example — to see it broken into prefix, root, and suffix with meanings.</div>
+      <div class="builder-input-row">
+        <input class="builder-input" id="builderInput" placeholder="e.g. unhappiness, preview, running…" onkeydown="if(event.key==='Enter')analyzeWord()">
+        <button class="builder-analyze-btn" onclick="analyzeWord()">Analyze →</button>
+      </div>
+      <div class="curated-section">
+        <div class="curated-title">✨ Try these</div>
+        <div class="curated-chips" id="curatedChips"></div>
+      </div>
+      <div id="builderResult"><div class="builder-empty">📖</div></div>
+    </div>
+  </div>
+  <div id="view-reference" style="display:none;"></div>
+</div>
+<script>
+// ============ COMPREHENSIVE PHONICS DATA ============
+// Aligned with: Moats Speech to Print, LETRS, Orton-Gillingham, Wilson Reading System, UFLI Foundations
+var defined = "evidence-based";
+var PHONICS = {
+  shortVowels: [
+    {pattern:"a", sound:"/æ/ (short a)", example:"cat, map, bag", color:"var(--pink)"},
+    {pattern:"e", sound:"/ɛ/ (short e)", example:"bed, pen, net", color:"var(--amber)"},
+    {pattern:"i", sound:"/ɪ/ (short i)", example:"sit, pin, lip", color:"var(--mint)"},
+    {pattern:"o", sound:"/ɑ/ (short o)", example:"hot, mop, top", color:"var(--periwinkle)"},
+    {pattern:"u", sound:"/ʌ/ (short u)", example:"cup, sun, bug", color:"var(--lavender)"}
+  ],
+  digraphs: [
+    {pattern:"sh", sound:"/ʃ/ (one sound)", example:"ship, fish, brush", color:"var(--mint)"},
+    {pattern:"ch", sound:"/tʃ/ (one sound)", example:"chip, lunch, beach", color:"var(--pink)"},
+    {pattern:"th", sound:"/θ/ or /ð/", example:"thin, the, math", color:"var(--amber)"},
+    {pattern:"wh", sound:"/w/ (or /hw/)", example:"when, whale, white", color:"var(--periwinkle)"},
+    {pattern:"ck", sound:"/k/ (one sound)", example:"duck, back, stick", color:"var(--lavender)"},
+    {pattern:"ng", sound:"/ŋ/ (one sound)", example:"ring, song, lung", color:"var(--mint)"},
+    {pattern:"ph", sound:"/f/ (one sound)", example:"phone, graph, dolphin", color:"var(--pink)"}
+  ],
+  blends: [
+    {pattern:"bl", sound:"/b/+/l/", example:"black, blue, blend", color:"var(--sky)"},
+    {pattern:"cl", sound:"/k/+/l/", example:"clap, close, climb", color:"var(--mint)"},
+    {pattern:"fl", sound:"/f/+/l/", example:"flag, flip, flow", color:"var(--pink)"},
+    {pattern:"gl", sound:"/g/+/l/", example:"glad, glow, glue", color:"var(--amber)"},
+    {pattern:"pl", sound:"/p/+/l/", example:"plan, play, please", color:"var(--lavender)"},
+    {pattern:"sl", sound:"/s/+/l/", example:"slip, slow, sleep", color:"var(--periwinkle)"},
+    {pattern:"br", sound:"/b/+/r/", example:"bring, brown, brush", color:"var(--pink)"},
+    {pattern:"cr", sound:"/k/+/r/", example:"crab, cross, cry", color:"var(--mint)"},
+    {pattern:"dr", sound:"/d/+/r/", example:"drop, drum, drive", color:"var(--amber)"},
+    {pattern:"fr", sound:"/f/+/r/", example:"frog, from, free", color:"var(--sky)"},
+    {pattern:"gr", sound:"/g/+/r/", example:"green, grow, grip", color:"var(--lavender)"},
+    {pattern:"pr", sound:"/p/+/r/", example:"print, pretty, proud", color:"var(--periwinkle)"},
+    {pattern:"tr", sound:"/t/+/r/", example:"tree, trip, train", color:"var(--pink)"},
+    {pattern:"sc", sound:"/s/+/k/", example:"scat, score, scar", color:"var(--mint)"},
+    {pattern:"sk", sound:"/s/+/k/", example:"skip, sky, skin", color:"var(--amber)"},
+    {pattern:"sm", sound:"/s/+/m/", example:"small, smile, smart", color:"var(--lavender)"},
+    {pattern:"sn", sound:"/s/+/n/", example:"snack, snow, snap", color:"var(--sky)"},
+    {pattern:"sp", sound:"/s/+/p/", example:"spin, spot, spell", color:"var(--periwinkle)"},
+    {pattern:"st", sound:"/s/+/t/", example:"stop, star, step", color:"var(--pink)"},
+    {pattern:"sw", sound:"/s/+/w/", example:"swim, sweet, swing", color:"var(--mint)"},
+    {pattern:"str", sound:"/s/+/t/+/r/", example:"street, strong, string", color:"var(--amber)"},
+    {pattern:"scr", sound:"/s/+/k/+/r/", example:"scream, scrub, scratch", color:"var(--lavender)"},
+    {pattern:"spl", sound:"/s/+/p/+/l/", example:"splash, split, splendid", color:"var(--sky)"},
+    {pattern:"spr", sound:"/s/+/p/+/r/", example:"spring, spray, spread", color:"var(--periwinkle)"},
+    {pattern:"squ", sound:"/s/+/k/+/w/", example:"square, squish, squid", color:"var(--pink)"},
+    {pattern:"-nd", sound:"/n/+/d/", example:"hand, bend, find", color:"var(--mint)"},
+    {pattern:"-nk", sound:"/ŋ/+/k/", example:"think, bank, drink", color:"var(--amber)"},
+    {pattern:"-nt", sound:"/n/+/t/", example:"went, hunt, plant", color:"var(--lavender)"},
+    {pattern:"-mp", sound:"/m/+/p/", example:"jump, camp, stamp", color:"var(--sky)"},
+    {pattern:"-st", sound:"/s/+/t/", example:"best, fast, must", color:"var(--periwinkle)"},
+    {pattern:"-ft", sound:"/f/+/t/", example:"left, soft, gift", color:"var(--pink)"},
+    {pattern:"-lt", sound:"/l/+/t/", example:"felt, belt, melt", color:"var(--amber)"},
+    {pattern:"-lk", sound:"/l/+/k/", example:"milk, silk, elk", color:"var(--lavender)"}
+  ],
+  magicE: [
+    {pattern:"a_e", sound:"/eɪ/ (long a)", example:"cake, make, brave", color:"var(--pink)"},
+    {pattern:"i_e", sound:"/aɪ/ (long i)", example:"bike, kite, smile", color:"var(--mint)"},
+    {pattern:"o_e", sound:"/oʊ/ (long o)", example:"home, rope, stone", color:"var(--periwinkle)"},
+    {pattern:"u_e", sound:"/juː/ or /uː/", example:"cube, cute, rude", color:"var(--lavender)"},
+    {pattern:"e_e", sound:"/iː/ (long e)", example:"these, Pete, eve", color:"var(--amber)"}
+  ],
+  vowelTeams: [
+    {pattern:"ai", sound:"/eɪ/ (long a)", example:"rain, wait, paint", color:"var(--pink)"},
+    {pattern:"ay", sound:"/eɪ/ (long a)", example:"day, play, stay", color:"var(--amber)"},
+    {pattern:"ee", sound:"/iː/ (long e)", example:"tree, sleep, feet", color:"var(--mint)"},
+    {pattern:"ea", sound:"/iː/ (long e)", example:"team, beach, clean", color:"var(--lavender)"},
+    {pattern:"oa", sound:"/oʊ/ (long o)", example:"boat, road, soap", color:"var(--periwinkle)"},
+    {pattern:"ow", sound:"/oʊ/ (long o)", example:"grow, show, snow", color:"var(--sky)"},
+    {pattern:"igh", sound:"/aɪ/ (long i)", example:"night, light, high", color:"var(--pink)"},
+    {pattern:"ie", sound:"/aɪ/ (long i)", example:"tie, pie, lie", color:"var(--amber)"},
+    {pattern:"oo", sound:"/uː/ (long oo)", example:"moon, food, school", color:"var(--mint)"},
+    {pattern:"\u016fk", sound:"/ʊ/ (short oo)", example:"book, look, good", color:"var(--lavender)"}
+  ],
+  rControlled: [
+    {pattern:"ar", sound:"/ɑr/", example:"car, farm, star", color:"var(--pink)"},
+    {pattern:"or", sound:"/ɔr/", example:"corn, storm, for", color:"var(--amber)"},
+    {pattern:"er", sound:"/ɜr/", example:"her, fern, teacher", color:"var(--mint)"},
+    {pattern:"ir", sound:"/ɜr/", example:"bird, girl, first", color:"var(--periwinkle)"},
+    {pattern:"ur", sound:"/ɜr/", example:"fur, nurse, burn", color:"var(--lavender)"}
+  ],
+  diphthongs: [
+    {pattern:"oi", sound:"/ɔɪ/", example:"coin, oil, point", color:"var(--pink)"},
+    {pattern:"oy", sound:"/ɔɪ/", example:"boy, toy, enjoy", color:"var(--amber)"},
+    {pattern:"ou", sound:"/aʊ/", example:"out, house, cloud", color:"var(--mint)"},
+    {pattern:"ow*", sound:"/aʊ/", example:"cow, how, down", color:"var(--periwinkle)"}
+  ],
+  moreVowels: [
+    {pattern:"au", sound:"/ɔː/", example:"caught, sauce, haul", color:"var(--pink)"},
+    {pattern:"aw", sound:"/ɔː/", example:"saw, draw, hawk", color:"var(--amber)"},
+    {pattern:"ew", sound:"/uː/ or /juː/", example:"new, flew, chew", color:"var(--mint)"},
+    {pattern:"ue", sound:"/uː/ or /juː/", example:"blue, true, glue", color:"var(--periwinkle)"},
+    {pattern:"ea*", sound:"/ɛ/ (short e)", example:"bread, head, dead", color:"var(--lavender)"},
+    {pattern:"oo*", sound:"/ʊ/ (short oo)", example:"book, look, foot", color:"var(--sky)"}
+  ],
+  advanced: [
+    {pattern:"soft c", sound:"/s/ before e,i,y", example:"city, cent, cycle", color:"var(--pink)"},
+    {pattern:"soft g", sound:"/dʒ/ before e,i,y", example:"gem, giant, gym", color:"var(--amber)"},
+    {pattern:"kn", sound:"/n/ (k silent)", example:"knee, knife, knot", color:"var(--mint)"},
+    {pattern:"wr", sound:"/r/ (w silent)", example:"write, wrong, wrap", color:"var(--periwinkle)"},
+    {pattern:"gn", sound:"/n/ (g silent)", example:"gnaw, gnat, sign", color:"var(--lavender)"},
+    {pattern:"mb", sound:"/m/ (b silent)", example:"lamb, comb, thumb", color:"var(--sky)"},
+    {pattern:"tch", sound:"/tʃ/ after short V", example:"catch, fetch, ditch", color:"var(--pink)"},
+    {pattern:"dge", sound:"/dʒ/ after short V", example:"badge, bridge, fudge", color:"var(--amber)"},
+    {pattern:"wa", sound:"/wɑ/ (a says /ɑ/)", example:"watch, want, wash", color:"var(--mint)"},
+    {pattern:"-ble", sound:"C-le syllable", example:"table, bubble, able", color:"var(--periwinkle)"},
+    {pattern:"-tle", sound:"C-le syllable", example:"little, gentle, castle", color:"var(--lavender)"},
+    {pattern:"-ple", sound:"C-le syllable", example:"apple, simple, people", color:"var(--sky)"},
+    {pattern:"-gle", sound:"C-le syllable", example:"eagle, giggle, angle", color:"var(--pink)"},
+    {pattern:"-dle", sound:"C-le syllable", example:"candle, middle, handle", color:"var(--amber)"}
+  ],
+  prefixes: [
+    {morph:"un-",meaning:"not / opposite",example:"undo, unhappy",color:"var(--pink)"},
+    {morph:"re-",meaning:"again",example:"redo, replay",color:"var(--mint)"},
+    {morph:"pre-",meaning:"before",example:"preview, pretest",color:"var(--amber)"},
+    {morph:"mis-",meaning:"wrongly",example:"mistake, mislead",color:"var(--periwinkle)"},
+    {morph:"dis-",meaning:"not / away",example:"dislike, disconnect",color:"var(--lavender)"},
+    {morph:"over-",meaning:"too much / above",example:"overeat, overwork",color:"var(--mint)"},
+    {morph:"sub-",meaning:"under / below",example:"subway, submarine",color:"var(--pink)"},
+    {morph:"inter-",meaning:"between",example:"interact, international",color:"var(--amber)"},
+    {morph:"super-",meaning:"above / beyond",example:"superhero, supermarket",color:"var(--periwinkle)"},
+    {morph:"anti-",meaning:"against",example:"antifreeze, antibiotic",color:"var(--lavender)"}
+  ],
+  suffixes: [
+    {morph:"-ing",meaning:"action in progress",example:"running, playing",color:"var(--mint)"},
+    {morph:"-ed",meaning:"past tense",example:"walked, jumped",color:"var(--pink)"},
+    {morph:"-er",meaning:"one who / more",example:"teacher, bigger",color:"var(--amber)"},
+    {morph:"-est",meaning:"most",example:"fastest, tallest",color:"var(--periwinkle)"},
+    {morph:"-ful",meaning:"full of",example:"hopeful, careful",color:"var(--lavender)"},
+    {morph:"-less",meaning:"without",example:"hopeless, careless",color:"var(--mint)"},
+    {morph:"-tion",meaning:"state / action",example:"nation, action",color:"var(--pink)"},
+    {morph:"-ness",meaning:"state of being",example:"kindness, darkness",color:"var(--amber)"},
+    {morph:"-ly",meaning:"in a manner of",example:"quickly, happily",color:"var(--periwinkle)"},
+    {morph:"-able",meaning:"capable of",example:"readable, lovable",color:"var(--lavender)"}
+  ]
+};
+var TABS=[
+  {id:"shortVowels",label:"Short Vowels",emoji:"🔊"},
+  {id:"digraphs",label:"Digraphs",emoji:"🔤"},
+  {id:"blends",label:"Blends",emoji:"🧩"},
+  {id:"magicE",label:"Magic E (VCe)",emoji:"✨"},
+  {id:"vowelTeams",label:"Vowel Teams",emoji:"👥"},
+  {id:"rControlled",label:"R-Controlled",emoji:"💢"},
+  {id:"diphthongs",label:"Diphthongs",emoji:"🎵"},
+  {id:"moreVowels",label:"More Vowels",emoji:"📚"},
+  {id:"advanced",label:"Advanced Patterns",emoji:"🏆"},
+  {id:"prefixes",label:"Prefixes",emoji:"⬅️"},
+  {id:"suffixes",label:"Suffixes",emoji:"➡️"}
+];
+var activeTab="shortVowels";var selected=null;var learned={};var streak=0;
+// NEW: Load from localStorage if available
+try{var saved=localStorage.getItem("phonicsFriend");if(saved){var d=JSON.parse(saved);learned=d.learned||{};streak=d.streak||0;}}catch(e){}
+var CURATED_WORDS=["unhappiness","redo","preview","misread","disconnect","overloaded","subway","international","superhero","antibiotic","running","jumped","teacher","kindness","quickly","readable","hopeful","fearless","action","fastest"];
+// ============ LESSONS (Evidence-based content) ============
+var LESSONS={
+  shortVowels:{
+    "a":{mnemonic:"Think of the sound a cat makes — short quick 'aaa'! Jaw drops low, mouth wide. 🐱",more:["cat","map","bag","rag","cap","hat","bat","sat","fan","van"],fact:"Short /æ/ is a near-open front vowel. Your jaw drops low and lips spread. It's one of the first vowel sounds children learn to decode in CVC words (Moats, Speech to Print).",practice:["What sound do you hear in the middle of 'map'?","Can you think of 3 words that rhyme with 'cat'?","Blend these sounds: /k/-/æ/-/p/. What word?"]},
+    "e":{mnemonic:"Short /ɛ/ — like when you say 'eh?' with a little surprise! Mouth slightly open. 🤷",more:["bed","pen","net","web","peg","red","hen","ten","pet","set"],fact:"The letter E is the most commonly used letter in English, appearing in about 11% of all words. Short /ɛ/ is an open-mid front vowel — jaw opens slightly less than for /æ/.",practice:["What sound is in the middle of 'pen'?","Can you think of a 3-letter word with short e?","Why do students sometimes confuse 'pen' and 'pin'?"]},
+    "i":{mnemonic:"Short /ɪ/ — a quick 'ih' sound, like the beginning of 'itch'! Tongue is high and relaxed. 🎯",more:["sit","pin","lip","bit","fig","hit","pig","big","dig","win"],fact:"Short /ɪ/ is called a 'lax' vowel because your tongue and jaw stay relaxed. Students often confuse /ɪ/ and /ɛ/ (pin/pen) — use jaw height cues to differentiate (LETRS).",practice:["What vowel do you hear in 'pin'?","Blend: /p/-/ɪ/-/g/. What word?","Name 2 words that rhyme with 'sit'."]},
+    "o":{mnemonic:"Short /ɑ/ — open wide like at the doctor's: 'aaah!' Jaw drops, mouth round. 👨‍⚕️",more:["hot","mop","sock","log","top","pot","dot","not","box","fox"],fact:"In General American English, short o is /ɑ/ (open back unrounded). Many speakers merge this with /ɔ/ (the 'caught' vowel) — this is called the cot-caught merger (Moats, LETRS).",practice:["What vowel sound is in 'mop'?","Blend: /t/-/ɑ/-/p/. What word?","What rhymes with 'hot'?"]},
+    "u":{mnemonic:"Short /ʌ/ — a soft grunt sound, like 'uh-huh'! Mouth relaxed and slightly open. 😄",more:["cup","sun","bug","mud","fun","cut","hug","run","tub","pup"],fact:"Short /ʌ/ is a stressed vowel. It is NOT the same as schwa /ə/, which only occurs in unstressed syllables. They sound similar but are different phonemes (Moats, Speech to Print).",practice:["What sound is in the middle of 'cup'?","Blend: /b/-/ʌ/-/g/. What word?","Name 2 words that rhyme with 'fun'."]}
+  },
+  digraphs:{
+    "sh":{mnemonic:"Finger to your lips — 'shhh!' Two letters, ONE brand-new sound. 🤫",more:["shop","fish","brush","dash","wish","ship","shell","shut","push","cash"],fact:"'sh' is a DIGRAPH: two letters making one sound. This is different from a BLEND (like 'bl') where both sounds are heard. In sound boxes, 'sh' goes in ONE box (Orton-Gillingham).",practice:["Where is 'sh' in 'fish' — beginning or end?","Blend: /ʃ/-/ɑ/-/p/. What word?","Name 2 words with 'sh' at the start and 2 at the end."]},
+    "ch":{mnemonic:"Like a train chugging: ch-ch-ch! Two letters make one punchy sound. 🚂",more:["chin","peach","lunch","chop","bench","chip","chat","much","such","catch"],fact:"'ch' has three pronunciations: /tʃ/ in native English words (chip), /k/ in Greek-origin words (school, chord), and /ʃ/ in French-origin words (chef, machine). The /tʃ/ sound is most common.",practice:["Blend: /tʃ/-/ɪ/-/n/. What word?","Is 'ch' at the start or end of 'peach'?","Can you think of a food word starting with 'ch'?"]},
+    "th":{mnemonic:"Tongue between your teeth! Voiceless in 'thin' (air only), voiced in 'the' (vibration). 👅",more:["thin","math","bath","cloth","three","the","this","that","them","with"],fact:"'th' makes TWO sounds: voiceless /θ/ (thin, math — no vocal vibration) and voiced /ð/ (the, this — vocal cords vibrate). Place fingers on your throat to feel the difference. English is one of few languages with dental fricatives.",practice:["Put your tongue between your teeth and say 'th' both ways!","Is 'th' voiced in 'the' or voiceless in 'thin'? Try both!","What rhymes with 'bath'?"]},
+    "wh":{mnemonic:"'wh' whispers like the wind — /w/ with a breathy puff! Most Americans say it as /w/. 💨",more:["wheel","whale","when","where","whisper","what","which","why","white","while"],fact:"Historically 'wh' was /hw/ (a breathy W). Some Southern U.S. and Scottish speakers still say /hw/. Most American English speakers now merge 'wh' and 'w'. 'wh' only appears at word beginnings.",practice:["What sound does 'wh' make in 'wheel'?","Name the 5 question words that start with 'wh'.","Blend: /w/-/aɪ/-/t/. What word?"]},
+    "ck":{mnemonic:"'ck' is the team that spells /k/ right after a short vowel — they protect it! 🤝",more:["duck","pack","rock","thick","click","back","neck","pick","sock","luck"],fact:"SPELLING RULE: Use 'ck' for final /k/ after a single short vowel (duck, back). Use 'k' after a consonant or long vowel (milk, bake). Use 'ke' in VCe words (cake). This is the CK Rule (Wilson, O-G).",practice:["Why is it 'duck' not 'duk'?","What's the rule for when to use 'ck' vs 'k'?","Name 3 short-vowel words ending in 'ck'."]},
+    "ng":{mnemonic:"A single nasal hum at the back of your throat — like a bell: riiiing! 🔔",more:["ring","song","long","bang","lung","sing","king","thing","wing","hang"],fact:"The /ŋ/ sound is a SINGLE phoneme (not /n/+/g/). It's a voiced velar nasal — made at the same place as /k/ and /g/ but through the nose. 'ng' never appears at the start of English words.",practice:["Is 'ng' at the start or end of 'ring'?","Feel the /ŋ/ at the back of your throat.","Name 3 words that rhyme with 'ring'."]},
+    "ph":{mnemonic:"'ph' is /f/ in disguise! It looks like P+H but sounds like F. 🎭",more:["phone","photo","graph","dolphin","phantom","elephant","trophy","orphan","sphere","phrase"],fact:"'ph' = /f/ comes from Greek. Phone (φωνή = voice), photo (φωτός = light), graph (γράφω = write). Knowing this Greek origin helps with academic vocabulary and spelling.",practice:["What sound does 'ph' make in 'phone'?","Can you think of 3 'ph' words?","Why isn't 'phone' spelled 'fone'?"]}
+  },
+  blends:{
+    "bl":{mnemonic:"B and L both talk — you hear /b/ then /l/ quickly. Blends keep both sounds! 🔵",more:["black","blue","blend","block","blink","blast","blank","blaze","bleed","bliss"],fact:"In a BLEND, each consonant keeps its own sound. In Elkonin sound boxes, each letter in a blend gets its OWN box. This is the key difference from digraphs (Orton-Gillingham).",practice:["How many sounds in 'bl'?","Blend: /b/-/l/-/æ/-/k/. What word?","Name 3 'bl' words."]},
+    "cl":{mnemonic:"C and L side by side — hear /k/ then /l/! 👏",more:["clap","close","climb","class","clean","clear","clock","cloud","clip","club"],fact:"L-blends (bl, cl, fl, gl, pl, sl) are typically taught first because the /l/ is a continuant sound that's easy to stretch and hear distinctly from the first consonant.",practice:["How is 'cl' different from 'ch'?","Blend: /k/-/l/-/æ/-/p/. What word?","Name a 'cl' word for something in your house."]},
+    "fl":{mnemonic:"F and L fly together — /f/ then /l/! 🦅",more:["flag","flip","flow","flat","flock","flame","float","floor","flesh","flung"],fact:"When teaching blends, have students stretch each sound: 'ffflllag.' If they can hear both sounds separately, it's a blend. If they can only hear one new sound, it's a digraph.",practice:["Blend: /f/-/l/-/ɪ/-/p/. What word?","Name something that 'fl'-ies.","Is 'fl' a blend or digraph? How do you know?"]},
+    "gl":{mnemonic:"G and L glow together — hear both /g/ and /l/! ✨",more:["glad","glow","glue","glass","globe","glide","gleam","gloom","glance","glory"],fact:"A helpful test: cover one letter. Can you still hear the remaining sound in the word? If yes, it's a blend. Blends are 'separable' — digraphs are not.",practice:["Blend: /g/-/l/-/u/. What word?","Name a 'gl' word that means happy.","Is 'gl' a blend or digraph?"]},
+    "pl":{mnemonic:"P and L plan together — /p/ then /l/! 📋",more:["plan","play","please","place","plant","plate","plum","plug","plenty","plain"],fact:"Students sometimes omit one sound in a blend ('pay' for 'play'). Practice segmenting: tap once for /p/, once for /l/, once for the vowel.",practice:["How many sounds in 'play'?","Blend: /p/-/l/-/æ/-/n/. What word?","Name a 'pl' word for something you eat."]},
+    "sl":{mnemonic:"S and L slide together — hear /s/ then /l/! 🛝",more:["slip","slow","sleep","slice","slam","slope","slime","slap","sled","sleeve"],fact:"S-blends (sl, sm, sn, sp, st, sc, sk, sw) form a large family. The /s/ is a continuant that naturally leads into the next consonant.",practice:["Blend: /s/-/l/-/iː/-/p/. What word?","Name a 'sl' word for something wet.","How many sounds in 'slim'?"]},
+    "br":{mnemonic:"B and R brave it together — /b/ then /r/! 💪",more:["bring","brown","brush","break","bread","brick","bright","brain","branch","breathe"],fact:"R-blends (br, cr, dr, fr, gr, pr, tr) can be harder because /r/ is one of the last sounds children master in speech. SLPs should monitor for /r/ production during blend instruction.",practice:["Blend: /b/-/r/-/ɪ/-/k/. What word?","Name a 'br' word for a color.","How is 'br' different from just 'b'?"]},
+    "cr":{mnemonic:"C and R crunch together — /k/ then /r/! 🦀",more:["crab","cross","cry","crack","cream","crown","crisp","crash","crawl","crust"],fact:"When students insert a vowel between blend consonants ('cuh-rab' for 'crab'), have them practice connecting the sounds without releasing air between them.",practice:["Blend: /k/-/r/-/æ/-/b/. What word?","Name a 'cr' animal.","How many sounds in 'crab'?"]},
+    "dr":{mnemonic:"D and R drive together — /d/ then /r/! 🚗",more:["drop","drum","drive","drink","draw","dress","drill","drain","dream","drift"],fact:"The 'dr' blend is sometimes heard as /dʒr/ (like 'jr') in casual speech. This is a natural coarticulation effect, not an error.",practice:["Blend: /d/-/r/-/ʌ/-/m/. What word?","Name a 'dr' word for something you do with a pencil.","How many sounds in 'drum'?"]},
+    "fr":{mnemonic:"F and R are friends — /f/ then /r/! 🐸",more:["frog","from","free","fresh","friend","front","frame","fruit","frown","freeze"],fact:"Continuant-initial blends (fr, fl, sl, sm, sn) are easier to teach because you can stretch the first sound: 'fffrog.' Stop-initial blends (br, cr, dr, gr, pr, tr) require quicker transitions.",practice:["Blend: /f/-/r/-/ɑ/-/g/. What word?","Name a 'fr' word for something you eat.","Is 'fr' a blend or digraph?"]},
+    "gr":{mnemonic:"G and R grow together — /g/ then /r/! 🌱",more:["green","grow","grip","great","grade","grass","group","ground","grape","grill"],fact:"When decoding blends, students should touch each sound separately, then sweep their finger under the blend to connect them smoothly.",practice:["Blend: /g/-/r/-/iː/-/n/. What word?","Name a 'gr' word for a color.","How many sounds in 'grip'?"]},
+    "pr":{mnemonic:"P and R print together — /p/ then /r/! 🖨️",more:["print","pretty","proud","price","press","prize","pray","prince","promise","protect"],fact:"Blend instruction typically follows this order: L-blends → S-blends → R-blends, as R-blends tend to be the most difficult (UFLI, Wilson).",practice:["Blend: /p/-/r/-/ɪ/-/n/-/t/. What word?","Name a 'pr' word for something valuable.","How is 'pr' different from 'ph'?"]},
+    "tr":{mnemonic:"T and R travel together — /t/ then /r/! 🚂",more:["tree","trip","train","truck","track","trade","treat","truth","trap","trim"],fact:"The 'tr' blend can sound like /tʃr/ (almost like 'chr') in natural speech. This coarticulation is normal and not a speech error.",practice:["Blend: /t/-/r/-/iː/. What word?","Name a 'tr' vehicle.","How many sounds in 'train'?"]},
+    "sc":{mnemonic:"S and C scan together — /s/ then /k/! 🔍",more:["scat","score","scar","scale","scare","scoop","scout","scold","scan","scarf"],fact:"Note: 'sc' before e, i, or y may produce just /s/ (scene, science) due to the soft c rule. The blend /sk/ only occurs before a, o, u, or consonants.",practice:["Blend: /s/-/k/-/ɔr/. What word?","When does 'sc' NOT make a blend sound?","Name a 'sc' word."]},
+    "sk":{mnemonic:"S and K skip together — /s/ then /k/! ⛷️",more:["skip","sky","skin","skill","skate","sketch","skull","ski","skirt","skeleton"],fact:"'sk' and 'sc' before a/o/u make the same blend sound /sk/. 'sk' is the more reliable spelling since it always says /sk/ regardless of what follows.",practice:["Blend: /s/-/k/-/ɪ/-/p/. What word?","Name a 'sk' word for something in the sky.","How many sounds in 'skip'?"]},
+    "sm":{mnemonic:"S and M smile together — /s/ then /m/! 😊",more:["small","smile","smart","smell","smoke","smooth","smash","smith","smug","smear"],fact:"S-blends are sometimes called 'S-clusters.' The /s/ naturally stretches into the next consonant, making these blends easier to segment.",practice:["Blend: /s/-/m/-/aɪ/-/l/. What word?","Name a 'sm' word for a facial expression.","How many sounds in 'small'?"]},
+    "sn":{mnemonic:"S and N sneak together — /s/ then /n/! 🐍",more:["snack","snow","snap","snail","sneak","snore","snake","snug","sniff","sneeze"],fact:"When segmenting S-blends, students should be able to isolate: /s/…/n/…/æ/…/k/ for 'snack.' If they can't separate the first two sounds, more phonemic awareness work is needed.",practice:["Blend: /s/-/n/-/oʊ/. What word?","Name a 'sn' animal.","How many sounds in 'snap'?"]},
+    "sp":{mnemonic:"S and P speed together — /s/ then /p/! 🏎️",more:["spin","spot","spell","space","speak","speed","spoon","spark","spend","spring"],fact:"Initial 'sp' is a blend, but 's' + 'p' can also appear across a syllable boundary (in·spect). Teaching students to look for this helps with multisyllabic word decoding.",practice:["Blend: /s/-/p/-/ɑ/-/t/. What word?","Name a 'sp' word for something fast.","How many sounds in 'spell'?"]},
+    "st":{mnemonic:"S and T stand together — /s/ then /t/! 🧍",more:["stop","star","step","stick","stone","story","stamp","still","storm","steam"],fact:"'st' can appear at the beginning (star), middle (master), or end (fast) of words. As a final blend (-st), it's one of the most common in English.",practice:["Blend: /s/-/t/-/ɑ/-/p/. What word?","Name a 'st' word in the sky.","How many sounds in 'stop'?"]},
+    "sw":{mnemonic:"S and W swim together — /s/ then /w/! 🏊",more:["swim","sweet","swing","switch","sweep","sword","swamp","swift","swear","swallow"],fact:"The W-blends (sw, tw, dw, qu) involve the glide /w/. 'sw' is the most common W-blend and is usually taught with the S-blend family.",practice:["Blend: /s/-/w/-/ɪ/-/m/. What word?","Name a 'sw' word for something fun at a playground.","How many sounds in 'swim'?"]},
+    "str":{mnemonic:"Three sounds in a row: /s/-/t/-/r/! A triple blend — street, strong, string! 💪",more:["street","strong","string","strike","stream","strange","stripe","stretch","straw","struggle"],fact:"Triple blends (str, scr, spl, spr, squ) contain three consonant sounds. They're taught after students master two-letter blends. Segmenting all three sounds is the key skill.",practice:["How many consonant sounds start 'string'?","Blend: /s/-/t/-/r/-/ɔ/-/ŋ/. What word?","Name a 'str' word for something you walk on."]},
+    "scr":{mnemonic:"Three sounds: /s/-/k/-/r/! Scratch, scream, scrub! 🧹",more:["scream","scrub","scratch","screen","scrap","scroll","script","screw","scramble","scribble"],fact:"When teaching triple blends, have students identify all three individual sounds first, then practice connecting them smoothly into the vowel.",practice:["How many consonant sounds start 'scream'?","Blend: /s/-/k/-/r/-/ʌ/-/b/. What word?","Name a 'scr' word for a sound you make when scared."]},
+    "spl":{mnemonic:"Three sounds: /s/-/p/-/l/! Splash, split, splendid! 💦",more:["splash","split","splendid","splice","splinter","splotch","spleen","splutter","display","explain"],fact:"Triple blends are among the most complex onset patterns in English. Mastery of triple blends indicates strong phonemic segmentation skills.",practice:["How many consonant sounds start 'splash'?","Blend: /s/-/p/-/l/-/ɪ/-/t/. What word?","Name a 'spl' word for water."]},
+    "spr":{mnemonic:"Three sounds: /s/-/p/-/r/! Spring, spray, spread! 🌸",more:["spring","spray","spread","sprout","sprint","sprinkle","sprawl","sprig","sprite","spruce"],fact:"Students who struggle with triple blends often need to go back and solidify their two-letter blend skills before progressing (Wilson Reading System).",practice:["How many consonant sounds start 'spring'?","Blend: /s/-/p/-/r/-/eɪ/. What word?","Name a 'spr' word for a season."]},
+    "squ":{mnemonic:"Three sounds: /s/-/k/-/w/! Square, squish, squid! 🦑",more:["square","squish","squid","squirrel","squeeze","squash","squad","squeak","squint","squat"],fact:"'squ' is unique — it's the only common triple blend involving /w/. Remember: Q is almost always followed by U in English, making /kw/ together.",practice:["How many sounds in the blend 'squ'?","Blend: /s/-/k/-/w/-/ɛ/-/r/. What word?","Name a 'squ' animal."]},
+    "-nd":{mnemonic:"Feel both sounds at the end: /n/ then /d/. Hand, bend, find! ✋",more:["hand","bend","find","sand","wind","mind","bond","pond","fund","round"],fact:"Final blends are taught after initial blends. Students often drop the last sound ('han' for 'hand'). Explicit segmentation practice helps: /h/-/æ/-/n/-/d/.",practice:["How many sounds in 'hand'?","What final blend do you hear in 'bend'?","Name 3 words ending in '-nd'."]},
+    "-nk":{mnemonic:"Feel /ŋ/ (like ng) then /k/ at the end. Think, bank, drink! 🏦",more:["think","bank","drink","pink","junk","skunk","blank","chunk","trunk","shrink"],fact:"The '-nk' blend actually contains /ŋ/ (the ng sound) + /k/, not /n/ + /k/. The 'n' before 'k' is always pronounced as /ŋ/. This is important for accurate phonemic analysis.",practice:["What sounds end 'think'?","How is '-nk' related to the 'ng' digraph?","Name 3 words ending in '-nk'."]},
+    "-nt":{mnemonic:"Two sounds at the end: /n/ then /t/. Went, hunt, plant! 🌿",more:["went","hunt","plant","bent","mint","front","grunt","stunt","point","paint"],fact:"Final blends are critical for spelling accuracy. Students who omit final blend sounds in writing ('wet' for 'went') need more phonemic segmentation practice.",practice:["How many sounds in 'hunt'?","What final blend do you hear in 'went'?","Name 3 words ending in '-nt'."]},
+    "-mp":{mnemonic:"Two sounds at the end: /m/ then /p/. Jump, camp, stamp! 🏕️",more:["jump","camp","stamp","bump","lamp","dump","pump","stomp","clamp","chimp"],fact:"The lips close for both /m/ and /p/ in the -mp blend, making it feel like one motion. Have students hold the /m/ hum before releasing the /p/ to feel both sounds.",practice:["How many sounds in 'jump'?","What final blend do you hear in 'camp'?","Name 3 words ending in '-mp'."]},
+    "-st":{mnemonic:"Two sounds at the end: /s/ then /t/. Best, fast, must! ⭐",more:["best","fast","must","list","dust","lost","frost","chest","toast","trust"],fact:"'-st' is one of the most common final blends in English. It appears in many high-frequency words and can combine with other patterns (toast = vowel team + final blend).",practice:["How many sounds in 'best'?","What final blend do you hear in 'fast'?","Name 3 words ending in '-st'."]},
+    "-ft":{mnemonic:"Two sounds at the end: /f/ then /t/. Left, soft, gift! 🎁",more:["left","soft","gift","lift","loft","raft","drift","craft","shift","swift"],fact:"Final '-ft' words are relatively few but include common words. The /f/ is a continuant, so students can stretch it before the /t/ stop: 'leffffff-t.'",practice:["How many sounds in 'gift'?","What final blend do you hear in 'soft'?","Name 3 words ending in '-ft'."]},
+    "-lt":{mnemonic:"Two sounds at the end: /l/ then /t/. Felt, belt, melt! 🫠",more:["felt","belt","melt","salt","bolt","jolt","built","quilt","fault","adult"],fact:"The '-lt' blend can be tricky because /l/ requires tongue elevation that's hard to hear before /t/. Have students exaggerate the /l/ in practice.",practice:["How many sounds in 'belt'?","What final blend do you hear in 'melt'?","Name 3 words ending in '-lt'."]},
+    "-lk":{mnemonic:"Two sounds at the end: /l/ then /k/. Milk, silk, elk! 🥛",more:["milk","silk","elk","bulk","hulk","sulk","folk","yolk","walk","talk"],fact:"Note: In 'walk,' 'talk,' 'folk,' and 'yolk,' the /l/ is silent! These are exceptions to the -lk blend pattern and must be taught as irregular.",practice:["How many sounds in 'milk'?","Is the /l/ heard in 'walk'?","Name 3 words ending in '-lk' where you hear the /l/."]}
+  },
+  magicE:{
+    "a_e":{mnemonic:"The silent E at the end makes A say its name: /eɪ/! Magic E! ✨",more:["cake","make","late","same","wade","game","brave","lane","safe","trace"],fact:"VCe (Vowel-Consonant-e) is one of the six syllable types. The silent e signals the preceding vowel to say its long (name) sound. This pattern is most common and reliable for 'a_e' (Moats, Wilson).",practice:["What does the silent E do in 'cake'?","How does 'cap' change when you add E?","Blend: /m/-/eɪ/-/k/. What word?"]},
+    "i_e":{mnemonic:"Silent E makes I say its name: /aɪ/! Like 'kite' flying high! 🪁",more:["bike","kite","smile","time","ride","hide","mine","vine","strike","white"],fact:"The VCe pattern for long i (i_e) is very reliable. Compare minimal pairs: bit/bite, rid/ride, kit/kite to show how silent E changes the vowel sound.",practice:["How does 'bit' change when you add E?","What does silent E do in 'time'?","Name 5 i_e words."]},
+    "o_e":{mnemonic:"Silent E makes O say its name: /oʊ/! Home sweet home! 🏠",more:["home","rope","stone","drove","bone","hole","nose","those","smoke","spoke"],fact:"Compare minimal pairs: hop/hope, not/note, cod/code. These pairs dramatically demonstrate the silent E's power to change vowel sounds.",practice:["How does 'hop' change when you add E?","What sound does O make in 'rope'?","Name 5 o_e words."]},
+    "u_e":{mnemonic:"Silent E makes U say /juː/ (cute) or /uː/ (rude)! Two possible sounds! 🎲",more:["cube","cute","rude","tune","huge","mute","fuse","tube","flute","prune"],fact:"Long u has two pronunciations: /juː/ (cube, cute, muse — with a 'y' glide) and /uː/ (rude, flute, June — without it). After r, l, and j, only /uː/ occurs (rule, June).",practice:["What sound does U make in 'cube'?","How does 'cub' change when you add E?","Name 3 u_e words with /juː/ and 3 with /uː/."]},
+    "e_e":{mnemonic:"Silent E makes the first E say its name: /iː/! These, Pete, eve! 📗",more:["these","Pete","eve","theme","gene","scene","Steve","compete","complete","concrete"],fact:"e_e is the RAREST VCe pattern. Long e is much more commonly spelled 'ee' (feet) or 'ea' (team). However, e_e does appear in important words like 'these,' 'theme,' 'scene,' 'complete,' and 'concrete.' Many e_e words are multisyllabic.",practice:["What sound does E make in 'these'?","Why is e_e the rarest magic E pattern?","Name 5 e_e words."]}
+  },
+  vowelTeams:{
+    "ai":{mnemonic:"A and I side by side — A says its name /eɪ/! The I stays quiet. 🤫",more:["rain","wait","paint","snail","tail","train","brain","chain","plain","claim"],fact:"POSITION RULE: 'ai' usually appears in the MIDDLE of words/syllables (rain, paint). 'ay' appears at the END (play, day). This is one of the most reliable spelling generalizations.",practice:["Where does 'ai' usually appear in a word?","Blend: /t/-/r/-/eɪ/-/n/. What word?","What rhymes with 'rain'?"]},
+    "ay":{mnemonic:"A and Y at the end — A says its name /eɪ/! Day, play, stay! ☀️",more:["day","play","stay","away","clay","pray","delay","display","relay","essay"],fact:"'ay' is the end-of-word/syllable spelling of long a. This ai/ay positional pattern is very reliable and should be explicitly taught (Moats, LETRS).",practice:["Where does 'ay' usually appear?","Why is 'day' spelled with 'ay' not 'ai'?","Name 5 'ay' words."]},
+    "ee":{mnemonic:"Two E's holding hands say 'ee' together — like cheese! 📸",more:["tree","sleep","feet","see","deep","seed","feed","week","screen","squeeze"],fact:"'ee' is a highly reliable vowel team — it almost always says /iː/. There is no simple rule for choosing 'ee' vs 'ea' for long e; word-specific knowledge is needed (LETRS).",practice:["What sound do two E's make together?","Name 5 'ee' words.","What rhymes with 'tree'?"]},
+    "ea":{mnemonic:"E and A usually say long E: /iː/! Like 'eat' and 'team'! But watch out — EA can be tricky! 🎭",more:["team","beach","clean","read","leaf","speak","dream","stream","teach","feast"],fact:"CAUTION: 'ea' has THREE pronunciations: long e /iː/ (eat, team — most common), short e /ɛ/ (bread, head), and long a /eɪ/ (great, break — rare). The multiple pronunciations make 'ea' one of the trickiest vowel teams.",practice:["What's the most common sound for 'ea'?","Can 'ea' make a different sound? Give an example.","Blend: /t/-/iː/-/m/. What word?"]},
+    "oa":{mnemonic:"O and A go walking — O does the talking! Says /oʊ/! 🚶",more:["boat","road","soap","toad","coat","load","foam","groan","roast","approach"],fact:"POSITION RULE: 'oa' usually appears in the MIDDLE of words (boat, road). 'ow' (as long o) appears at the END (grow, show). Similar to the ai/ay pattern.",practice:["Where does 'oa' usually appear?","Blend: /b/-/oʊ/-/t/. What word?","What rhymes with 'boat'?"]},
+    "ow":{mnemonic:"O and W can say long O: /oʊ/! Grow, show, snow! ❄️ But careful — OW has two sounds!",more:["grow","show","snow","flow","blow","slow","know","throw","below","elbow"],fact:"CAUTION: 'ow' represents TWO different sounds: long o /oʊ/ (grow, show) AND the diphthong /aʊ/ (cow, how). Students must learn BOTH and use context to determine pronunciation.",practice:["What are the two sounds 'ow' can make?","Is 'ow' saying /oʊ/ or /aʊ/ in 'grow'?","Name 3 'ow' words with long o."]},
+    "igh":{mnemonic:"I-G-H says long I: /aɪ/! The G and H are silent helpers! 🌙",more:["night","light","high","sight","right","bright","flight","might","tight","thigh"],fact:"'igh' is a reliable pattern for long i. The 'gh' is a silent remnant from Middle English when it was pronounced as a guttural fricative. Teaching this history helps students accept the 'extra' letters.",practice:["What sound does 'igh' make?","How many sounds in 'night'?","Name 5 'igh' words."]},
+    "ie":{mnemonic:"I and E at the end say long I: /aɪ/! Tie, pie, lie! 🥧",more:["tie","pie","lie","die","cries","flies","tries","dried","skies","supplies"],fact:"'ie' at the END of a base word usually says /aɪ/ (tie, pie). In the MIDDLE of a word, 'ie' often says /iː/ (field, piece) — following the 'i before e' pattern.",practice:["What sound does 'ie' make at the end of 'pie'?","Can 'ie' make a different sound? When?","Name 3 'ie' words with long i."]},
+    "oo":{mnemonic:"Two O's make a long 'ooo' — like a ghost or the moon! 👻",more:["moon","food","school","cool","zoom","proof","spoon","booth","goose","choose"],fact:"'oo' has TWO pronunciations: long /uː/ (moon, food — more common) and short /ʊ/ (book, good). There's no reliable rule for which sound — it must be learned word by word.",practice:["What sound does 'oo' make in 'moon'?","Name 5 long 'oo' words.","Can 'oo' make a different sound? Give examples."]},
+    "\u016fk":{mnemonic:"Short 'oo' as in 'book' — /ʊ/! Rhymes with 'look,' 'cook,' 'hook'! 📚",more:["book","look","good","foot","wood","cook","hook","stood","shook","brook"],fact:"Short oo /ʊ/ is a near-close near-back rounded vowel. It's a DIFFERENT phoneme from long oo /uː/. Common words: book, cook, foot, good, hood, look, took, wood, wool.",practice:["What sound does 'oo' make in 'book'?","How is the 'oo' in 'book' different from 'moon'?","Name 5 short 'oo' words."]}
+  },
+  rControlled:{
+    "ar":{mnemonic:"R bosses the A around! A + R = /ɑr/ like a pirate: 'Arrr!' 🏴‍☠️",more:["car","farm","star","park","barn","dark","sharp","march","garden","target"],fact:"R-controlled vowels are one of the six syllable types. The R fundamentally changes the vowel's articulation — it's neither short nor long. 'ar' = /ɑr/ is the most consistent and easiest to teach (Wilson, UFLI).",practice:["What happens to the 'a' sound when R follows it?","Blend: /k/-/ɑr/. What word?","Name 5 'ar' words."]},
+    "or":{mnemonic:"R bosses the O! O + R = /ɔr/ like 'or' in morning! 🌅",more:["corn","storm","for","born","fork","horse","north","short","sport","report"],fact:"'or' = /ɔr/ is relatively consistent. Additional spellings of this sound include 'ore' (more, store), 'oar' (board, soar), 'our' (four, pour), and 'oor' (door, floor).",practice:["What happens to 'o' when R follows it?","Name 5 'or' words.","What other spellings can make the /ɔr/ sound?"]},
+    "er":{mnemonic:"E + R = /ɜr/ — the same sound as 'ir' and 'ur'! Her, fern, teacher. 👩‍🏫",more:["her","fern","teacher","hotter","number","water","letter","other","better","never"],fact:"er, ir, and ur ALL make the SAME sound: /ɜr/. 'er' is the MOST COMMON spelling, especially in the -er suffix (teacher, bigger). Spelling choice requires word-specific knowledge (Moats).",practice:["What sound does 'er' make?","How is 'er' related to 'ir' and 'ur'?","Name 5 'er' words."]},
+    "ir":{mnemonic:"I + R = /ɜr/ — same as 'er' and 'ur'! Bird, girl, first. 🐦",more:["bird","girl","first","stir","third","shirt","birth","circle","dirt","firm"],fact:"'ir' often appears in the middle of words, frequently before d, m, t, and th. Since er/ir/ur sound identical, spelling these words correctly is one of the hardest challenges in English spelling.",practice:["What sound does 'ir' make?","Is 'ir' pronounced differently from 'er'?","Name 5 'ir' words."]},
+    "ur":{mnemonic:"U + R = /ɜr/ — same sound again! Fur, nurse, burn. 🔥",more:["fur","nurse","burn","curl","hurt","turn","church","purple","burst","surface"],fact:"Since er/ir/ur are indistinguishable by ear, students must learn which spelling to use through practice and morphological knowledge (e.g., -er is used for comparatives and agent nouns).",practice:["What sound does 'ur' make?","Why is it hard to spell er/ir/ur words correctly?","Name 5 'ur' words."]}
+  },
+  diphthongs:{
+    "oi":{mnemonic:"Your mouth changes shape! Starts open, glides to /ɪ/. Coin, oil, point! 🪙",more:["coin","oil","point","noise","moist","join","voice","choice","spoil","avoid"],fact:"A DIPHTHONG is a vowel where the mouth changes position during production (Greek: 'two sounds'). Place fingers on either side of your mouth — they MOVE for diphthongs but stay still for monophthongs.",practice:["Feel your mouth move as you say 'coin.'","Where does 'oi' appear in words — middle or end?","Name 5 'oi' words."]},
+    "oy":{mnemonic:"Same sound as 'oi' but at the end of words! Boy, toy, enjoy! 🧸",more:["boy","toy","enjoy","joy","royal","loyal","annoy","employ","destroy","voyage"],fact:"POSITION RULE: 'oi' in the MIDDLE of words (coin, point). 'oy' at the END (boy, enjoy). Same pattern as ai/ay and oa/ow. Mnemonic: 'Destroy the poison' — poison (middle) = oi, destroy (end) = oy.",practice:["Where does 'oy' appear in words?","How is the oi/oy rule like the ai/ay rule?","Name 5 'oy' words."]},
+    "ou":{mnemonic:"Mouth opens wide then rounds up! Out, house, cloud! ☁️",more:["out","house","cloud","sound","mouth","round","ground","loud","found","count"],fact:"The /aʊ/ diphthong starts with an open mouth (like /ɑ/) and glides to a rounded position (like /ʊ/). Position rule: 'ou' usually in the MIDDLE (house, cloud).",practice:["Feel your mouth change shape as you say 'out.'","Where does 'ou' usually appear?","Name 5 'ou' words."]},
+    "ow*":{mnemonic:"Same sound as 'ou' — /aʊ/! Cow, how, down! 🐄 (Remember: 'ow' has TWO possible sounds!)",more:["cow","how","down","town","brown","power","tower","flower","crowd","allow"],fact:"'ow' = /aʊ/ (cow) vs 'ow' = /oʊ/ (grow). This is one of English's trickiest patterns — same spelling, two different sounds. Students must learn both and use context/word knowledge.",practice:["Is 'ow' saying /aʊ/ or /oʊ/ in 'cow'?","How do you know which sound 'ow' makes?","Name 3 'ow' = /aʊ/ words and 3 'ow' = /oʊ/ words."]}
+  },
+  moreVowels:{
+    "au":{mnemonic:"A and U make the /ɔː/ sound — like 'aw'! Caught, sauce, haul! 🍝",more:["caught","sauce","haul","August","cause","fault","launch","author","taught","pause"],fact:"POSITION RULE: 'au' usually in the MIDDLE of words (caught, sauce). 'aw' at the END or before l, n, k (saw, shawl, dawn, hawk). Same positional pattern as other vowel teams.",practice:["Where does 'au' usually appear?","What sound do 'au' and 'aw' make?","Name 5 'au' words."]},
+    "aw":{mnemonic:"Same sound as 'au': /ɔː/! Saw, draw, hawk! 🦅",more:["saw","draw","hawk","law","shawl","dawn","crawl","straw","awful","jaw"],fact:"Note: Many American speakers with the cot-caught merger do NOT distinguish /ɑ/ (hot) from /ɔː/ (caught/saw). This is a regional dialect feature, not an error (Moats, LETRS).",practice:["Where does 'aw' usually appear?","How is the au/aw rule like the ai/ay rule?","Name 5 'aw' words."]},
+    "ew":{mnemonic:"E and W say /uː/ or /juː/! New, flew, chew! 🛫",more:["new","flew","chew","few","stew","blew","grew","drew","crew","threw"],fact:"'ew' says /uː/ after r, l, ch, j (flew, chew) and /juː/ after other consonants (few, new — though this varies by dialect). 'ew' typically appears at the end of words.",practice:["What sound does 'ew' make in 'new'?","Name 5 'ew' words.","Where does 'ew' appear in words?"]},
+    "ue":{mnemonic:"U and E say /uː/ or /juː/! Blue, true, glue! 💙",more:["blue","true","glue","clue","cue","due","sue","argue","rescue","continue"],fact:"'ue' typically appears at the end of words. It follows the same /uː/ vs /juː/ pattern as 'ew.' English words don't end in 'u' alone (the 'e' satisfies the spelling convention).",practice:["What sound does 'ue' make in 'blue'?","Why does English add 'e' after 'u' at the end of words?","Name 5 'ue' words."]},
+    "ea*":{mnemonic:"Tricky EA! Sometimes it says short E: /ɛ/! Bread, head, dead! 🍞",more:["bread","head","dead","spread","thread","breakfast","weather","heavy","feather","leather"],fact:"'ea' saying short e /ɛ/ is an EXCEPTION pattern — there's no rule to predict it. These words must be learned through practice. Mnemonic sentence: 'Eat a great breakfast' shows ea's three sounds: /iː/, /eɪ/, /ɛ/.",practice:["What sound does 'ea' make in 'bread'?","Name the three sounds 'ea' can make.","Name 5 'ea' = short e words."]},
+    "oo*":{mnemonic:"Short OO: /ʊ/ as in 'book'! Different from long OO in 'moon'! 📖",more:["book","look","foot","good","wood","cook","hook","stood","shook","wool"],fact:"Short oo /ʊ/ (book) vs long oo /uː/ (moon): there is NO reliable rule for predicting which sound. Most 'oo' before 'k' says /ʊ/ (book, cook, look, took). This must be learned word by word.",practice:["How is 'oo' in 'book' different from 'oo' in 'moon'?","Does 'oo' before 'k' usually say /ʊ/ or /uː/?","Name 5 short 'oo' words."]}
+  },
+  advanced:{
+    "soft c":{mnemonic:"C says /s/ before E, I, or Y! City, cent, cycle! 🏙️",more:["city","cent","cycle","ice","face","place","price","pencil","cellar","decide"],fact:"SOFT C/G RULE: C and G say their 'soft' sounds before e, i, or y. Soft C (/s/) is VERY reliable — few exceptions (soccer, Celtic). This rule also explains why we use K before e/i/y to spell /k/ (keep, kind, sky).",practice:["When does C say /s/ instead of /k/?","Why is 'cake' spelled with C but 'keep' with K?","Name 5 soft C words."]},
+    "soft g":{mnemonic:"G says /dʒ/ before E, I, or Y! Gem, giant, gym! 💎",more:["gem","giant","gym","cage","huge","page","giraffe","gentle","general","magic"],fact:"Soft G (/dʒ/) is LESS reliable than soft C — there are many exceptions (get, give, girl, gift, gear, begin, tiger). When it works, it's consistent, but G + e/i/y does NOT always produce /dʒ/.",practice:["When does G say /dʒ/?","Name 3 EXCEPTIONS where G before e/i stays hard.","Name 5 soft G words."]},
+    "kn":{mnemonic:"The K is silent! Only say /n/! Knee, knife, knot! 🔪",more:["knee","knife","knot","knock","know","knight","knit","knead","knack","kneel"],fact:"The K in 'kn' was pronounced in Old English (cniht for 'knight'). These are 'ghost letters' — silent now but historically meaningful. Teaching etymology helps students accept the spelling.",practice:["What happened to the /k/ sound over time?","Name 5 'kn' words.","Why don't we just spell 'knife' as 'nife'?"]},
+    "wr":{mnemonic:"The W is silent! Only say /r/! Write, wrong, wrap! ✍️",more:["write","wrong","wrap","wreck","wrist","wrinkle","wrestle","wren","wreath","wring"],fact:"The W in 'wr' was pronounced in Old English. Like 'kn,' knowing the history helps: 'write' meant to scratch/carve (writan), so the W was part of the original pronunciation.",practice:["What letter is silent in 'wr'?","Name 5 'wr' words.","How does knowing history help with spelling?"]},
+    "gn":{mnemonic:"The G is silent! Only say /n/! Gnaw, gnat, sign! 🦟",more:["gnaw","gnat","gnome","gnarl","sign","design","align","assign","reign","foreign"],fact:"'gn' can be silent at the beginning (gnaw, gnat) OR end (sign, design) of words. At the end, 'gn' often becomes /n/ in the base but the G 'reappears' in related forms (sign → signal).",practice:["Where can silent 'gn' appear?","Name 3 initial 'gn' and 3 final 'gn' words.","What happens to the G in 'sign' → 'signal'?"]},
+    "mb":{mnemonic:"The B is silent at the end! Only say /m/! Lamb, comb, thumb! 👍",more:["lamb","comb","thumb","dumb","crumb","bomb","climb","limb","numb","plumb"],fact:"Silent B in 'mb' only occurs at the END of words/roots. Like other silent letters, the B was once pronounced. The B sometimes 'reappears' in related words (bomb → bombard, crumb → crumble).",practice:["Where is B silent — at the beginning or end?","Name 5 'mb' words.","Does the B come back in 'bomb → bombard'?"]},
+    "tch":{mnemonic:"Use TCH for /tʃ/ after a single short vowel! Catch, fetch, ditch! 🥎",more:["catch","match","watch","fetch","sketch","stitch","witch","ditch","blotch","clutch"],fact:"SPELLING RULE: Use '-tch' after a single short vowel (catch, fetch). Use '-ch' after a consonant (lunch), vowel team (beach), or r-controlled vowel (porch). Exceptions: which, much, such, rich.",practice:["When do you use '-tch' vs '-ch'?","Name the 4 common exceptions to the tch rule.","Why 'catch' but 'lunch'?"]},
+    "dge":{mnemonic:"Use DGE for /dʒ/ after a single short vowel! Badge, bridge, fudge! 🌉",more:["badge","bridge","fudge","edge","hedge","ledge","ridge","dodge","lodge","judge"],fact:"SPELLING RULE: Use '-dge' after a single short vowel (badge, fudge). Use '-ge' after a consonant (bulge), long vowel (page, cage), or r-controlled vowel (forge). The D 'protects' the short vowel from silent E.",practice:["When do you use '-dge' vs '-ge'?","Why does the D 'protect' the short vowel?","Why 'badge' but 'page'?"]},
+    "wa":{mnemonic:"After W, the letter A often says /ɑ/ instead of /æ/! Watch, want, wash! 👀",more:["watch","want","wash","was","wander","wasp","swap","swat","wallet","waffle"],fact:"The W rounds the following vowel, pulling it back in the mouth (coarticulation). So 'wa' often sounds like /wɑ/ rather than /wæ/. Similarly, 'war/warm' = /wɔr/ and 'qua' follows the same pattern.",practice:["How does W change the A sound?","Does 'want' rhyme with 'ant' or 'font'?","Name 5 'wa' words where A says /ɑ/."]},
+    "-ble":{mnemonic:"Consonant-LE! The E is silent — hear the consonant + /l/. Table, bubble, able! 📋",more:["table","bubble","able","cable","fable","fumble","humble","marble","noble","trouble"],fact:"Consonant-LE is one of the six syllable types. The silent E exists to give the syllable a written vowel (English convention). Strategy: 'Count back three' from the end to find the syllable break.",practice:["How do you divide 'table' into syllables?","Is the first syllable open or closed in 'table'?","What about in 'bubble'?"]},
+    "-tle":{mnemonic:"Consonant-LE with T! Little, gentle, castle! 🏰",more:["little","gentle","castle","bottle","battle","cattle","kettle","settle","turtle","title"],fact:"In C-le words with double consonants (lit-tle, bot-tle), the first syllable is CLOSED (short vowel). With single consonants (ti-tle), it's OPEN (long vowel). This determines the vowel sound!",practice:["Divide 'little' into syllables.","Is the first syllable open or closed?","How about 'title'?"]},
+    "-ple":{mnemonic:"Consonant-LE with P! Apple, simple, people! 🍎",more:["apple","simple","people","purple","maple","sample","couple","triple","example","principle"],fact:"When dividing C-le words, you count back three letters from the end. Everything before that point is the first syllable. This reliably identifies the syllable break.",practice:["Divide 'simple' into syllables.","What's the vowel sound in the first syllable?","Divide 'maple' — what's different?"]},
+    "-gle":{mnemonic:"Consonant-LE with G! Eagle, giggle, angle! 🦅",more:["eagle","giggle","angle","single","jungle","struggle","wiggle","jingle","bugle","google"],fact:"C-le syllables are also called 'final stable syllables' because they consistently appear at the end and have a stable pronunciation: consonant + schwa + /l/.",practice:["Divide 'eagle' into syllables.","Is 'ea' in 'eagle' making its usual sound?","Divide 'giggle' into syllables."]},
+    "-dle":{mnemonic:"Consonant-LE with D! Candle, middle, handle! 🕯️",more:["candle","middle","handle","bundle","cuddle","fiddle","muddle","needle","paddle","riddle"],fact:"C-le words provide excellent practice for all syllable division skills. Students must identify the C-le syllable, divide correctly, then determine if the first syllable is open or closed.",practice:["Divide 'candle' into syllables.","Divide 'needle' — what type is the first syllable?","What pattern helps you divide C-le words?"]}
+  },
+  prefixes:{
+    "un-":{mnemonic:"UN-do what was done — just flip the meaning! 🔄",more:["unhappy","unlock","unfair","unkind","unsafe","unable","unreal","untie","unpack","unwrap"],fact:"'un-' comes from Old English and is one of the oldest, most common prefixes. It attaches to adjectives (unhappy), verbs (unlock), and some nouns (unrest). It's typically the first prefix taught in structured literacy.",practice:["Cover 'un-' in 'unhappy' — what's the base word?","Add 'un-' to 'lock'. What does it mean?","Name 5 more 'un-' words."]},
+    "re-":{mnemonic:"RE-do = do again! RE-play = play again! RE = again! ♻️",more:["redo","replay","return","rebuild","rewrite","reread","retell","remake","reopen","review"],fact:"'re-' from Latin meaning 'back' or 'again.' It's one of the most productive prefixes — it can attach to thousands of verbs. Important for building vocabulary systematically.",practice:["What does 're-' add to 'play'?","Create a sentence using a 're-' word.","What's the base word in 'rebuild'?"]},
+    "pre-":{mnemonic:"PREview = view BEFORE. PRE = before! ⏮️",more:["preview","pretest","prepare","preschool","preheat","preorder","predict","prevent","prefix","prewrite"],fact:"'pre-' from Latin 'prae' meaning 'before.' It attaches to nouns (preschool), verbs (preheat), and adjectives (premature). Fun fact: the word 'prefix' itself contains 'pre-'!",practice:["What does 'pre-' mean in 'preheat'?","Cover 'pre-' in 'preschool' — what's the base?","Create a 'pre-' word and explain it."]},
+    "mis-":{mnemonic:"MIS = wrongly! MIStake = take wrongly! MISspell = spell wrongly! ❌",more:["mistake","misread","mislead","misspell","misplace","miscount","misuse","misjudge","misfire","misprint"],fact:"'mis-' means 'wrongly/badly.' Notice 'misspell' keeps both S's (mis + spell). This is a common spelling error — students often write 'mispell.' Understanding the prefix boundary prevents this.",practice:["What does 'mis-' mean in 'misread'?","Why does 'misspell' have two S's?","Use 'misplace' in a sentence."]},
+    "dis-":{mnemonic:"DIS = not or away! DISlike = not like! DISconnect = un-connect! ↩️",more:["dislike","disagree","disconnect","dismiss","disorder","discover","disappear","disable","discard","distrust"],fact:"'dis-' from Latin meaning 'apart/away/not.' It reverses verbs (connect → disconnect) and adjectives (honest → dishonest). Similar to 'un-' but with Latin-origin words.",practice:["What's the opposite of 'agree'?","Cover 'dis-' in 'disconnect' — what's left?","Make a sentence using a 'dis-' word."]},
+    "over-":{mnemonic:"OVER has two meanings: 'too much' (overeat) and 'above' (overpass)! 🍽️",more:["overeat","overwork","overfill","overpass","overcome","overlap","overflow","overdue","overlook","overseas"],fact:"'over-' from Old English. Two meanings: 'too much' (overeat, overwork, overfill) and 'above/across' (overpass, overlook, overseas). Context determines meaning.",practice:["What does 'overeat' mean?","What does 'over-' mean in 'overpass' vs 'overwork'?","Create a sentence using 'overcome'."]},
+    "sub-":{mnemonic:"SUB = under! SUBmarine = under the sea! SUBway = under the way! 🌊",more:["subway","submarine","submerge","subzero","subtitle","subtract","subject","submit","suburb","subscribe"],fact:"'sub-' from Latin meaning 'under/below.' Submarine = under the sea, subtitle = under the main title, subzero = below zero. Very productive in academic vocabulary.",practice:["What does 'sub-' mean in 'subway'?","Cover 'sub-' in 'subzero' — what's left?","Name a 'sub-' word in math."]},
+    "inter-":{mnemonic:"INTER = between! INTERnational = between nations! 🌍",more:["interact","international","interview","interrupt","internet","intersection","interfere","interpret","intermediate","interchange"],fact:"'inter-' from Latin meaning 'between/among.' An intersection = where roads cross between each other. The internet = a network between networks. Very common in academic English.",practice:["What does 'inter-' mean in 'interact'?","Break down 'international'.","Use 'interrupt' in a sentence."]},
+    "super-":{mnemonic:"SUPER = above/beyond! SUPERhero = beyond a normal hero! 🦸",more:["superhero","superhuman","supermarket","supernatural","supersonic","superstar","supervisor","superpower","superior","superficial"],fact:"'super-' from Latin meaning 'above/beyond.' Supersonic = beyond the speed of sound. Supermarket = a market beyond (bigger than) a regular one.",practice:["What does 'super-' add to 'human'?","What's the base word in 'supernatural'?","Name 5 'super-' words."]},
+    "anti-":{mnemonic:"ANTI = against! ANTIfreeze works AGAINST freezing! 🛡️",more:["antibiotic","antisocial","antifreeze","antivirus","antidote","antibacterial","anticlockwise","antihero","antipathy","antiseptic"],fact:"'anti-' from Greek meaning 'against/opposite.' Antibiotics fight against bacteria. Antivirus fights against viruses. Antidote works against poison. Very common in science vocabulary.",practice:["What does 'anti-' mean in 'antivirus'?","What is an antidote against?","Name 5 'anti-' words."]}
+  },
+  suffixes:{
+    "-ing":{mnemonic:"-ING shows action happening NOW — running, jumping, reading! 🏃",more:["running","jumping","reading","singing","cooking","playing","making","hoping","sitting","swimming"],fact:"SPELLING RULES for -ing: (1) Double final consonant after short vowel (run → running). (2) Drop silent E (make → making). (3) Keep E after 'ee' (see → seeing). These are the Three Great Suffixing Rules (Wilson).",practice:["Why is 'running' spelled with double-n?","How does 'make' change when adding '-ing'?","What's the rule for 'hope' + '-ing'?"]},
+    "-ed":{mnemonic:"-ED means it already happened — past tense! ⏪",more:["jumped","walked","helped","painted","listed","played","loved","wanted","opened","closed"],fact:"THREE PRONUNCIATIONS: /t/ after voiceless sounds (jumped, walked), /d/ after voiced sounds (played, loved), /ɪd/ after /t/ or /d/ (painted, wanted). Same spelling, different sounds!",practice:["Say 'jumped' and 'painted' — do the '-ed's sound the same?","What are the three sounds '-ed' makes?","What determines which sound you hear?"]},
+    "-er":{mnemonic:"-ER has two jobs: 'one who' (teacher) AND 'more' (taller)! 🎭",more:["teacher","runner","bigger","faster","singer","worker","taller","cleaner","swimmer","painter"],fact:"-er as agent noun: 'one who does' (teach → teacher). -er as comparative: 'more' (tall → taller). SPELLING: Double final consonant after short vowel (big → bigger), change y to i (happy → happier).",practice:["Does '-er' mean 'one who' or 'more' in 'teacher'?","What about in 'bigger'?","Why is 'bigger' spelled with double-g?"]},
+    "-est":{mnemonic:"-EST means THE MOST — the biggest, fastest, tallest! 🏆",more:["fastest","tallest","smallest","brightest","kindest","biggest","hottest","happiest","strongest","wisest"],fact:"-est creates superlatives (comparing 3+). Use -er for 2 things (She is taller than me), -est for 3+ (She is the tallest in class). Same spelling rules as -er apply.",practice:["'Fast → faster → ___'?","What's the difference between -er and -est?","Make a sentence using a '-est' word."]},
+    "-ful":{mnemonic:"-FUL means FULL OF — hopeFUL = full of hope! 💛",more:["helpful","hopeful","careful","thankful","colorful","beautiful","powerful","wonderful","cheerful","peaceful"],fact:"'-ful' as a suffix ALWAYS has one L (hopeful), but the standalone word 'full' has two L's. This is consistent across all -ful words. Pairs with -less for antonyms (hopeful/hopeless).",practice:["What does 'careful' mean using '-ful'?","Drop '-ful' from 'thankful' — what's the base?","Why does '-ful' have only one L?"]},
+    "-less":{mnemonic:"-LESS means WITHOUT — hopeLESS = without hope! 🚫",more:["hopeless","fearless","careless","homeless","restless","useless","endless","helpless","worthless","countless"],fact:"-less creates adjectives meaning 'without.' It pairs with -ful for teaching antonyms: hopeful/hopeless, careful/careless. This is a powerful morphology lesson.",practice:["What's the opposite of 'hopeful'?","Drop '-less' from 'fearless' — what's left?","Use 'careless' and 'careful' in sentences."]},
+    "-tion":{mnemonic:"-TION turns verbs into nouns: act → action, create → creation! 🔄",more:["action","station","nation","creation","education","attention","direction","connection","protection","celebration"],fact:"'-tion' is pronounced /ʃən/ (shun), NOT /tiː-ɒn/. It turns verbs into nouns (create → creation). Related: '-sion' also says /ʃən/ (vision) or /ʒən/ (television).",practice:["What part of speech is 'action'?","What's the base verb in 'creation'?","Turn 'educate' into a noun."]},
+    "-ness":{mnemonic:"-NESS names a state — KINDness = the state of being kind! 💫",more:["kindness","darkness","happiness","sadness","illness","weakness","goodness","madness","awareness","loneliness"],fact:"'-ness' turns adjectives into nouns. SPELLING: When base ends in consonant + y, change y to i (happy → happiness, lonely → loneliness). This is the Y-to-I suffixing rule.",practice:["What's the base adjective in 'darkness'?","Turn 'sad' into a noun.","Why is it 'happiness' not 'happyness'?"]},
+    "-ly":{mnemonic:"-LY turns adjectives into adverbs — shows HOW! Quick → quickly! 💨",more:["quickly","slowly","happily","loudly","gently","softly","safely","bravely","quietly","carefully"],fact:"SPELLING: happy → happily (y → i). gentle → gently (drop -le, add -ly). true → truly (drop e). These are important suffixing rule applications.",practice:["What does '-ly' tell us about 'quickly'?","What's the base adjective in 'gently'?","Turn 'slow' into an adverb."]},
+    "-able":{mnemonic:"-ABLE means you CAN — readABLE = can be read! ✅",more:["readable","lovable","washable","breakable","enjoyable","comfortable","remarkable","reasonable","valuable","adorable"],fact:"'-able' vs '-ible': '-able' is more common and usually attaches to complete base words (read → readable). '-ible' tends to appear with Latin roots that aren't standalone words (visible, terrible).",practice:["What does 'washable' mean?","Make 'enjoy' into an '-able' word.","What's the opposite of 'readable'?"]}
+  }
+};
+var MORE_EXAMPLES={
+  shortVowels:{"a":["cat","map","bag","hat","fan"],"e":["bed","pen","net","red","ten"],"i":["sit","pin","lip","big","win"],"o":["hot","mop","sock","top","box"],"u":["cup","sun","bug","run","fun"]},
+  digraphs:{"sh":["shop","fish","brush","wish","shell"],"ch":["chin","peach","lunch","chop","bench"],"th":["thin","math","bath","this","cloth"],"wh":["wheel","whale","when","where","why"],"ck":["duck","pack","rock","stick","luck"],"ng":["ring","song","long","king","bang"],"ph":["phone","photo","graph","dolphin","phantom"]},
+  blends:{"bl":["black","blue","blend"],"cl":["clap","close","climb"],"fl":["flag","flip","flow"],"gl":["glad","glow","glue"],"pl":["plan","play","plant"],"sl":["slip","slow","sleep"],"br":["bring","brown","brush"],"cr":["crab","cross","cry"],"dr":["drop","drum","drive"],"fr":["frog","from","free"],"gr":["green","grow","grip"],"pr":["print","pretty","proud"],"tr":["tree","trip","train"],"sc":["scat","score","scar"],"sk":["skip","sky","skin"],"sm":["small","smile","smart"],"sn":["snack","snow","snap"],"sp":["spin","spot","spell"],"st":["stop","star","step"],"sw":["swim","sweet","swing"],"str":["street","strong","string"],"scr":["scream","scrub","scratch"],"spl":["splash","split","splendid"],"spr":["spring","spray","spread"],"squ":["square","squish","squid"],"-nd":["hand","bend","find"],"-nk":["think","bank","drink"],"-nt":["went","hunt","plant"],"-mp":["jump","camp","stamp"],"-st":["best","fast","must"],"-ft":["left","soft","gift"],"-lt":["felt","belt","melt"],"-lk":["milk","silk","elk"]},
+  magicE:{"a_e":["cake","make","late","brave","game"],"i_e":["bike","kite","smile","time","ride"],"o_e":["home","rope","stone","drove","bone"],"u_e":["cube","cute","rude","tune","huge"],"e_e":["these","Pete","eve","theme","scene"]},
+  vowelTeams:{"ai":["rain","wait","paint","train","brain"],"ay":["day","play","stay","away","clay"],"ee":["tree","sleep","feet","see","deep"],"ea":["team","beach","clean","read","leaf"],"oa":["boat","road","soap","toad","coat"],"ow":["grow","show","snow","flow","blow"],"igh":["night","light","high","sight","right"],"ie":["tie","pie","lie","die","cries"],"oo":["moon","food","school","cool","zoom"],"\u016fk":["book","look","good","foot","wood"]},
+  rControlled:{"ar":["car","farm","star","park","barn"],"or":["corn","storm","for","born","fork"],"er":["her","fern","teacher","letter","better"],"ir":["bird","girl","first","stir","third"],"ur":["fur","nurse","burn","curl","hurt"]},
+  diphthongs:{"oi":["coin","oil","point","noise","join"],"oy":["boy","toy","enjoy","joy","royal"],"ou":["out","house","cloud","sound","mouth"],"ow*":["cow","how","down","town","brown"]},
+  moreVowels:{"au":["caught","sauce","haul","cause","fault"],"aw":["saw","draw","hawk","law","crawl"],"ew":["new","flew","chew","few","stew"],"ue":["blue","true","glue","clue","cue"],"ea*":["bread","head","dead","spread","weather"],"oo*":["book","look","foot","good","wood"]},
+  advanced:{"soft c":["city","cent","cycle","ice","face"],"soft g":["gem","giant","gym","cage","huge"],"kn":["knee","knife","knot","knock","know"],"wr":["write","wrong","wrap","wreck","wrist"],"gn":["gnaw","gnat","gnome","sign","design"],"mb":["lamb","comb","thumb","dumb","climb"],"tch":["catch","match","fetch","witch","clutch"],"dge":["badge","bridge","fudge","edge","judge"],"wa":["watch","want","wash","wasp","waffle"],"-ble":["table","bubble","able","cable","humble"],"-tle":["little","gentle","castle","bottle","title"],"-ple":["apple","simple","purple","maple","sample"],"-gle":["eagle","giggle","angle","jungle","single"],"-dle":["candle","middle","handle","bundle","needle"]},
+  prefixes:{"un-":["unhappy","unlock","unfair"],"re-":["redo","replay","return"],"pre-":["preview","pretest","prepare"],"mis-":["mistake","misread","mislead"],"dis-":["dislike","disagree","disconnect"],"over-":["overeat","overwork","overfill"],"sub-":["subway","submarine","submerge"],"inter-":["interact","international","interview"],"super-":["superhero","superhuman","supermarket"],"anti-":["antibiotic","antisocial","antifreeze"]},
+  suffixes:{"-ing":["running","jumping","reading"],"-ed":["jumped","walked","helped"],"-er":["teacher","runner","bigger"],"-est":["fastest","tallest","smallest"],"-ful":["helpful","hopeful","careful"],"-less":["hopeless","fearless","careless"],"-tion":["action","station","nation"],"-ness":["kindness","darkness","happiness"],"-ly":["quickly","slowly","happily"],"-able":["readable","lovable","washable"]}
+};
+var SYLLABLE_DICT={"unhappiness":"un\u00b7hap\u00b7pi\u00b7ness","redo":"re\u00b7do","preview":"pre\u00b7view","misread":"mis\u00b7read","disconnect":"dis\u00b7con\u00b7nect","overloaded":"o\u00b7ver\u00b7load\u00b7ed","subway":"sub\u00b7way","international":"in\u00b7ter\u00b7na\u00b7tion\u00b7al","superhero":"su\u00b7per\u00b7he\u00b7ro","antibiotic":"an\u00b7ti\u00b7bi\u00b7ot\u00b7ic","running":"run\u00b7ning","jumped":"jumped","teacher":"teach\u00b7er","kindness":"kind\u00b7ness","quickly":"quick\u00b7ly","readable":"read\u00b7a\u00b7ble","hopeful":"hope\u00b7ful","fearless":"fear\u00b7less","action":"ac\u00b7tion","fastest":"fast\u00b7est","unhappy":"un\u00b7hap\u00b7py","unlock":"un\u00b7lock","unfair":"un\u00b7fair","replay":"re\u00b7play","return":"re\u00b7turn","rebuild":"re\u00b7build","rewrite":"re\u00b7write","pretest":"pre\u00b7test","prepare":"pre\u00b7pare","preschool":"pre\u00b7school","preheat":"pre\u00b7heat","mistake":"mis\u00b7take","mislead":"mis\u00b7lead","misspell":"mis\u00b7spell","misplace":"mis\u00b7place","dislike":"dis\u00b7like","disagree":"dis\u00b7a\u00b7gree","dismiss":"dis\u00b7miss","disorder":"dis\u00b7or\u00b7der","overeat":"o\u00b7ver\u00b7eat","overwork":"o\u00b7ver\u00b7work","overfill":"o\u00b7ver\u00b7fill","overpass":"o\u00b7ver\u00b7pass","overcome":"o\u00b7ver\u00b7come","submerge":"sub\u00b7merge","subzero":"sub\u00b7ze\u00b7ro","subtitle":"sub\u00b7ti\u00b7tle","subtract":"sub\u00b7tract","interact":"in\u00b7ter\u00b7act","interview":"in\u00b7ter\u00b7view","interrupt":"in\u00b7ter\u00b7rupt","internet":"in\u00b7ter\u00b7net","superhuman":"su\u00b7per\u00b7hu\u00b7man","supermarket":"su\u00b7per\u00b7mar\u00b7ket","supernatural":"su\u00b7per\u00b7nat\u00b7u\u00b7ral","supersonic":"su\u00b7per\u00b7son\u00b7ic","antisocial":"an\u00b7ti\u00b7so\u00b7cial","antifreeze":"an\u00b7ti\u00b7freeze","antivirus":"an\u00b7ti\u00b7vi\u00b7rus","antidote":"an\u00b7ti\u00b7dote","jumping":"jump\u00b7ing","reading":"read\u00b7ing","singing":"sing\u00b7ing","cooking":"cook\u00b7ing","playing":"play\u00b7ing","walked":"walked","helped":"helped","painted":"paint\u00b7ed","listed":"list\u00b7ed","runner":"run\u00b7ner","bigger":"big\u00b7ger","faster":"fast\u00b7er","singer":"sing\u00b7er","tallest":"tall\u00b7est","smallest":"small\u00b7est","brightest":"bright\u00b7est","kindest":"kind\u00b7est","helpful":"help\u00b7ful","careful":"care\u00b7ful","thankful":"thank\u00b7ful","colorful":"col\u00b7or\u00b7ful","hopeless":"hope\u00b7less","careless":"care\u00b7less","homeless":"home\u00b7less","restless":"rest\u00b7less","station":"sta\u00b7tion","nation":"na\u00b7tion","creation":"cre\u00b7a\u00b7tion","education":"ed\u00b7u\u00b7ca\u00b7tion","darkness":"dark\u00b7ness","happiness":"hap\u00b7pi\u00b7ness","sadness":"sad\u00b7ness","illness":"ill\u00b7ness","slowly":"slow\u00b7ly","happily":"hap\u00b7pi\u00b7ly","loudly":"loud\u00b7ly","gently":"gen\u00b7tly","lovable":"lov\u00b7a\u00b7ble","washable":"wash\u00b7a\u00b7ble","breakable":"break\u00b7a\u00b7ble","enjoyable":"en\u00b7joy\u00b7a\u00b7ble","table":"ta\u00b7ble","bubble":"bub\u00b7ble","little":"lit\u00b7tle","gentle":"gen\u00b7tle","castle":"cas\u00b7tle","bottle":"bot\u00b7tle","apple":"ap\u00b7ple","simple":"sim\u00b7ple","purple":"pur\u00b7ple","eagle":"ea\u00b7gle","giggle":"gig\u00b7gle","candle":"can\u00b7dle","middle":"mid\u00b7dle","needle":"nee\u00b7dle","handle":"han\u00b7dle","dolphin":"dol\u00b7phin","phantom":"phan\u00b7tom","telephone":"tel\u00b7e\u00b7phone","photograph":"pho\u00b7to\u00b7graph","breakfast":"break\u00b7fast","weather":"weath\u00b7er","submarine":"sub\u00b7ma\u00b7rine","splendid":"splen\u00b7did","squirrel":"squir\u00b7rel","waffle":"waf\u00b7fle"};
+function getLabel(item){return item.pattern||item.morph||"";}
+function esc(t){return String(t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function shootConfetti(){var c=document.getElementById("confettiContainer");var cols=["#d4829e","#9b8cbf","#7baac8","#8b9fd4","#8cc5a7","#d4a855"];for(var i=0;i<50;i++){var p=document.createElement("div");p.className="confetti-piece";p.style.left=(Math.random()*100)+"%";p.style.background=cols[Math.floor(Math.random()*cols.length)];p.style.animationDelay=(Math.random()*.6)+"s";p.style.animationDuration=(1.8+Math.random()*1.5)+"s";p.style.width=(5+Math.random()*8)+"px";p.style.height=p.style.width;p.style.borderRadius=Math.random()>.5?"50%":"2px";c.appendChild(p);setTimeout((function(el){return function(){el.remove();};})(p),3000);}}
+function showToast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2800);}
+function syllabify(word){word=(word||"").toLowerCase().replace(/[^a-z]/g,"");if(!word||word.length<=3)return word;if(SYLLABLE_DICT[word])return SYLLABLE_DICT[word];var vow="aeiouy";function isV(c){return c&&vow.indexOf(c)>=0;}var onsets=["bl","br","ch","cl","cr","dr","dw","fl","fr","gl","gn","gr","kn","ph","pl","pr","qu","sc","sh","sk","sl","sm","sn","sp","spl","spr","sq","st","str","sw","th","tr","tw","wh","wr","scr","sch"];function isOn(s){if(s.length===1&&!isV(s))return true;for(var i=0;i<onsets.length;i++)if(onsets[i]===s)return true;return false;}var nuclei=[],i=0;while(i<word.length){if(isV(word[i])){var s=i;while(i<word.length&&isV(word[i]))i++;nuclei.push({s:s,e:i-1});}else i++;}if(nuclei.length>1){var last=nuclei[nuclei.length-1];if(last.s===last.e&&last.e===word.length-1&&word[last.e]==="e"){if(!(last.s>=2&&!isV(word[last.s-1])&&word[last.s-1]==="l"))nuclei.pop();}}if(nuclei.length<=1)return word;var brk=[];for(var j=0;j<nuclei.length-1;j++){var curr=nuclei[j],next=nuclei[j+1],cs=curr.e+1,ce=next.s-1,nc=ce-cs+1;if(nc<=0)brk.push(next.s);else if(nc===1)brk.push(cs);else if(nc===2){if(isOn(word[cs]+word[cs+1]))brk.push(cs);else brk.push(cs+1);}else if(nc===3){if(isOn(word[cs+1]+word[cs+2]))brk.push(cs+1);else brk.push(cs+1);}else{var placed=false;for(var k=ce;k>cs;k--){if(isOn(word.slice(k,ce+1))){brk.push(k);placed=true;break;}}if(!placed)brk.push(cs+1);}}var res="",lp=0;for(var b=0;b<brk.length;b++){res+=word.slice(lp,brk[b])+"\u00b7";lp=brk[b];}return res+word.slice(lp);}
+function switchView(view){document.querySelectorAll(".view-tab").forEach(function(b){b.classList.remove("active");});document.querySelector(".view-tab[data-view='"+view+"']").classList.add("active");["explore","builder","reference"].forEach(function(v){var el=document.getElementById("view-"+v);if(el)el.style.display=v===view?"block":"none";});var cv=document.getElementById("view-collection");if(cv)cv.style.display="none";if(view==="reference")buildReferenceView();}
+function buildCatTabs(){var el=document.getElementById("catTabs");el.innerHTML=TABS.map(function(t){return '<button class="cat-tab'+(t.id===activeTab?" active":"")+'" onclick="switchTab(\''+t.id+'\')">'+t.emoji+" "+t.label+"</button>";}).join("");}
+function switchTab(id){activeTab=id;selected=null;buildCatTabs();buildCards();document.getElementById("lessonPanel").style.display="none";document.getElementById("emptyState").style.display="flex";var tab=TABS.find(function(t){return t.id===id;});document.getElementById("emptyHint").textContent="Tap any "+(tab?tab.label:"")+" card to learn about it!";updateCatProgress();}
+function buildCards(){
+  var items=PHONICS[activeTab];if(!items)return;
+  var el=document.getElementById("cardsGrid");
+  el.innerHTML=items.map(function(item,i){
+    var lbl=getLabel(item);
+    var isSel=selected&&getLabel(selected)===lbl;
+    var isL=learned[activeTab+":"+lbl];
+    var ss=isSel?"border-color:"+item.color+";--card-color:"+item.color+";box-shadow:0 0 0 3px "+item.color+"33;":"";
+    var cs=isSel?"color:"+item.color+";":"color:var(--text-dark);";
+    var delay="animation-delay:"+(i*0.04)+"s;";
+    return '<div class="phon-card'+(isSel?" selected":"")+'" style="'+ss+delay+'" onclick="selectItem('+i+')">'
+      +'<span class="check-badge'+(isL?" visible":"")+'">&#x2705;</span>'
+      +'<div class="card-pattern" style="'+cs+'">'+esc(lbl)+'</div>'
+      +(item.sound?'<div class="card-sound">'+esc(item.sound)+'</div>':"")
+      +(item.meaning?'<div class="card-meaning">'+esc(item.meaning)+'</div>':"")
+      +'<div class="card-example">'+esc(item.example)+'</div>'
+      +'<button class="speak-btn" onclick="event.stopPropagation();speakWord(\''+esc(item.example.split(",")[0].trim()).replace(/'/g,"\\'")+'\',this)" title="Hear it!">\uD83D\uDD0A</button>'
+      +'</div>';
+  }).join("");
+  updateCatProgress();
+}
+function selectItem(index){var items=PHONICS[activeTab];selected=items[index];var lbl=getLabel(selected);var lesson=(LESSONS[activeTab]&&LESSONS[activeTab][lbl])||{mnemonic:"",more:[],fact:"",practice:[]};var examples=(MORE_EXAMPLES[activeTab]&&MORE_EXAMPLES[activeTab][lbl])||selected.example.split(",").map(function(s){return s.trim();});buildCards();document.getElementById("emptyState").style.display="none";var sub=selected.sound?"Sound: "+selected.sound:(selected.meaning?"Meaning: "+selected.meaning:"");var h='<div class="lesson-panel"><div class="lesson-header" style="background:'+selected.color+'11;border-bottom-color:'+selected.color+'33;"><div class="lesson-header-icon" style="background:'+selected.color+';">'+esc(lbl)+'</div><div><div class="lesson-header-title" style="color:'+selected.color+';">'+esc(lbl)+'</div><div class="lesson-header-sub">'+esc(sub)+' \u00b7 e.g. <em>'+esc(selected.example)+'</em></div></div></div><div class="lesson-body">';if(lesson.mnemonic){h+='<div class="lesson-block" style="background:#eef3f0;border:1.5px solid var(--mint-soft);"><div class="lesson-block-label" style="color:var(--mint);">\ud83d\udca1 Remember It</div><div class="lesson-block-text">'+esc(lesson.mnemonic)+'</div></div>';}if(examples.length){h+='<div class="lesson-block" style="background:var(--cream);border:1.5px solid var(--warm-gray);"><div class="lesson-block-label" style="color:'+selected.color+';">\ud83d\udcda Examples</div><div class="examples-row">';examples.forEach(function(ex){h+='<span class="example-chip" style="background:'+selected.color+';">'+esc(ex)+'</span>';});h+='</div></div>';}if(lesson.fact){h+='<div class="lesson-block" style="background:linear-gradient(135deg,#fdf5e6 0%,#faf0d8 100%);border:1.5px solid var(--amber-soft);"><div class="lesson-block-label" style="color:var(--amber);">\u2b50 Did You Know?</div><div class="lesson-block-text">'+esc(lesson.fact)+'</div></div>';}h+='</div>';if(lesson.practice&&lesson.practice.length){h+='<div class="qa-section"><div class="qa-title">\ud83c\udfaf Practice Questions</div>';lesson.practice.forEach(function(q,i){h+='<div class="qa-item"><div class="qa-q" id="qq'+i+'" onclick="toggleQA('+i+')"><span class="qa-arrow" id="qa-arr'+i+'">\u25b6</span> '+esc(q)+'</div><div class="qa-a" id="qa-a'+i+'">Think about the sounds and patterns you\'ve learned. Try saying it out loud! \ud83c\udfaf</div></div>';});h+='</div>';}h+='</div>';document.getElementById("lessonPanel").innerHTML=h;document.getElementById("lessonPanel").style.display="block";var key=activeTab+":"+lbl;if(!learned[key]){learned[key]=true;streak++;buildCards();updateStreak();if(streak>0&&streak%5===0){shootConfetti();showToast("\ud83c\udf1f "+streak+" patterns explored!");}else showToast("\u2705 "+lbl+" learned!");}saveProgress();if(window.innerWidth<=768){document.getElementById("lessonPanel").scrollIntoView({behavior:"smooth",block:"start"});}floatReaction();}
+function toggleQA(i){document.getElementById("qq"+i).classList.toggle("open");document.getElementById("qa-a"+i).classList.toggle("visible");}
+function updateStreak(){var bar=document.getElementById("streakBar");if(streak>0){bar.style.display="flex";bar.innerHTML="\ud83d\udd25 "+streak+" explored \u00a0\u00b7\u00a0 \u2705 "+Object.keys(learned).length+" learned";}}
+function analyzeWord(){var w=document.getElementById("builderInput").value.trim();if(!w)return;var r=localAnalyzeWord(w);renderAnalysis(r,w);document.querySelectorAll(".curated-chip").forEach(function(c){c.classList.toggle("active",c.textContent===w.toLowerCase());});}
+function localAnalyzeWord(wordRaw){var word=(wordRaw||"").toLowerCase().replace(/[^a-z]/g,"");if(!word)return{error:"Enter a word."};var PRE=[{p:"inter-",m:"between"},{p:"super-",m:"above/beyond"},{p:"anti-",m:"against"},{p:"over-",m:"too much/above"},{p:"under-",m:"below"},{p:"pre-",m:"before"},{p:"dis-",m:"not/away"},{p:"mis-",m:"wrongly"},{p:"sub-",m:"under"},{p:"re-",m:"again"},{p:"un-",m:"not/opposite"}];var SUF=[{p:"-tion",m:"state/action"},{p:"-sion",m:"state/action"},{p:"-ness",m:"state of being"},{p:"-ment",m:"result of"},{p:"-able",m:"capable of"},{p:"-ible",m:"capable of"},{p:"-less",m:"without"},{p:"-ful",m:"full of"},{p:"-est",m:"most"},{p:"-ing",m:"in progress"},{p:"-ed",m:"past tense"},{p:"-er",m:"one who/more"},{p:"-ly",m:"in manner of"},{p:"-ous",m:"full of"},{p:"-ive",m:"tending to"},{p:"-al",m:"relating to"}];
+var RH={"act":"to do","agree":"harmony","break":"to separate","build":"to construct","care":"concern","clean":"free from dirt","close":"to shut","connect":"to join","cook":"prepare food","count":"to number","create":"to make","dark":"no light","do":"to perform","eat":"to consume","educate":"to teach","employ":"give work","end":"to finish","enjoy":"take pleasure","fail":"not succeed","fair":"just","fast":"quick","fear":"danger feeling","fill":"make full","fold":"to bend","free":"not bound","freeze":"become ice","gentle":"mild","govern":"to rule","graph":"write/display","happy":"feeling good","harm":"damage","heat":"warmth","help":"to assist","home":"where one lives","hope":"to wish","human":"a person","jump":"to leap","kind":"caring","know":"understand","large":"big","lead":"to guide","like":"to enjoy","list":"ordered series","live":"to be alive","load":"burden/cargo","lock":"to secure","look":"to see","love":"deep affection","market":"buy/sell place","merge":"combine","move":"change position","name":"identification","nation":"country","natural":"from nature","open":"not closed","order":"arrangement","paint":"apply color","pass":"go by","place":"location","play":"activity","point":"indicate","power":"ability","prepare":"make ready","print":"reproduce","protect":"keep safe","quick":"fast","read":"interpret text","real":"existing","rest":"relax","return":"come back","run":"move fast","safe":"no danger","school":"learning place","see":"perceive","send":"cause to go","sing":"make music","sit":"be seated","sleep":"rest","slow":"not fast","small":"little","social":"of society","soft":"not hard","speak":"talk","spell":"form words","stand":"upright","start":"begin","station":"stop place","stop":"cease","strong":"powerful","take":"get hold of","talk":"speak","tall":"great height","teach":"instruct","tell":"communicate","test":"examine","thank":"gratitude","think":"use mind","touch":"contact","true":"accurate","turn":"rotate","use":"employ","view":"to see","visit":"go see","walk":"move on foot","want":"desire","wash":"clean","watch":"observe","work":"effort","write":"form letters"};
+var prefix=null,suffix=null,core=word;PRE.sort(function(a,b){return b.p.length-a.p.length;});for(var i=0;i<PRE.length;i++){var pt=PRE[i].p.replace("-","");if(core.indexOf(pt)===0&&core.length>pt.length+1){prefix=PRE[i];core=core.slice(pt.length);break;}}SUF.sort(function(a,b){return b.p.length-a.p.length;});for(var i=0;i<SUF.length;i++){var st=SUF[i].p.replace("-","");if(core.length>st.length&&core.slice(-st.length)===st){suffix=SUF[i];core=core.slice(0,-st.length);break;}}
+if(suffix){var sf=suffix.p.replace("-","");var sfV="aeiouy".indexOf(sf[0])>=0;if(core.length>=2&&core[core.length-1]===core[core.length-2]&&"aeiouy".indexOf(core[core.length-1])<0){var s1=core.slice(0,-1);if(RH[s1])core=s1;}if(core.length>=2&&core[core.length-1]==="i"){var wy=core.slice(0,-1)+"y";if(RH[wy])core=wy;}if(sfV&&core.length>=2){var we=core+"e";if(RH[we])core=we;}}
+var syl=syllabify(word);var mp=[];if(prefix)mp.push(prefix.m);mp.push(RH[core]||'"'+core+'"');if(suffix)mp.push("("+suffix.m+")");var fm=mp.length>1?mp.join(" + "):"A base word.";var ff;if(prefix&&suffix)ff="Three morphemes: prefix + root + suffix!";else if(prefix)ff="A prefix modifies the root's meaning.";else if(suffix)ff="A suffix changes the word's form or meaning.";else ff="A free morpheme \u2014 stands on its own!";
+return{prefix:prefix?{part:prefix.p,meaning:prefix.m}:{part:null},root:{part:core,meaning:RH[core]||"base word"},suffix:suffix?{part:suffix.p,meaning:suffix.m}:{part:null},pronunciation:syl||word,fullMeaning:fm,funFact:ff};}
+function renderAnalysis(a,ow){if(a.error){document.getElementById("builderResult").innerHTML='<div class="builder-error">'+esc(a.error)+'</div>';return;}var pts=[];if(a.prefix&&a.prefix.part)pts.push({c:a.prefix.part,l:"PREFIX",m:a.prefix.meaning,bg:"var(--pink)"});if(a.root&&a.root.part)pts.push({c:a.root.part,l:"ROOT",m:a.root.meaning,bg:"var(--mint)"});if(a.suffix&&a.suffix.part)pts.push({c:a.suffix.part,l:"SUFFIX",m:a.suffix.meaning,bg:"var(--periwinkle)"});var h='<div class="morph-row">';pts.forEach(function(p,i){if(i>0)h+='<div class="morph-plus">+</div>';h+='<div class="morph-chip-wrap"><div class="morph-chip" style="background:'+p.bg+';">'+esc(p.c)+'</div><div class="morph-label" style="color:'+p.bg+';">'+p.l+'</div><div class="morph-meaning">'+esc(p.m||"")+'</div></div>';});h+='</div>';if(a.pronunciation){h+='<div class="result-box" style="background:#eef3f0;border:1.5px solid var(--mint-soft);"><div class="result-box-label" style="color:var(--mint);">\ud83d\udde3 Syllables</div><div class="result-box-text"><em>'+esc(a.pronunciation)+'</em></div>';if(a.fullMeaning)h+='<div class="result-box-sub">'+esc(a.fullMeaning)+'</div>';h+='</div>';}if(a.funFact){h+='<div class="result-box" style="background:linear-gradient(135deg,#fdf5e6 0%,#faf0d8 100%);border:1.5px solid var(--amber-soft);"><div class="result-box-label" style="color:var(--amber);">\u2b50 Fun Fact</div><div class="result-box-text">'+esc(a.funFact)+'</div></div>';}document.getElementById("builderResult").innerHTML=h;shootConfetti();showToast("\ud83d\udd27 "+ow+" analyzed!");}
+function buildCuratedChips(){document.getElementById("curatedChips").innerHTML=CURATED_WORDS.map(function(w){return '<span class="curated-chip" onclick="pickCurated(\''+w+'\')">'+esc(w)+'</span>';}).join("");}
+function pickCurated(w){document.getElementById("builderInput").value=w;analyzeWord();}
+function buildReferenceView(){var el=document.getElementById("view-reference");var h='<div style="animation:fadeIn .3s ease;"><div class="ref-section"><div class="ref-section-title">\ud83d\udcdd The Six Syllable Types</div><p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Every English syllable follows one of these six patterns. (Sources: Wilson Reading System, Orton-Gillingham, LETRS)</p><div class="ref-grid">';
+[{t:"1. Closed",tg:"~50% of syllables",tc:"var(--mint)",d:"One vowel closed by consonant(s). Vowel is SHORT.",x:"cat, hint, splash, nap\u00b7kin, rab\u00b7bit"},{t:"2. Open",tg:"Long Vowel",tc:"var(--sky)",d:"Ends with a single vowel. Vowel is LONG.",x:"go, me, hi, ba\u00b7by, mu\u00b7sic"},{t:"3. VCe (Magic E)",tg:"Silent E",tc:"var(--pink)",d:"Vowel + consonant + silent e. Vowel is LONG.",x:"cake, kite, rope, cube"},{t:"4. Vowel Team",tg:"Two Vowels",tc:"var(--amber)",d:"Two+ adjacent vowels representing ONE sound.",x:"rain, boat, team, play, night"},{t:"5. R-Controlled",tg:"Bossy R",tc:"var(--lavender)",d:"Vowel + R. Sound is neither short nor long.",x:"car, for, her, bird, fur"},{t:"6. Consonant-LE",tg:"Final Syllable",tc:"var(--periwinkle)",d:"Final syllable: consonant + le. E is silent.",x:"ta\u00b7ble, puz\u00b7zle, gen\u00b7tle"}].forEach(function(s){h+='<div class="ref-card"><div class="ref-card-tag" style="background:'+s.tc+';">'+s.tg+'</div><div class="ref-card-title">'+s.t+'</div><div class="ref-card-desc">'+s.d+'</div><div class="ref-card-example">\ud83d\udccc '+s.x+'</div></div>';});
+h+='</div></div><div class="ref-section"><div class="ref-section-title">\ud83d\udcd0 Key Spelling Rules</div><p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Evidence-based generalizations from structured literacy. (Sources: Moats, Wilson, O-G)</p><div class="ref-grid">';
+[{t:"FLOSS Rule",tc:"var(--mint)",d:"After single short vowel in 1-syllable word, double final F, L, S, Z.",x:"staff, bell, miss, buzz"},{t:"CK Rule",tc:"var(--pink)",d:"CK after single short vowel. K after consonant/long vowel/team.",x:"duck (ck) vs milk (k) vs bake (ke)"},{t:"TCH Rule",tc:"var(--amber)",d:"TCH after single short vowel. CH after consonant/long vowel/team.",x:"catch (tch) vs lunch (ch). Except: which, much, such, rich"},{t:"DGE Rule",tc:"var(--lavender)",d:"DGE after single short vowel. GE otherwise. D protects short vowel.",x:"badge (dge) vs page (ge)"},{t:"Drop the E",tc:"var(--sky)",d:"Drop silent E before vowel suffix. Keep before consonant suffix.",x:"hope+ing=hoping, hope+ful=hopeful"},{t:"Doubling (1-1-1)",tc:"var(--periwinkle)",d:"Double final consonant before vowel suffix if: 1 vowel + 1 consonant + stressed.",x:"run+ing=running, hop+ed=hopped"},{t:"Y to I",tc:"var(--pink)",d:"Consonant+Y: change Y to I before suffix (unless suffix starts with I).",x:"happy+ness=happiness, happy+ing=keep Y"},{t:"Soft C & G",tc:"var(--mint)",d:"C=/s/ and G=/j/ before E, I, Y. Hard sounds before A, O, U.",x:"city, gem vs cat, got"},{t:"Position Rules",tc:"var(--amber)",d:"ai/oi/au/oa = middle. ay/oy/aw/ow = end. Consistent pattern.",x:"rain/play, coin/boy, boat/show"},{t:"Q + U",tc:"var(--lavender)",d:"Q is almost always followed by U. Together = /kw/.",x:"queen, quick, quiz, square"}].forEach(function(r){h+='<div class="ref-card"><div class="ref-card-tag" style="background:'+r.tc+';">Rule</div><div class="ref-card-title">'+r.t+'</div><div class="ref-card-desc">'+r.d+'</div><div class="ref-card-example">\ud83d\udccc '+r.x+'</div></div>';});
+h+='</div></div><div class="ref-section"><div class="ref-section-title">\ud83c\udfaf Scope & Sequence</div><p style="font-size:13px;color:var(--text-muted);margin-bottom:14px;">Evidence-based teaching order. (Sources: Wilson, UFLI, O-G, LETRS)</p><table class="scope-table"><thead><tr><th>#</th><th>Skill</th><th>Examples</th><th>Notes</th></tr></thead><tbody>';
+[["1","Consonants & Short Vowels (CVC)","cat, bed, sit, hot, cup","Closed syllables; ~50% of English syllables"],["2","FLOSS Rule","staff, bell, miss, buzz","Double f,l,s,z after short vowel"],["3","Consonant Digraphs","sh, ch, th, wh, ck, ng, ph","2 letters = 1 NEW sound (not a blend)"],["4","Initial Blends (L, R, S)","bl, cr, st, sw, tr","2 consonants; both sounds heard"],["5","Final Blends","nd, nk, nt, mp, st, ft, lt","End of words"],["6","Triple Blends","str, scr, spl, spr, squ","3 consonant sounds"],["7","VCe / Magic E","cake, bike, rope, cube","Silent E = long vowel"],["8","Open Syllables","go, me, ba-by","Syllable ends in vowel = long"],["9","Vowel Teams","ai/ay, ee/ea, oa/ow, igh/ie","2 vowels = 1 sound"],["10","R-Controlled Vowels","ar, or, er, ir, ur","R changes vowel; er/ir/ur = same sound"],["11","Soft C & G","city, gem, cycle, gym","Before e, i, y"],["12","Diphthongs","oi/oy, ou/ow","Mouth moves during vowel"],["13","Variant Vowels","au/aw, oo (book), ea (bread)","Less predictable patterns"],["14","Consonant-LE","table, little, eagle","Count back 3; final stable syllable"],["15","Silent Letters","kn, wr, gn, mb, gh","Historical; ghost letters"],["16","TCH & DGE","catch, badge","After single short vowel"],["17","Prefixes & Suffixes","un-, re-, -ing, -ed, -tion","Morphology; suffixing rules"],["18","Syllable Division","VC/CV, V/CV patterns","Multisyllabic decoding"],["19","Latin & Greek Roots","bio, struct, ject, port","Academic vocabulary"]].forEach(function(r){h+='<tr><td class="scope-num">'+r[0]+'</td><td><strong>'+r[1]+'</strong></td><td style="font-style:italic;">'+r[2]+'</td><td style="font-size:12px;color:var(--text-muted);">'+r[3]+'</td></tr>';});
+h+='</tbody></table></div><div class="ref-section" style="margin-top:20px;padding:16px;background:var(--cream);border-radius:var(--radius);border:1.5px solid var(--warm-gray);"><div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">\ud83d\udcda Sources</div><div style="font-size:13px;color:var(--text-body);line-height:1.8;">\u2022 <b>Moats, L.C.</b> \u2014 Speech to Print (Brookes Publishing)<br>\u2022 <b>LETRS</b> \u2014 Language Essentials for Teachers of Reading & Spelling<br>\u2022 <b>Orton-Gillingham</b> \u2014 Multisensory structured literacy<br>\u2022 <b>Wilson Reading System</b> \u2014 Steps 1\u201312<br>\u2022 <b>UFLI Foundations</b> \u2014 University of Florida Literacy Institute<br>\u2022 <b>National Reading Panel (2000)</b><br>\u2022 <b>ASHA</b> \u2014 SLP Roles in Literacy (2001)<br>\u2022 <b>Ehri, L.C.</b> \u2014 Phases of Word Reading Development</div></div></div>';
+el.innerHTML=h;}
+// ============ NEW V3 FUNCTIONS ============
+
+function speakWord(word,btn){
+  if(!window.speechSynthesis)return;
+  var u=new SpeechSynthesisUtterance(word);
+  u.rate=0.8;u.pitch=1.1;
+  if(btn){btn.style.animation="pulse .4s ease";setTimeout(function(){btn.style.animation="";},500);}
+  speechSynthesis.cancel();
+  speechSynthesis.speak(u);
+}
+
+function saveProgress(){
+  try{localStorage.setItem("phonicsFriend",JSON.stringify({learned:learned,streak:streak}));}catch(e){}
+}
+
+function updateCatProgress(){
+  var bar=document.getElementById("catProgress");
+  if(!bar)return;
+  var items=PHONICS[activeTab];if(!items)return;
+  var total=items.length;
+  var done=0;
+  items.forEach(function(item){if(learned[activeTab+":"+getLabel(item)])done++;});
+  var pct=Math.round((done/total)*100);
+  bar.innerHTML='<div class="cat-progress-fill" style="width:'+pct+'%;--progress:'+pct+'%;"></div>';
+  var countEl=document.getElementById("collectionCount");
+  if(countEl)countEl.textContent=Object.keys(learned).length;
+}
+
+function floatReaction(){
+  var emojis=["\u2b50","\ud83c\udf89","\u2728","\ud83d\udcab","\ud83c\udf1f","\ud83d\udc4f","\ud83c\udfaf","\ud83d\udca1","\ud83d\udd25","\ud83c\udf08"];
+  var el=document.createElement("div");
+  el.className="reaction";
+  el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.left=(20+Math.random()*60)+"%";
+  el.style.bottom="20%";
+  document.body.appendChild(el);
+  setTimeout(function(){el.remove();},1600);
+}
+
+function showCollection(){
+  var keys=Object.keys(learned);
+  if(keys.length===0){
+    showToast("\ud83d\udc46 Explore some patterns first!");
+    return;
+  }
+  var groups={};
+  keys.forEach(function(k){
+    var parts=k.split(":");
+    var cat=parts[0],lbl=parts[1];
+    if(!groups[cat])groups[cat]=[];
+    groups[cat].push(lbl);
+  });
+  
+  var h='<div class="print-header"><h1>\ud83e\udde9 My Phonics Collection</h1><p>Phonics Friend \u2014 Rachel Terra Norton, MS, CCC-SLP</p></div>';
+  h+='<div class="collection-panel"><div class="collection-title">\ud83e\udde9 My Collected Patterns</div>';
+  h+='<div class="collection-desc">You\'ve explored <strong>'+keys.length+'</strong> patterns! Here\'s your collection:</div>';
+  
+  TABS.forEach(function(tab){
+    var items=groups[tab.id];
+    if(!items)return;
+    var total=PHONICS[tab.id]?PHONICS[tab.id].length:0;
+    h+='<div class="collection-group"><div class="collection-group-title">'+tab.emoji+' '+tab.label+' <span style="font-weight:400;font-size:12px;color:var(--text-light);">('+items.length+'/'+total+')</span></div>';
+    items.forEach(function(lbl){
+      var itemData=null;
+      if(PHONICS[tab.id]){
+        PHONICS[tab.id].forEach(function(it){if(getLabel(it)===lbl)itemData=it;});
+      }
+      var sound=itemData?(itemData.sound||itemData.meaning||""):"";
+      h+='<span class="collection-item" style="border-color:'+((itemData&&itemData.color)||"var(--warm-gray)")+';">'+esc(lbl);
+      if(sound)h+=' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+esc(sound)+'</span>';
+      h+='</span>';
+    });
+    h+='</div>';
+  });
+  h+='</div>';
+  
+  document.getElementById("view-explore").style.display="none";
+  document.getElementById("view-builder").style.display="none";
+  document.getElementById("view-reference").style.display="none";
+  
+  var cv=document.getElementById("view-collection");
+  if(!cv){
+    cv=document.createElement("div");
+    cv.id="view-collection";
+    document.querySelector(".main").appendChild(cv);
+  }
+  cv.style.display="block";
+  cv.innerHTML=h+'<div style="text-align:center;margin-top:16px;"><button class="toolbar-btn" onclick="printCollection()" style="margin-right:8px;">\ud83d\udda8\ufe0f Print Collection</button><button class="toolbar-btn" onclick="closeCollection()">\u2190 Back to Exploring</button></div>';
+  
+  document.querySelectorAll(".view-tab").forEach(function(b){b.classList.remove("active");});
+}
+
+function closeCollection(){
+  var cv=document.getElementById("view-collection");
+  if(cv)cv.style.display="none";
+  switchView("explore");
+}
+
+function printCollection(){
+  window.print();
+}
+
+function startQuiz(){
+  var items=PHONICS[activeTab];if(!items||items.length<3)return;
+  var learnedItems=[];
+  items.forEach(function(item){
+    if(learned[activeTab+":"+getLabel(item)])learnedItems.push(item);
+  });
+  if(learnedItems.length<3){showToast("\ud83c\udfaf Explore at least 3 patterns in this category first!");return;}
+  
+  var q=learnedItems[Math.floor(Math.random()*learnedItems.length)];
+  var correct=q.example.split(",")[0].trim();
+  var lbl=getLabel(q);
+  
+  var wrongs=[];
+  items.forEach(function(it){
+    if(getLabel(it)!==lbl)wrongs.push(it.example.split(",")[0].trim());
+  });
+  wrongs.sort(function(){return Math.random()-.5;});
+  wrongs=wrongs.slice(0,2);
+  
+  var options=[correct].concat(wrongs).sort(function(){return Math.random()-.5;});
+  
+  var overlay=document.createElement("div");
+  overlay.className="quiz-overlay";
+  overlay.id="quizOverlay";
+  var qText=q.sound?"Which word uses the "+lbl+" pattern ("+q.sound+")?":"Which word uses the "+lbl+" pattern?";
+  
+  var h='<div class="quiz-card" style="position:relative;"><button class="quiz-close" onclick="closeQuiz()">\u2715</button>';
+  h+='<div style="text-align:center;font-size:36px;margin-bottom:12px;">\ud83c\udfaf</div>';
+  h+='<div class="quiz-question">'+esc(qText)+'</div>';
+  h+='<div class="quiz-options">';
+  options.forEach(function(opt,i){
+    h+='<button class="quiz-option" onclick="checkQuiz(this,\''+esc(opt).replace(/'/g,"\\'")+'\',\''+esc(correct).replace(/'/g,"\\'")+'\')">'+esc(opt)+'</button>';
+  });
+  h+='</div><div id="quizResult"></div></div>';
+  
+  overlay.innerHTML=h;
+  document.body.appendChild(overlay);
+}
+
+function checkQuiz(btn,answer,correct){
+  var options=document.querySelectorAll(".quiz-option");
+  options.forEach(function(o){o.disabled=true;o.style.pointerEvents="none";});
+  if(answer===correct){
+    btn.classList.add("correct");
+    document.getElementById("quizResult").innerHTML='<div class="quiz-result" style="background:#eef3f0;color:var(--mint);">\ud83c\udf89 Correct! Great job!</div>';
+    shootConfetti();
+  }else{
+    btn.classList.add("wrong");
+    options.forEach(function(o){if(o.textContent===correct)o.classList.add("correct");});
+    document.getElementById("quizResult").innerHTML='<div class="quiz-result" style="background:#fdf0f4;color:var(--pink);">Not quite! The answer is <strong>'+esc(correct)+'</strong></div>';
+  }
+  setTimeout(function(){closeQuiz();},2500);
+}
+
+function closeQuiz(){
+  var o=document.getElementById("quizOverlay");
+  if(o)o.remove();
+}
+
+// ============ INITIALIZATION ============
+buildCatTabs();buildCards();buildCuratedChips();
+if(streak>0)updateStreak();
+
+</script>
+
+<!-- iframe height reporter -->
+<script>
+(function(){
+  if (window.self === window.top) return; // not in iframe, skip
+  function reportHeight() {
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'rrc-resize', height: h }, '*');
+  }
+  window.addEventListener('load', reportHeight);
+  new MutationObserver(reportHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+  window.addEventListener('resize', reportHeight);
+  // Also report on interval for dynamic content
+  setInterval(reportHeight, 1000);
+})();
+</script>
+</body>
+</html>

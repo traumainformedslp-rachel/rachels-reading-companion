@@ -1,0 +1,163 @@
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  Rachel's Reading Companion — Wix Embed (Hybrid)           ║
+  ║                                                            ║
+  ║  HOW TO USE:                                               ║
+  ║  1. In Wix Editor, go to the page where you want the app  ║
+  ║  2. Click Add (+) → Embed Code → "Embed HTML"             ║
+  ║  3. Paste this ENTIRE file into the code box               ║
+  ║  4. Resize the element to fill your content area           ║
+  ║  5. Update SITE_URL below once GitHub Pages is live        ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+  /* ── Desktop: iframe fills container ── */
+  .rrc-iframe-wrap {
+    width: 100%;
+    overflow: hidden;
+  }
+  .rrc-iframe-wrap iframe {
+    width: 100%;
+    border: none;
+    display: block;
+    min-height: 600px;
+    transition: height 0.2s ease;
+  }
+
+  /* ── Mobile: styled link button ── */
+  .rrc-mobile-link {
+    display: none;
+    text-align: center;
+    padding: 40px 24px;
+  }
+  .rrc-mobile-link .rrc-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #f4a0b5, #f6b889, #f5d98a, #8dd4b0, #8dc4e8, #b8a0d8, #d4a0d8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+  .rrc-mobile-link h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: #2d2a26;
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .rrc-mobile-link h2 em {
+    font-style: italic;
+    background: linear-gradient(135deg, #8a6cb8, #d4718e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .rrc-mobile-link p {
+    color: #76706a;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 400px;
+    margin: 0 auto 28px;
+  }
+  .rrc-mobile-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 40px;
+    background: linear-gradient(135deg, #b8a0d8, #f4a0b5, #f6b889);
+    background-size: 200% 200%;
+    color: white;
+    text-decoration: none;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(184,160,216,0.35);
+    animation: rrcShift 6s ease-in-out infinite alternate;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .rrc-mobile-link a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(184,160,216,0.45);
+  }
+  .rrc-mobile-link a svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+  .rrc-mobile-link .rrc-footnote {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #a8a19a;
+  }
+
+  @keyframes rrcShift {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+  }
+
+  /* ── Responsive switch at 768px ── */
+  @media (max-width: 768px) {
+    .rrc-iframe-wrap { display: none; }
+    .rrc-mobile-link { display: block; }
+  }
+</style>
+
+<!-- Load fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- ════════════════════════════════════════════════════
+     UPDATE THIS URL once your GitHub Pages site is live
+     ════════════════════════════════════════════════════ -->
+<script>
+  var SITE_URL = 'https://traumainformedslp-rachel.github.io/rachels-reading-companion/';
+</script>
+
+<!-- Desktop: embedded iframe -->
+<div class="rrc-iframe-wrap">
+  <iframe
+    id="rrcFrame"
+    title="Rachel's Reading Companion"
+    loading="lazy"
+    allow="clipboard-write"
+    sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+  ></iframe>
+</div>
+
+<!-- Mobile: styled link-out -->
+<div class="rrc-mobile-link">
+  <div class="rrc-badge">Free Literacy Toolkit</div>
+  <h2>Rachel's <em>Reading Companion</em></h2>
+  <p>Tap below to open the full interactive toolkit — word study, vocabulary, spelling patterns, morphology, and fluency tools.</p>
+  <a id="rrcMobileLink" href="#" target="_blank" rel="noopener">
+    Open Toolkit
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+  </a>
+  <p class="rrc-footnote">Opens in a new tab for the best mobile experience</p>
+</div>
+
+<script>
+  // Set URLs
+  document.getElementById('rrcFrame').src = SITE_URL;
+  document.getElementById('rrcMobileLink').href = SITE_URL;
+
+  // Auto-resize iframe based on content height
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'rrc-resize' && typeof e.data.height === 'number') {
+      var frame = document.getElementById('rrcFrame');
+      if (frame) {
+        frame.style.height = e.data.height + 'px';
+      }
+    }
+  });
+</script>

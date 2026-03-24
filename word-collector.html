@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Collector | Rachel's Reading Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ========================================
+   PASTEL RAINBOW DESIGN SYSTEM
+   ======================================== */
+:root {
+  --bg: #fefcfa;
+  --surface: #ffffff;
+  --surface-warm: #fdf9f5;
+  --border: #ede6df;
+  --border-light: #f5f0ea;
+  --ink: #2d2a26;
+  --ink-secondary: #4a4640;
+  --ink-muted: #76706a;
+  --ink-faint: #a8a19a;
+  --pastel-rose: #f4a0b5;
+  --pastel-rose-soft: #fdf0f4;
+  --pastel-rose-deep: #d4718e;
+  --pastel-peach: #f6b889;
+  --pastel-peach-soft: #fef5ed;
+  --pastel-yellow: #f5d98a;
+  --pastel-yellow-soft: #fef9ed;
+  --pastel-mint: #8dd4b0;
+  --pastel-mint-soft: #eefaf3;
+  --pastel-mint-deep: #5aaf80;
+  --pastel-sky: #8dc4e8;
+  --pastel-sky-soft: #eef6fc;
+  --pastel-sky-deep: #5a98c4;
+  --pastel-lavender: #b8a0d8;
+  --pastel-lavender-soft: #f3eefa;
+  --pastel-lavender-deep: #8a6cb8;
+  --pastel-lilac: #d4a0d8;
+  --pastel-lilac-soft: #f9f0fa;
+  --rainbow: linear-gradient(135deg, var(--pastel-rose) 0%, var(--pastel-peach) 16%, var(--pastel-yellow) 32%, var(--pastel-mint) 48%, var(--pastel-sky) 64%, var(--pastel-lavender) 80%, var(--pastel-lilac) 100%);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 2px 8px rgba(180,160,140,0.08), 0 1px 3px rgba(180,160,140,0.06);
+  --shadow-md: 0 6px 24px rgba(180,160,140,0.10), 0 2px 8px rgba(180,160,140,0.06);
+  --shadow-lg: 0 12px 40px rgba(180,160,140,0.12), 0 4px 12px rgba(180,160,140,0.06);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* App-specific (rose/pink theme) */
+  --white: #ffffff;
+  --offwhite: #fdfcfb;
+  --cream: #f9f6f2;
+  --warm-gray: #f0ece6;
+  --sand: #e4ddd4;
+  --text-dark: #2e2a26;
+  --text-body: #4a4540;
+  --text-muted: #8a8279;
+  --text-light: #b0a89e;
+  --rose: #d4829e;
+  --rose-soft: #e8a5bc;
+  --rose-light: #f5dce6;
+  --rose-deep: #b86885;
+  --rose-bg: #fdf0f4;
+  --blush: #e096aa;
+  --blush-soft: #f0c0cf;
+  --raspberry: #c46e8a;
+  --raspberry-soft: #e4a6b8;
+  --peony: #d98ba4;
+  --peony-soft: #f0c4d2;
+  --cherry: #c2647e;
+  --cherry-soft: #e0a0b4;
+  --cranberry: #b05a74;
+  --hibiscus: #cc7a94;
+  --hibiscus-soft: #e8b8c8;
+  --tulip: #d490a8;
+  --tulip-soft: #f0ccd8;
+  --rouge: #a85068;
+  --petal: #f2d8e2;
+  --app-radius: 10px;
+  --app-radius-lg: 14px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Nunito Sans', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.skip-link {
+  position: absolute; top: -100%; left: 16px;
+  background: var(--ink); color: white;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 600; z-index: 100;
+  text-decoration: none; transition: top 0.2s;
+}
+.skip-link:focus { top: 16px; }
+:focus-visible { outline: 2px solid var(--pastel-lavender); outline-offset: 3px; border-radius: 2px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--pastel-lavender), var(--pastel-rose)); border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* ========================================
+   CONFETTI
+   ======================================== */
+.confetti-container {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999; overflow: hidden;
+}
+.confetti-piece {
+  position: absolute; width: 8px; height: 8px; border-radius: 2px;
+  animation: confetti-fall 2.5s ease-out forwards; opacity: 0;
+}
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translateY(-20px) rotate(0deg) scale(1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0.3); }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+@keyframes rainbowShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+/* ========================================
+   HERO / APP HEADER
+   ======================================== */
+.hero {
+  background: linear-gradient(170deg, var(--rose-bg) 0%, var(--offwhite) 100%);
+  padding: 36px 32px 28px; text-align: center;
+  border-bottom: 1px solid var(--warm-gray);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,130,158,0.10) 0%, transparent 70%);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -40px; left: -40px;
+  width: 140px; height: 140px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(194,100,126,0.08) 0%, transparent 70%);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--text-light); margin-bottom: 10px;
+  justify-content: center;
+}
+.hero-eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--rose); }
+.hero-icon-wrap { display: flex; justify-content: center; margin-bottom: 10px; }
+.hero-app-icon {
+  width: 72px; height: 72px; object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(212,130,158,0.22), 0 1px 4px rgba(184,104,133,0.10);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.hero-app-icon:hover { transform: scale(1.08) rotate(-3deg); }
+.hero-title {
+  font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  font-size: 36px; font-weight: 400; color: var(--text-dark);
+  line-height: 1.15; margin-bottom: 8px;
+}
+.hero-title em { font-style: italic; color: var(--rose-deep); }
+.hero-desc {
+  font-size: 14px; font-weight: 300; color: var(--text-muted);
+  line-height: 1.7; max-width: 540px; margin: 0 auto 14px;
+}
+.hero-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: 8px;
+  font-family: 'Nunito Sans', 'DM Sans', sans-serif;
+  font-size: 12.5px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; border: 1.5px solid;
+}
+.hero-btn-primary { background: var(--rose); border-color: var(--rose); color: white; }
+.hero-btn-primary:hover { background: var(--rose-deep); border-color: var(--rose-deep); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(184,104,133,0.25); }
+.hero-btn-outline { background: var(--white); border-color: var(--warm-gray); color: var(--text-muted); }
+.hero-btn-outline:hover { border-color: var(--rose-soft); color: var(--rose-deep); background: var(--offwhite); }
+
+@media (max-width: 768px) {
+  .hero-app-icon { width: 60px; height: 60px; border-radius: 14px; }
+}
+
+/* ========================================
+   MAIN APP CONTENT
+   ======================================== */
+.main { max-width: 920px; margin: 0 auto; padding: 32px 24px 60px; }
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 8px; padding-bottom: 10px;
+  border-bottom: 1.5px solid var(--warm-gray);
+}
+.section-icon {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; color: white;
+  background: var(--raspberry);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  font-size: 24px; font-weight: 500; color: var(--text-dark); flex: 1;
+}
+.section-subtitle {
+  font-size: 13px; font-weight: 400; color: var(--text-muted);
+  margin: -2px 0 16px 46px; line-height: 1.5;
+}
+.section-count {
+  font-size: 11px; font-weight: 700; color: var(--rose-deep);
+  letter-spacing: 0.5px; background: var(--rose-light);
+  padding: 3px 10px; border-radius: 20px;
+}
+.info-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.info-field { flex: 1; min-width: 150px; display: flex; flex-direction: column; gap: 4px; }
+.field-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--text-light);
+}
+.info-input {
+  font-family: 'Nunito Sans', sans-serif; font-size: 14px; font-weight: 500;
+  padding: 8px 11px; border: 1.5px solid var(--warm-gray); border-radius: 8px;
+  background: var(--white); color: var(--text-dark); outline: none;
+  transition: border-color 0.2s;
+}
+.info-input:focus { border-color: var(--rose-soft); }
+.info-input::placeholder { color: var(--sand); }
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--text-dark); color: white;
+  padding: 11px 22px; border-radius: var(--app-radius);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13.5px; font-weight: 500; z-index: 1000; opacity: 0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none; display: flex; align-items: center; gap: 8px; max-width: 90vw;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+/* ========================================
+   ALPHABET GRID
+   ======================================== */
+.alpha-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+.letter-cell {
+  background: var(--white); border: 1.5px solid transparent;
+  border-radius: var(--app-radius); padding: 7px 9px 9px;
+  transition: all 0.2s ease; min-height: 84px;
+}
+.letter-cell:hover, .letter-cell:focus-within {
+  background: var(--rose-bg); border-color: var(--tulip-soft);
+  box-shadow: 0 2px 10px rgba(212,130,158,0.06);
+}
+.letter-top { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+.letter-badge {
+  width: 24px; height: 24px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600; font-size: 12px; color: white; flex-shrink: 0;
+}
+.word-count-badge {
+  font-size: 9px; font-weight: 700; color: var(--rose-deep);
+  background: var(--rose-light); padding: 1px 6px; border-radius: 10px;
+  opacity: 0; transition: opacity 0.2s;
+}
+.letter-cell:focus-within .word-count-badge, .word-count-badge.visible { opacity: 1; }
+.word-input-area { display: flex; flex-direction: column; gap: 1px; }
+.word-input {
+  font-family: 'Nunito Sans', sans-serif; font-size: 12.5px; font-weight: 500;
+  color: var(--text-dark); border: none; border-bottom: 1px solid var(--warm-gray);
+  padding: 2px 3px; background: transparent; outline: none; width: 100%;
+  transition: border-color 0.2s;
+}
+.word-input:focus { border-bottom-color: var(--rose-soft); }
+.word-input::placeholder { color: var(--sand); font-weight: 400; font-size: 12px; }
+.add-word-btn {
+  border: none; background: none; color: var(--raspberry);
+  font-size: 11px; font-weight: 700; cursor: pointer; padding: 2px 3px;
+  text-align: left; font-family: 'Nunito Sans', sans-serif;
+  opacity: 0; transition: opacity 0.2s;
+}
+.letter-cell:focus-within .add-word-btn, .letter-cell:hover .add-word-btn { opacity: 1; }
+.add-word-btn:hover { text-decoration: underline; color: var(--rose-deep); }
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .alpha-grid { grid-template-columns: repeat(2, 1fr); }
+  .info-bar { flex-direction: column; }
+  .hero-title { font-size: 30px; }
+  .main { padding: 24px 14px 40px; }
+}
+
+/* Print */
+.no-print {}
+@media print {
+  body { background: white !important; }
+  .no-print, .hero-actions, .site-nav { display: none !important; }
+  .hero { padding: 16px 20px 12px; }
+  .main { max-width: 100%; padding: 12px; }
+  .add-word-btn, .word-count-badge { display: none !important; }
+  .letter-cell { border-color: #ddd !important; break-inside: avoid; }
+  .alpha-grid { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+  .page-footer { padding: 20px; }
+  .page-footer::before { display: none; }
+}
+
+/* ── Back-to-toolkit nav ── */
+.rrc-topnav { position: sticky; top: 0; z-index: 999; background: rgba(254,252,250,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #ede6df; padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
+.rrc-topnav a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: "DM Sans", -apple-system, sans-serif; font-size: 13px; font-weight: 600; color: #76706a; transition: color 0.2s, transform 0.2s; }
+.rrc-topnav a:hover { color: #2d2a26; transform: translateX(-2px); }
+.rrc-topnav a svg { width: 14px; height: 14px; fill: currentColor; }
+.rrc-topnav .rrc-topnav-title { margin-left: auto; font-family: "Fraunces", Georgia, serif; font-size: 13px; font-weight: 400; color: #a8a19a; letter-spacing: 0.5px; }
+@media print { .rrc-topnav { display: none; } }
+
+</style>
+</head>
+<body>
+<nav class="rrc-topnav" aria-label="Toolkit navigation">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back to Toolkit</a>
+  <span class="rrc-topnav-title">Rachel&#8217;s Reading Companion</span>
+</nav>
+
+
+<div class="confetti-container" id="confettiContainer"></div>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ===== APP HERO ===== -->
+<header class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-dot"></div>
+    Rachel's Reading Companion
+  </div>
+  <div class="hero-icon-wrap">
+    <img src="https://static.wixstatic.com/media/517494_7dba195afbce4e5baf6d4d70bc58e650~mv2.png" alt="Word Collector icon" class="hero-app-icon" />
+  </div>
+  <h1 class="hero-title">Word <em>Collector</em></h1>
+  <p class="hero-desc">Gather interesting, tricky, or unfamiliar words from your reading. Watch your collection grow!</p>
+  <div class="hero-actions no-print">
+    <button class="hero-btn hero-btn-primary" onclick="printPage()">🖨️ Print / Save PDF</button>
+    <button class="hero-btn hero-btn-outline" onclick="clearAll()">Clear All</button>
+  </div>
+</header>
+
+<div class="toast" id="toast"></div>
+
+<main id="main-content" class="main">
+
+  <div class="section-header">
+    <div class="section-icon">📖</div>
+    <h2 class="section-title">Word Collector</h2>
+    <span class="section-count" id="total-word-count">0 words</span>
+  </div>
+  <p class="section-subtitle">Gather interesting, tricky, or unfamiliar words from your reading. Watch your collection grow!</p>
+  <div class="info-bar">
+    <div class="info-field"><div class="field-label">Student Name</div><input type="text" class="info-input" id="wl-name" placeholder="Who's reading today?"></div>
+    <div class="info-field"><div class="field-label">Book / Text</div><input type="text" class="info-input" id="wl-book" placeholder="What are we reading?"></div>
+    <div class="info-field" style="max-width:150px;"><div class="field-label">Date</div><input type="date" class="info-input" id="wl-date"></div>
+  </div>
+  <div class="alpha-grid" id="alphaGrid"></div>
+
+</main>
+
+<script>
+var CHEERS = [
+  '🌟 Great work!', '⭐ Amazing!', '🎉 Keep going!', '✨ Wonderful!',
+  '💪 So strong!', '🌈 Look at that progress!', '🏆 Champion reader!', '🎊 Fantastic!',
+  '🚀 You\'re on fire!', '💫 Brilliant!', '🌻 Growing every day!', '📚 Word wizard!'
+];
+function shootConfetti() {
+  var c = document.getElementById('confettiContainer');
+  var colors = ['#d4829e','#b8688a','#e096aa','#c46e8a','#d98ba4','#c2647e','#cc7a94','#d490a8'];
+  for (var i = 0; i < 50; i++) {
+    var p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left = (Math.random() * 100) + '%';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDelay = (Math.random() * 0.6) + 's';
+    p.style.animationDuration = (1.8 + Math.random() * 1.5) + 's';
+    p.style.width = (5 + Math.random() * 8) + 'px';
+    p.style.height = (5 + Math.random() * 8) + 'px';
+    p.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    c.appendChild(p);
+    setTimeout(function(el){ return function(){ el.remove(); }; }(p), 3000);
+  }
+}
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2800);
+}
+function printPage() {
+  try { window.print(); } catch(e) { showToast('Print not available in this view'); }
+}
+
+var LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+var COLORS = ['#d4829e','#c46e8a','#d98ba4','#cc7a94'];
+
+function buildAlphaGrid() {
+  var grid = document.getElementById('alphaGrid');
+  grid.innerHTML = '';
+  LETTERS.forEach(function(letter, i) {
+    var c = COLORS[i % 4];
+    var cell = document.createElement('div');
+    cell.className = 'letter-cell';
+    cell.innerHTML =
+      '<div class="letter-top">' +
+        '<div class="letter-badge" style="background:' + c + '">' + letter + '</div>' +
+        '<span class="word-count-badge" id="count-' + letter + '">0</span>' +
+      '</div>' +
+      '<div class="word-input-area" id="words-' + letter + '">' +
+        '<input type="text" class="word-input" placeholder="word…" oninput="updateCount(\'' + letter + '\')">' +
+      '</div>' +
+      '<button class="add-word-btn no-print" onclick="addWordLine(\'' + letter + '\')">+ add</button>';
+    grid.appendChild(cell);
+  });
+}
+
+function addWordLine(letter) {
+  var area = document.getElementById('words-' + letter);
+  var input = document.createElement('input');
+  input.type = 'text'; input.className = 'word-input';
+  input.placeholder = 'word…'; input.oninput = function() { updateCount(letter); };
+  area.appendChild(input); input.focus();
+}
+
+function updateCount(letter) {
+  var inputs = document.querySelectorAll('#words-' + letter + ' .word-input');
+  var count = 0;
+  inputs.forEach(function(inp) { if (inp.value.trim()) count++; });
+  var badge = document.getElementById('count-' + letter);
+  badge.textContent = count;
+  badge.classList.toggle('visible', count > 0);
+  updateTotalCount();
+}
+
+function updateTotalCount() {
+  var total = 0;
+  LETTERS.forEach(function(l) {
+    document.querySelectorAll('#words-' + l + ' .word-input').forEach(function(inp) {
+      if (inp.value.trim()) total++;
+    });
+  });
+  var el = document.getElementById('total-word-count');
+  var prev = parseInt(el.textContent) || 0;
+  el.textContent = total + ' word' + (total !== 1 ? 's' : '');
+  if (total > prev && total > 0 && total % 10 === 0) {
+    shootConfetti();
+    showToast(CHEERS[Math.floor(Math.random() * CHEERS.length)] + ' ' + total + ' words collected!');
+  }
+}
+
+function clearAll() {
+  buildAlphaGrid();
+  ['wl-name','wl-book','wl-date'].forEach(function(id) {
+    var el = document.getElementById(id); if (el) el.value = '';
+  });
+  updateTotalCount();
+  showToast('All cleared! Fresh start ✨');
+}
+
+buildAlphaGrid();
+updateTotalCount();
+</script>
+
+<!-- iframe height reporter -->
+<script>
+(function(){
+  if (window.self === window.top) return; // not in iframe, skip
+  function reportHeight() {
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'rrc-resize', height: h }, '*');
+  }
+  window.addEventListener('load', reportHeight);
+  new MutationObserver(reportHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+  window.addEventListener('resize', reportHeight);
+  // Also report on interval for dynamic content
+  setInterval(reportHeight, 1000);
+})();
+</script>
+</body>
+</html>

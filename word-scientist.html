@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word Scientist | Rachel's Reading Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ========================================
+   PASTEL RAINBOW DESIGN SYSTEM
+   ======================================== */
+:root {
+  --bg: #fefcfa; --surface: #ffffff; --surface-warm: #fdf9f5;
+  --border: #ede6df; --border-light: #f5f0ea;
+  --ink: #2d2a26; --ink-secondary: #4a4640; --ink-muted: #76706a; --ink-faint: #a8a19a;
+  --pastel-rose: #f4a0b5; --pastel-rose-soft: #fdf0f4; --pastel-rose-deep: #d4718e;
+  --pastel-peach: #f6b889; --pastel-peach-soft: #fef5ed;
+  --pastel-yellow: #f5d98a; --pastel-yellow-soft: #fef9ed;
+  --pastel-mint: #8dd4b0; --pastel-mint-soft: #eefaf3; --pastel-mint-deep: #5aaf80;
+  --pastel-sky: #8dc4e8; --pastel-sky-soft: #eef6fc; --pastel-sky-deep: #5a98c4;
+  --pastel-lavender: #b8a0d8; --pastel-lavender-soft: #f3eefa; --pastel-lavender-deep: #8a6cb8;
+  --pastel-lilac: #d4a0d8; --pastel-lilac-soft: #f9f0fa;
+  --rainbow: linear-gradient(135deg, var(--pastel-rose) 0%, var(--pastel-peach) 16%, var(--pastel-yellow) 32%, var(--pastel-mint) 48%, var(--pastel-sky) 64%, var(--pastel-lavender) 80%, var(--pastel-lilac) 100%);
+  --radius: 12px; --radius-sm: 8px; --radius-lg: 20px; --radius-xl: 28px;
+  --shadow-sm: 0 2px 8px rgba(180,160,140,0.08), 0 1px 3px rgba(180,160,140,0.06);
+  --shadow-md: 0 6px 24px rgba(180,160,140,0.10), 0 2px 8px rgba(180,160,140,0.06);
+  --shadow-lg: 0 12px 40px rgba(180,160,140,0.12), 0 4px 12px rgba(180,160,140,0.06);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --white: #ffffff; --offwhite: #fdfcfb; --cream: #f9f6f2; --warm-gray: #f0ece6; --sand: #e4ddd4;
+  --text-dark: #2e2a26; --text-body: #4a4540; --text-muted: #8a8279; --text-light: #b0a89e;
+  --peach: #d4956b; --peach-soft: #f0c9a8; --peach-light: #fae8d8; --peach-deep: #b87a52; --peach-bg: #fdf3ec;
+  --coral: #d4887a; --coral-soft: #f0bab0; --salmon: #e0967e; --salmon-soft: #f2c4b4;
+  --apricot: #e8a87c; --apricot-soft: #f5d4b8; --terracotta: #c27a5e;
+  --rose: #d48a9e; --rose-soft: #f0c0cf; --rose-deep: #b86a80;
+  --blush: #e6b4c3; --blush-soft: #f5dce4; --sienna: #a86848;
+  --app-radius: 10px; --app-radius-lg: 14px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Nunito Sans', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text-body); min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+.skip-link { position: absolute; top: -100%; left: 16px; background: var(--ink); color: white; padding: 8px 16px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; z-index: 100; text-decoration: none; transition: top 0.2s; }
+.skip-link:focus { top: 16px; }
+:focus-visible { outline: 2px solid var(--pastel-lavender); outline-offset: 3px; border-radius: 2px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--pastel-lavender), var(--pastel-rose)); border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; } }
+
+/* ========================================
+   CONFETTI
+   ======================================== */
+.confetti-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; overflow: hidden; }
+.confetti-piece { position: absolute; width: 8px; height: 8px; border-radius: 2px; animation: confetti-fall 2.5s ease-out forwards; opacity: 0; }
+@keyframes confetti-fall { 0% { opacity: 1; transform: translateY(-20px) rotate(0deg) scale(1); } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0.3); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes rainbowShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* ========================================
+   HERO / APP HEADER
+   ======================================== */
+.hero { background: linear-gradient(170deg, var(--peach-bg) 0%, var(--offwhite) 100%); padding: 36px 32px 28px; text-align: center; border-bottom: 1px solid var(--warm-gray); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(212,149,107,0.10) 0%, transparent 70%); }
+.hero::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(212,138,158,0.08) 0%, transparent 70%); }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-light); margin-bottom: 10px; justify-content: center; }
+.hero-eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--peach); }
+.hero-icon-wrap { display: flex; justify-content: center; margin-bottom: 10px; }
+.hero-app-icon { width: 72px; height: 72px; object-fit: contain; border-radius: 18px; box-shadow: 0 4px 18px rgba(212,149,107,0.22), 0 1px 4px rgba(184,122,82,0.10); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+.hero-app-icon:hover { transform: scale(1.08) rotate(-3deg); }
+.hero-title { font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif; font-size: 36px; font-weight: 400; color: var(--text-dark); line-height: 1.15; margin-bottom: 8px; }
+.hero-title em { font-style: italic; color: var(--peach-deep); }
+.hero-desc { font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.7; max-width: 540px; margin: 0 auto 14px; }
+.hero-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.hero-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; border-radius: 8px; font-family: 'Nunito Sans', 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1.5px solid; }
+.hero-btn-primary { background: var(--peach); border-color: var(--peach); color: white; }
+.hero-btn-primary:hover { background: var(--peach-deep); border-color: var(--peach-deep); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(184,122,82,0.25); }
+.hero-btn-outline { background: var(--white); border-color: var(--warm-gray); color: var(--text-muted); }
+.hero-btn-outline:hover { border-color: var(--peach-soft); color: var(--peach-deep); background: var(--offwhite); }
+@media (max-width: 768px) { .hero-app-icon { width: 60px; height: 60px; border-radius: 14px; } }
+
+/* ========================================
+   MAIN APP CONTENT
+   ======================================== */
+.main { max-width: 920px; margin: 0 auto; padding: 32px 24px 60px; }
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; padding-bottom: 10px; border-bottom: 1.5px solid var(--warm-gray); }
+.section-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; color: white; background: var(--coral); }
+.section-title { font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 500; color: var(--text-dark); flex: 1; }
+.section-subtitle { font-size: 13px; font-weight: 400; color: var(--text-muted); margin: -2px 0 16px 46px; line-height: 1.5; }
+.section-count { font-size: 11px; font-weight: 700; color: var(--peach-deep); letter-spacing: 0.5px; background: var(--peach-light); padding: 3px 10px; border-radius: 20px; }
+.info-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.info-field { flex: 1; min-width: 150px; display: flex; flex-direction: column; gap: 4px; }
+.field-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); }
+.info-input { font-family: 'Nunito Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 8px 11px; border: 1.5px solid var(--warm-gray); border-radius: 8px; background: var(--white); color: var(--text-dark); outline: none; transition: border-color 0.2s; }
+.info-input:focus { border-color: var(--peach-soft); }
+.info-input::placeholder { color: var(--sand); }
+.hidden-input { display: none; }
+.add-card-btn { width: 100%; padding: 14px; border: 1.5px dashed var(--apricot-soft); border-radius: var(--app-radius); background: transparent; font-family: 'Nunito Sans', sans-serif; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 6px; }
+.add-card-btn:hover { border-color: var(--peach); color: var(--peach-deep); background: var(--peach-light); }
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--text-dark); color: white; padding: 11px 22px; border-radius: var(--app-radius); font-family: 'Nunito Sans', sans-serif; font-size: 13.5px; font-weight: 500; z-index: 1000; opacity: 0; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; display: flex; align-items: center; gap: 8px; max-width: 90vw; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+/* ========================================
+   SWI WORD STUDY CARDS
+   ======================================== */
+.swi-cards-list { display: flex; flex-direction: column; gap: 20px; }
+.swi-card { padding: 20px 20px 16px; border: 1.5px solid transparent; border-radius: var(--app-radius); position: relative; transition: all 0.2s ease; animation: slideIn 0.3s ease; }
+.swi-card:hover { background: var(--offwhite); border-color: var(--warm-gray); box-shadow: 0 2px 10px rgba(46,42,38,0.04); }
+.swi-accent { position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: var(--app-radius) var(--app-radius) 0 0; }
+.swi-card-num { position: absolute; top: 12px; right: 14px; font-size: 11px; font-weight: 600; color: var(--sand); }
+.swi-delete-btn { position: absolute; top: 12px; right: 42px; background: none; border: none; color: var(--sand); font-size: 15px; cursor: pointer; opacity: 0; transition: opacity 0.2s, color 0.2s; }
+.swi-card:hover .swi-delete-btn { opacity: 1; }
+.swi-delete-btn:hover { color: var(--rose-deep); }
+.swi-target-row { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding-top: 4px; }
+.swi-target-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); white-space: nowrap; }
+.swi-target-input { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 500; color: var(--text-dark); border: none; border-bottom: 2px solid var(--warm-gray); padding: 3px 6px; background: transparent; outline: none; flex: 1; transition: border-color 0.2s; }
+.swi-target-input:focus { border-bottom-color: var(--peach-soft); }
+.swi-target-input::placeholder { color: var(--sand); font-size: 18px; }
+.matrix-section { margin-bottom: 14px; }
+.matrix-outer { border: 2.5px solid var(--peach); border-radius: 6px; background: var(--peach-bg); display: flex; flex-direction: row; align-items: stretch; min-height: 160px; overflow: hidden; }
+.matrix-prefix-side { display: flex; flex-direction: row; border-right: 2px solid var(--peach); flex-shrink: 0; }
+.prefix-column { display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 6px 3px; border-right: 1.5px solid var(--peach-soft); min-width: 52px; }
+.prefix-column:last-child { border-right: none; }
+.prefix-entry { position: relative; }
+.prefix-entry-input { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; font-weight: 500; color: var(--text-dark); text-align: center; border: none; background: transparent; outline: none; width: 100%; padding: 2px; }
+.prefix-entry-input::placeholder { color: var(--peach-soft); font-size: 11px; }
+.prefix-remove-btn { position: absolute; top: -2px; right: -2px; background: none; border: none; color: var(--peach-soft); font-size: 9px; cursor: pointer; opacity: 0; line-height: 1; }
+.prefix-entry:hover .prefix-remove-btn { opacity: 1; }
+.prefix-remove-btn:hover { color: var(--rose-deep); }
+.prefix-add-btn { font-size: 10px; font-weight: 700; color: var(--coral); background: none; border: 1px dashed var(--peach-soft); border-radius: 3px; padding: 1px 5px; cursor: pointer; margin-top: 3px; font-family: 'Nunito Sans', sans-serif; }
+.prefix-add-btn:hover { background: var(--peach-light); border-color: var(--coral); }
+.prefix-add-col-btn { display: flex; align-items: center; justify-content: center; padding: 3px; min-width: 22px; background: none; border: none; border-left: 1.5px dashed var(--peach-soft); color: var(--coral); font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Nunito Sans', sans-serif; }
+.prefix-add-col-btn:hover { background: var(--peach-light); }
+.matrix-base-center { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 12px 16px; min-width: 100px; flex-shrink: 0; }
+.matrix-base-input { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 28px; font-weight: 600; color: var(--text-dark); text-align: center; border: none; background: transparent; outline: none; width: 100%; }
+.matrix-base-input::placeholder { color: var(--peach-soft); font-size: 18px; }
+.matrix-meaning-input { font-family: 'Nunito Sans', sans-serif; font-size: 11px; font-weight: 500; font-style: italic; color: var(--peach-deep); text-align: center; border: none; background: transparent; outline: none; width: 100%; margin-top: 2px; }
+.matrix-meaning-input::placeholder { color: var(--peach-soft); font-size: 10px; }
+.matrix-suffix-side { display: flex; flex-direction: column; border-left: 2px solid var(--peach); flex: 1; min-width: 0; }
+.suffix-group { display: flex; flex-direction: row; align-items: stretch; border-bottom: 1.5px solid var(--peach-soft); flex: 1; }
+.suffix-group:last-child { border-bottom: none; }
+.suffix-layer { display: flex; flex-direction: column; justify-content: center; gap: 1px; padding: 3px; border-right: 1.5px solid var(--peach-soft); min-width: 44px; }
+.suffix-layer:last-child { border-right: none; }
+.suffix-entry { position: relative; }
+.suffix-entry-input { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; font-weight: 500; color: var(--text-dark); text-align: center; border: none; background: transparent; outline: none; width: 100%; padding: 2px; }
+.suffix-entry-input::placeholder { color: var(--peach-soft); font-size: 10px; }
+.suffix-remove-btn { position: absolute; top: -2px; right: -2px; background: none; border: none; color: var(--peach-soft); font-size: 9px; cursor: pointer; opacity: 0; line-height: 1; }
+.suffix-entry:hover .suffix-remove-btn { opacity: 1; }
+.suffix-remove-btn:hover { color: var(--rose-deep); }
+.suffix-add-entry-btn { font-size: 9px; font-weight: 700; color: var(--salmon); background: none; border: 1px dashed var(--peach-soft); border-radius: 3px; padding: 1px 4px; cursor: pointer; margin-top: 2px; font-family: 'Nunito Sans', sans-serif; }
+.suffix-add-entry-btn:hover { background: var(--peach-light); }
+.suffix-add-layer-btn { display: flex; align-items: center; justify-content: center; padding: 3px; min-width: 22px; background: none; border: none; border-left: 1.5px dashed var(--peach-soft); color: var(--salmon); font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Nunito Sans', sans-serif; }
+.suffix-add-layer-btn:hover { background: var(--peach-light); }
+.suffix-add-group-btn { display: flex; align-items: center; justify-content: center; padding: 5px; background: none; border: none; border-top: 1.5px dashed var(--peach-soft); color: var(--salmon); font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Nunito Sans', sans-serif; width: 100%; }
+.suffix-add-group-btn:hover { background: var(--peach-light); }
+.matrix-hint { font-size: 10px; color: var(--text-light); font-style: italic; text-align: center; margin-top: 5px; }
+.swi-wordsum-section { margin-bottom: 14px; }
+.wordsum-list { margin-top: 5px; display: flex; flex-direction: column; gap: 3px; }
+.wordsum-row { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; padding: 5px 10px; background: var(--peach-light); border-radius: 8px; border: 1px solid var(--apricot-soft); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; }
+.wordsum-editable { display: flex; align-items: center; gap: 3px; flex-wrap: wrap; flex: 1; }
+.ws-plus { color: var(--sand); }
+.ws-arrow { color: var(--sand); font-size: 15px; }
+.wordsum-remove-btn { background: none; border: none; color: var(--sand); font-size: 13px; cursor: pointer; padding: 0 3px; }
+.wordsum-remove-btn:hover { color: var(--rose-deep); }
+.wordsum-input { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; font-weight: 500; color: var(--text-dark); border: none; border-bottom: 1.5px solid var(--warm-gray); background: transparent; outline: none; padding: 2px 3px; width: 70px; text-align: center; }
+.wordsum-input::placeholder { color: var(--sand); font-size: 11px; }
+.wordsum-input:focus { border-bottom-color: var(--peach-soft); }
+.wordsum-input.ws-inp-base { color: var(--peach-deep); width: 80px; }
+.wordsum-input.ws-inp-prefix { color: var(--coral); width: 60px; }
+.wordsum-input.ws-inp-suffix { color: var(--rose); width: 60px; }
+.ws-add-part-btn { background: none; border: 1px dashed var(--apricot-soft); border-radius: 3px; color: var(--salmon); font-size: 11px; font-weight: 700; padding: 1px 5px; cursor: pointer; }
+.ws-add-part-btn:hover { border-color: var(--peach); }
+.wordsum-add-btn { font-family: 'Nunito Sans', sans-serif; font-size: 11px; font-weight: 700; color: var(--peach-deep); background: none; border: 1.5px dashed var(--apricot-soft); border-radius: 8px; padding: 5px 12px; cursor: pointer; align-self: flex-start; }
+.wordsum-add-btn:hover { border-color: var(--peach); background: var(--peach-light); }
+.swi-body { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.swi-column { display: flex; flex-direction: column; gap: 8px; }
+.swi-textarea { font-family: 'Nunito Sans', sans-serif; font-size: 12.5px; color: var(--text-dark); border: 1.5px solid var(--warm-gray); border-radius: 8px; padding: 7px 10px; background: var(--white); outline: none; resize: vertical; min-height: 50px; line-height: 1.6; transition: border-color 0.2s; }
+.swi-textarea:focus { border-color: var(--peach-soft); }
+.swi-textarea::placeholder { color: var(--sand); }
+.swi-image-zone { width: 100%; height: 80px; border: 1.5px dashed var(--apricot-soft); border-radius: var(--app-radius); background: var(--peach-light); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden; }
+.swi-image-zone.drag-over { border-color: var(--peach); background: var(--peach-bg); }
+.swi-image-zone.has-image { border-style: solid; border-color: var(--apricot-soft); padding: 0; }
+.swi-image-zone img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+.swi-image-zone:hover .image-overlay { opacity: 1; }
+.drop-icon { font-size: 20px; opacity: 0.3; }
+.drop-text { font-size: 9px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; text-align: center; line-height: 1.3; }
+.image-overlay { position: absolute; inset: 0; background: rgba(46,42,38,0.45); display: flex; align-items: center; justify-content: center; gap: 5px; opacity: 0; transition: opacity 0.2s; border-radius: 8px; }
+.img-action-btn { background: white; border: none; border-radius: 5px; padding: 4px 8px; font-family: 'Nunito Sans', sans-serif; font-size: 10px; font-weight: 700; cursor: pointer; color: var(--text-dark); }
+.img-action-btn.remove { color: var(--rose-deep); }
+
+
+.no-print {}
+@media print { body { background: white !important; } .no-print, .hero-actions, .site-nav { display: none !important; } .hero { padding: 16px 20px 12px; } .main { max-width: 100%; padding: 12px; } .swi-delete-btn, .matrix-hint, .prefix-add-btn, .prefix-add-col-btn, .prefix-remove-btn, .suffix-add-entry-btn, .suffix-add-layer-btn, .suffix-add-group-btn, .suffix-remove-btn, .wordsum-add-btn, .wordsum-remove-btn, .ws-add-part-btn, .image-overlay { display: none !important; } .swi-card { border-color: #ddd !important; break-inside: avoid; } .page-footer { padding: 20px; } }
+
+/* ── Back-to-toolkit nav ── */
+.rrc-topnav { position: sticky; top: 0; z-index: 999; background: rgba(254,252,250,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #ede6df; padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
+.rrc-topnav a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: "DM Sans", -apple-system, sans-serif; font-size: 13px; font-weight: 600; color: #76706a; transition: color 0.2s, transform 0.2s; }
+.rrc-topnav a:hover { color: #2d2a26; transform: translateX(-2px); }
+.rrc-topnav a svg { width: 14px; height: 14px; fill: currentColor; }
+.rrc-topnav .rrc-topnav-title { margin-left: auto; font-family: "Fraunces", Georgia, serif; font-size: 13px; font-weight: 400; color: #a8a19a; letter-spacing: 0.5px; }
+@media print { .rrc-topnav { display: none; } }
+
+</style>
+</head>
+<body>
+<nav class="rrc-topnav" aria-label="Toolkit navigation">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back to Toolkit</a>
+  <span class="rrc-topnav-title">Rachel&#8217;s Reading Companion</span>
+</nav>
+
+
+<div class="confetti-container" id="confettiContainer"></div>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+
+<header class="hero">
+  <div class="hero-eyebrow"><div class="hero-eyebrow-dot"></div> Rachel's Reading Companion</div>
+  <div class="hero-icon-wrap"><img src="https://static.wixstatic.com/media/517494_49ebeafa7034463fa1d25006b5b26acc~mv2.png" alt="Word Scientist icon" class="hero-app-icon" /></div>
+  <h1 class="hero-title">Word <em>Scientist</em></h1>
+  <p class="hero-desc">Investigate words like a scientist — build matrices, write word sums, and trace how words are constructed from meaningful parts.</p>
+  <div class="hero-actions no-print">
+    <button class="hero-btn hero-btn-primary" onclick="printPage()">🖨️ Print / Save PDF</button>
+    <button class="hero-btn hero-btn-outline" onclick="clearAll()">Clear All</button>
+  </div>
+</header>
+
+<div class="toast" id="toast"></div>
+
+<main id="main-content" class="main">
+  <div class="section-header">
+    <div class="section-icon">🔬</div>
+    <h2 class="section-title">Word Scientist</h2>
+    <span class="section-count" id="swi-count">0</span>
+  </div>
+  <p class="section-subtitle">Investigate words like a scientist — build matrices, write word sums, and trace how words are constructed from meaningful parts.</p>
+  <div class="info-bar">
+    <div class="info-field"><div class="field-label">Student Name</div><input type="text" class="info-input" id="swi-name" placeholder="Who's investigating?"></div>
+    <div class="info-field"><div class="field-label">Text / Source</div><input type="text" class="info-input" id="swi-source" placeholder="Where did we find this word?"></div>
+    <div class="info-field" style="max-width:150px;"><div class="field-label">Date</div><input type="date" class="info-input" id="swi-date"></div>
+  </div>
+  <div class="swi-cards-list" id="swiCardsList"></div>
+  <button class="add-card-btn no-print" onclick="addSwiCard()" style="margin-top:12px;">+ Investigate Another Word</button>
+</main>
+
+<script>
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+function printPage(){try{window.print();}catch(e){showToast('Print not available in this view');}}
+var COLORS=['#d4956b','#d4887a','#e0967e','#d48a9e'];
+var swiCount=0;
+function addSwiCard(){swiCount++;var id='swi-'+swiCount;var c=COLORS[(swiCount-1)%4];var card=document.createElement('div');card.className='swi-card';card.id=id;card._matrixState={prefixColumns:[['']],base:'',baseMeaning:'',suffixGroups:[[['']]]};card._wordSums=[{parts:[{type:'prefix',value:''},{type:'base',value:''},{type:'suffix',value:''}],result:''}];card.innerHTML='<div class="swi-accent" style="background:'+c+'"></div><span class="swi-card-num">#'+swiCount+'</span><button class="swi-delete-btn no-print" onclick="removeSwiCard(\''+id+'\')" title="Remove">✕</button><div class="swi-target-row"><span class="swi-target-label">Target Word</span><input type="text" class="swi-target-input" placeholder="Type the word to investigate…"></div><div class="matrix-section"><div class="field-label" style="text-align:center;margin-bottom:5px;">Word Matrix</div><div class="matrix-outer" id="matrix-'+id+'"></div><div class="matrix-hint no-print">Click + buttons to add prefixes, suffixes, and layers</div></div><div class="swi-wordsum-section"><div class="field-label">Word Sums</div><div class="wordsum-list" id="wordsums-'+id+'"></div><button class="wordsum-add-btn no-print" onclick="addWordSum(\''+id+'\')" style="margin-top:5px;">+ Add Word Sum</button></div><div class="swi-body"><div class="swi-column"><div><div class="field-label">Base Meaning</div><textarea class="swi-textarea" placeholder="What does the base mean?"></textarea></div><div><div class="field-label">Affix Notes</div><textarea class="swi-textarea" placeholder="What do the affixes mean or do?"></textarea></div></div><div class="swi-column"><div><div class="field-label">Etymology / History</div><textarea class="swi-textarea" placeholder="Where does this word come from?"></textarea></div><div><div class="field-label">Keyword Image</div><div class="swi-image-zone" id="swi-drop-'+id+'" onclick="triggerUpload(\''+id+'\')" ondragover="event.preventDefault();this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')" ondrop="handleDrop(event,\''+id+'\')"><span class="drop-icon">📷</span><span class="drop-text">Drag &amp; drop<br>or click</span></div><input type="file" class="hidden-input" id="file-'+id+'" accept="image/*" onchange="handleFileSelect(event,\''+id+'\')"></div><div><div class="field-label">Observations</div><textarea class="swi-textarea" placeholder="What surprised us?"></textarea></div></div></div>';document.getElementById('swiCardsList').appendChild(card);renderMatrix(id);renderWordSums(id);updateSwiCount();}
+function removeSwiCard(id){var el=document.getElementById(id);if(el){el.style.opacity='0';el.style.transition='opacity 0.25s';setTimeout(function(){el.remove();updateSwiCount();},250);}}
+function updateSwiCount(){document.getElementById('swi-count').textContent=document.querySelectorAll('.swi-card').length;}
+function renderMatrix(cid){var card=document.getElementById(cid),s=card._matrixState,el=document.getElementById('matrix-'+cid);var h='<div class="matrix-prefix-side">';s.prefixColumns.forEach(function(col,ci){h+='<div class="prefix-column">';col.forEach(function(v,ei){h+='<div class="prefix-entry"><input type="text" class="prefix-entry-input" value="'+v+'" placeholder="pre-" oninput="upPfx(\''+cid+'\','+ci+','+ei+',this.value)"><button class="prefix-remove-btn no-print" onclick="rmPfx(\''+cid+'\','+ci+','+ei+')">✕</button></div>';});h+='<button class="prefix-add-btn no-print" onclick="addPfx(\''+cid+'\','+ci+')">+</button></div>';});h+='<button class="prefix-add-col-btn no-print" onclick="addPfxCol(\''+cid+'\')">+</button></div>';h+='<div class="matrix-base-center"><input type="text" class="matrix-base-input" value="'+s.base+'" placeholder="base" oninput="document.getElementById(\''+cid+'\')._matrixState.base=this.value"><input type="text" class="matrix-meaning-input" value="'+s.baseMeaning+'" placeholder=\'"meaning"\' oninput="document.getElementById(\''+cid+'\')._matrixState.baseMeaning=this.value"></div>';h+='<div class="matrix-suffix-side">';s.suffixGroups.forEach(function(g,gi){h+='<div class="suffix-group">';g.forEach(function(layer,li){h+='<div class="suffix-layer">';layer.forEach(function(v,ei){h+='<div class="suffix-entry"><input type="text" class="suffix-entry-input" value="'+v+'" placeholder="-suf" oninput="upSfx(\''+cid+'\','+gi+','+li+','+ei+',this.value)"><button class="suffix-remove-btn no-print" onclick="rmSfx(\''+cid+'\','+gi+','+li+','+ei+')">✕</button></div>';});h+='<button class="suffix-add-entry-btn no-print" onclick="addSfxE(\''+cid+'\','+gi+','+li+')">+</button></div>';});h+='<button class="suffix-add-layer-btn no-print" onclick="addSfxL(\''+cid+'\','+gi+')">+</button></div>';});h+='<button class="suffix-add-group-btn no-print" onclick="addSfxG(\''+cid+'\')">+ suffix group</button></div>';el.innerHTML=h;}
+function upPfx(id,c,e,v){document.getElementById(id)._matrixState.prefixColumns[c][e]=v;}
+function addPfx(id,c){document.getElementById(id)._matrixState.prefixColumns[c].push('');renderMatrix(id);}
+function rmPfx(id,c,e){var col=document.getElementById(id)._matrixState.prefixColumns[c];if(col.length>1){col.splice(e,1);renderMatrix(id);}}
+function addPfxCol(id){document.getElementById(id)._matrixState.prefixColumns.unshift(['']);renderMatrix(id);}
+function upSfx(id,g,l,e,v){document.getElementById(id)._matrixState.suffixGroups[g][l][e]=v;}
+function addSfxE(id,g,l){document.getElementById(id)._matrixState.suffixGroups[g][l].push('');renderMatrix(id);}
+function rmSfx(id,g,l,e){var ly=document.getElementById(id)._matrixState.suffixGroups[g][l];if(ly.length>1){ly.splice(e,1);renderMatrix(id);}}
+function addSfxL(id,g){document.getElementById(id)._matrixState.suffixGroups[g].push(['']);renderMatrix(id);}
+function addSfxG(id){document.getElementById(id)._matrixState.suffixGroups.push([['']]);renderMatrix(id);}
+function renderWordSums(cid){var card=document.getElementById(cid),sums=card._wordSums,el=document.getElementById('wordsums-'+cid);var h='';sums.forEach(function(sum,si){h+='<div class="wordsum-row"><div class="wordsum-editable">';sum.parts.forEach(function(p,pi){if(pi>0)h+='<span class="ws-plus">+</span>';var cls=p.type==='base'?'ws-inp-base':p.type==='prefix'?'ws-inp-prefix':'ws-inp-suffix';h+='<input type="text" class="wordsum-input '+cls+'" value="'+p.value+'" placeholder="'+p.type+'" oninput="upWSP(\''+cid+'\','+si+','+pi+',this.value)">';});h+='<button class="ws-add-part-btn no-print" onclick="addWSPart(\''+cid+'\','+si+')">+</button><span class="ws-arrow">→</span><input type="text" class="wordsum-input" value="'+sum.result+'" placeholder="= word" oninput="upWSR(\''+cid+'\','+si+',this.value)" style="font-weight:600;"></div><button class="wordsum-remove-btn no-print" onclick="rmWS(\''+cid+'\','+si+')">✕</button></div>';});el.innerHTML=h;}
+function upWSP(id,si,pi,v){document.getElementById(id)._wordSums[si].parts[pi].value=v;}
+function upWSR(id,si,v){document.getElementById(id)._wordSums[si].result=v;}
+function addWSPart(id,si){document.getElementById(id)._wordSums[si].parts.push({type:'suffix',value:''});renderWordSums(id);}
+function addWordSum(id){document.getElementById(id)._wordSums.push({parts:[{type:'prefix',value:''},{type:'base',value:''},{type:'suffix',value:''}],result:''});renderWordSums(id);}
+function rmWS(id,si){var s=document.getElementById(id)._wordSums;if(s.length>1){s.splice(si,1);renderWordSums(id);}}
+function triggerUpload(cid){var zone=document.getElementById('swi-drop-'+cid);if(!zone||zone.classList.contains('has-image'))return;document.getElementById('file-'+cid).click();}
+function handleFileSelect(e,cid){var file=e.target.files[0];if(file&&file.type.startsWith('image/')){var r=new FileReader();r.onload=function(ev){loadImageToZone(cid,ev.target.result);};r.readAsDataURL(file);}}
+function loadImageToZone(cid,src){var zone=document.getElementById('swi-drop-'+cid);if(!zone)return;zone.classList.add('has-image');zone.innerHTML='<img src="'+src+'" alt=""><div class="image-overlay"><button class="img-action-btn" onclick="event.stopPropagation();changeImage(\''+cid+'\')">Change</button><button class="img-action-btn remove" onclick="event.stopPropagation();removeImage(\''+cid+'\')">Remove</button></div>';}
+function changeImage(cid){document.getElementById('file-'+cid).click();}
+function removeImage(cid){var zone=document.getElementById('swi-drop-'+cid);if(!zone)return;zone.classList.remove('has-image');zone.innerHTML='<span class="drop-icon">📷</span><span class="drop-text">Drag &amp; drop<br>or click</span>';var f=document.getElementById('file-'+cid);if(f)f.value='';}
+function handleDrop(e,cid){e.preventDefault();e.currentTarget.classList.remove('drag-over');var files=e.dataTransfer.files;if(files.length>0&&files[0].type.startsWith('image/')){var r=new FileReader();r.onload=function(ev){loadImageToZone(cid,ev.target.result);};r.readAsDataURL(files[0]);}}
+function clearAll(){swiCount=0;document.getElementById('swiCardsList').innerHTML='';['swi-name','swi-source','swi-date'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});addSwiCard();addSwiCard();showToast('All cleared! Fresh start ✨');}
+addSwiCard();addSwiCard();
+
+</script>
+
+<!-- iframe height reporter -->
+<script>
+(function(){
+  if (window.self === window.top) return; // not in iframe, skip
+  function reportHeight() {
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'rrc-resize', height: h }, '*');
+  }
+  window.addEventListener('load', reportHeight);
+  new MutationObserver(reportHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+  window.addEventListener('resize', reportHeight);
+  // Also report on interval for dynamic content
+  setInterval(reportHeight, 1000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pattern Detective | Rachel's Reading Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ========================================
+   PASTEL RAINBOW DESIGN SYSTEM (from About page)
+   ======================================== */
+:root {
+  --bg: #fefcfa;
+  --surface: #ffffff;
+  --surface-warm: #fdf9f5;
+  --border: #ede6df;
+  --border-light: #f5f0ea;
+  --ink: #2d2a26;
+  --ink-secondary: #4a4640;
+  --ink-muted: #76706a;
+  --ink-faint: #a8a19a;
+  --pastel-rose: #f4a0b5;
+  --pastel-rose-soft: #fdf0f4;
+  --pastel-rose-deep: #d4718e;
+  --pastel-peach: #f6b889;
+  --pastel-peach-soft: #fef5ed;
+  --pastel-yellow: #f5d98a;
+  --pastel-yellow-soft: #fef9ed;
+  --pastel-mint: #8dd4b0;
+  --pastel-mint-soft: #eefaf3;
+  --pastel-mint-deep: #5aaf80;
+  --pastel-sky: #8dc4e8;
+  --pastel-sky-soft: #eef6fc;
+  --pastel-sky-deep: #5a98c4;
+  --pastel-lavender: #b8a0d8;
+  --pastel-lavender-soft: #f3eefa;
+  --pastel-lavender-deep: #8a6cb8;
+  --pastel-lilac: #d4a0d8;
+  --pastel-lilac-soft: #f9f0fa;
+  --rainbow: linear-gradient(135deg, var(--pastel-rose) 0%, var(--pastel-peach) 16%, var(--pastel-yellow) 32%, var(--pastel-mint) 48%, var(--pastel-sky) 64%, var(--pastel-lavender) 80%, var(--pastel-lilac) 100%);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 2px 8px rgba(180,160,140,0.08), 0 1px 3px rgba(180,160,140,0.06);
+  --shadow-md: 0 6px 24px rgba(180,160,140,0.10), 0 2px 8px rgba(180,160,140,0.06);
+  --shadow-lg: 0 12px 40px rgba(180,160,140,0.12), 0 4px 12px rgba(180,160,140,0.06);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* App-specific (mint/green theme) */
+  --white: #ffffff;
+  --offwhite: #fdfcfb;
+  --cream: #f9f6f2;
+  --warm-gray: #f0ece6;
+  --sand: #e4ddd4;
+  --text-dark: #2e2a26;
+  --text-body: #4a4540;
+  --text-muted: #8a8279;
+  --text-light: #b0a89e;
+  --mint: #8cc5a7;
+  --mint-soft: #b5dbc7;
+  --mint-light: #dff0e7;
+  --mint-deep: #5a9e78;
+  --mint-bg: #eef7f1;
+  --sage: #7aab8a;
+  --sage-soft: #c2dcc9;
+  --fern: #6b9c7d;
+  --jade: #5b9977;
+  --seafoam: #93ccb3;
+  --seafoam-soft: #c8e6d8;
+  --pine: #4d8866;
+  --pink: #d4829e;
+  --pink-soft: #e8a5bc;
+  --app-radius: 10px;
+  --app-radius-lg: 14px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Nunito Sans', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.skip-link {
+  position: absolute; top: -100%; left: 16px;
+  background: var(--ink); color: white;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 600; z-index: 100;
+  text-decoration: none; transition: top 0.2s;
+}
+.skip-link:focus { top: 16px; }
+:focus-visible { outline: 2px solid var(--pastel-lavender); outline-offset: 3px; border-radius: 2px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--pastel-lavender), var(--pastel-rose)); border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* ========================================
+   CONFETTI
+   ======================================== */
+.confetti-container {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999; overflow: hidden;
+}
+.confetti-piece {
+  position: absolute; width: 8px; height: 8px; border-radius: 2px;
+  animation: confetti-fall 2.5s ease-out forwards; opacity: 0;
+}
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translateY(-20px) rotate(0deg) scale(1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0.3); }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes rainbowShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* ========================================
+   HERO / APP HEADER
+   ======================================== */
+.hero {
+  background: linear-gradient(170deg, var(--mint-bg) 0%, var(--offwhite) 100%);
+  padding: 36px 32px 28px; text-align: center;
+  border-bottom: 1px solid var(--warm-gray);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(140,197,167,0.10) 0%, transparent 70%);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -40px; left: -40px;
+  width: 140px; height: 140px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(107,156,125,0.08) 0%, transparent 70%);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--text-light); margin-bottom: 10px;
+  justify-content: center;
+}
+.hero-eyebrow-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--mint);
+}
+.hero-title {
+  font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  font-size: 36px; font-weight: 400; color: var(--text-dark);
+  line-height: 1.15; margin-bottom: 8px;
+}
+.hero-title em { font-style: italic; color: var(--mint-deep); }
+.hero-desc {
+  font-size: 14px; font-weight: 300; color: var(--text-muted);
+  line-height: 1.7; max-width: 540px; margin: 0 auto 14px;
+}
+.hero-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: 8px;
+  font-family: 'Nunito Sans', 'DM Sans', sans-serif;
+  font-size: 12.5px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; border: 1.5px solid;
+}
+.hero-btn-primary { background: var(--mint); border-color: var(--mint); color: white; }
+.hero-btn-primary:hover { background: var(--mint-deep); border-color: var(--mint-deep); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(90,158,120,0.25); }
+.hero-btn-outline { background: var(--white); border-color: var(--warm-gray); color: var(--text-muted); }
+.hero-btn-outline:hover { border-color: var(--mint-soft); color: var(--mint-deep); background: var(--offwhite); }
+
+.hero-icon-wrap {
+  display: flex; justify-content: center; margin-bottom: 10px;
+}
+.hero-app-icon {
+  width: 72px; height: 72px; object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(140,197,167,0.22), 0 1px 4px rgba(90,158,120,0.10);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.hero-app-icon:hover { transform: scale(1.08) rotate(-3deg); }
+@media (max-width: 768px) {
+  .hero-app-icon { width: 60px; height: 60px; border-radius: 14px; }
+}
+
+/* ========================================
+   MAIN APP CONTENT
+   ======================================== */
+.main { max-width: 920px; margin: 0 auto; padding: 32px 24px 60px; }
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 8px; padding-bottom: 10px;
+  border-bottom: 1.5px solid var(--warm-gray);
+}
+.section-icon {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; color: white;
+  background: var(--sage);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  font-size: 24px; font-weight: 500; color: var(--text-dark); flex: 1;
+}
+.section-subtitle {
+  font-size: 13px; font-weight: 400; color: var(--text-muted);
+  margin: -2px 0 16px 46px; line-height: 1.5;
+}
+.section-count {
+  font-size: 11px; font-weight: 700; color: var(--mint-deep);
+  letter-spacing: 0.5px; background: var(--mint-light);
+  padding: 3px 10px; border-radius: 20px;
+}
+.info-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.info-field { flex: 1; min-width: 150px; display: flex; flex-direction: column; gap: 4px; }
+.field-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--text-light);
+}
+.info-input {
+  font-family: 'Nunito Sans', sans-serif; font-size: 14px; font-weight: 500;
+  padding: 8px 11px; border: 1.5px solid var(--warm-gray); border-radius: 8px;
+  background: var(--white); color: var(--text-dark); outline: none;
+  transition: border-color 0.2s;
+}
+.info-input:focus { border-color: var(--mint-soft); }
+.info-input::placeholder { color: var(--sand); }
+.hidden-input { display: none; }
+.add-card-btn {
+  width: 100%; padding: 14px;
+  border: 1.5px dashed var(--sage-soft); border-radius: var(--app-radius);
+  background: transparent; font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--text-muted);
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.add-card-btn:hover { border-color: var(--mint); color: var(--mint-deep); background: var(--mint-light); }
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--text-dark); color: white;
+  padding: 11px 22px; border-radius: var(--app-radius);
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13.5px; font-weight: 500; z-index: 1000; opacity: 0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none; display: flex; align-items: center; gap: 8px; max-width: 90vw;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+/* Pattern cards */
+.patterns-list { display: flex; flex-direction: column; gap: 12px; }
+.pattern-card {
+  display: grid; grid-template-columns: 140px 1fr; grid-template-rows: auto auto;
+  gap: 12px 18px; padding: 16px 18px; border: 1.5px solid transparent;
+  border-radius: var(--app-radius); position: relative;
+  transition: all 0.2s ease; animation: slideIn 0.3s ease;
+}
+.pattern-card:hover {
+  background: var(--offwhite); border-color: var(--warm-gray);
+  box-shadow: 0 2px 10px rgba(46,42,38,0.04);
+}
+.pattern-accent { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; border-radius: var(--app-radius) 0 0 var(--app-radius); }
+.card-num { position: absolute; top: 8px; right: 12px; font-size: 11px; font-weight: 600; color: var(--sand); }
+.delete-card-btn {
+  position: absolute; top: 8px; right: 36px; background: none; border: none;
+  color: var(--sand); font-size: 15px; cursor: pointer; padding: 0 4px;
+  opacity: 0; transition: opacity 0.2s, color 0.2s;
+}
+.pattern-card:hover .delete-card-btn { opacity: 1; }
+.delete-card-btn:hover { color: var(--pink); }
+.pattern-left { grid-row: 1 / 3; display: flex; flex-direction: column; align-items: center; gap: 7px; }
+.pattern-input-box {
+  width: 120px; height: 44px; border: 1.5px dashed var(--sage-soft);
+  border-radius: var(--app-radius); background: var(--mint-light);
+  display: flex; align-items: center; justify-content: center;
+}
+.pattern-input {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px; font-weight: 600; color: var(--text-dark);
+  border: none; background: transparent; text-align: center; width: 100%; outline: none;
+}
+.pattern-input::placeholder { color: var(--sage-soft); font-size: 17px; }
+.keyword-drop-zone {
+  width: 120px; height: 86px; border: 1.5px dashed var(--sage-soft);
+  border-radius: var(--app-radius); background: var(--mint-light);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden;
+}
+.keyword-drop-zone.drag-over { border-color: var(--mint); background: var(--mint-bg); }
+.keyword-drop-zone.has-image { border-style: solid; border-color: var(--sage-soft); padding: 0; }
+.keyword-drop-zone img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
+.drop-icon { font-size: 20px; opacity: 0.3; }
+.drop-text { font-size: 9px; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; text-align: center; line-height: 1.3; }
+.image-overlay {
+  position: absolute; inset: 0; background: rgba(46,42,38,0.45);
+  display: flex; align-items: center; justify-content: center; gap: 5px;
+  opacity: 0; transition: opacity 0.2s; border-radius: 8px;
+}
+.keyword-drop-zone.has-image:hover .image-overlay { opacity: 1; }
+.img-action-btn {
+  background: white; border: none; border-radius: 5px; padding: 4px 8px;
+  font-family: 'Nunito Sans', sans-serif; font-size: 10px; font-weight: 700;
+  cursor: pointer; color: var(--text-dark);
+}
+.img-action-btn.remove { color: var(--pink); }
+.keyword-input {
+  font-family: 'Nunito Sans', sans-serif; font-size: 11.5px; font-weight: 600;
+  color: var(--text-dark); border: none; border-bottom: 1.5px solid var(--warm-gray);
+  padding: 3px 2px; background: transparent; outline: none; text-align: center; width: 120px;
+}
+.keyword-input::placeholder { color: var(--sand); }
+.keyword-input:focus { border-bottom-color: var(--mint-soft); }
+.rule-section, .examples-section { display: flex; flex-direction: column; gap: 5px; }
+.rule-textarea {
+  font-family: 'Nunito Sans', sans-serif; font-size: 13px; color: var(--text-dark);
+  border: 1.5px solid var(--warm-gray); border-radius: 8px;
+  padding: 7px 10px; background: var(--white); outline: none;
+  resize: vertical; min-height: 58px; line-height: 1.6; transition: border-color 0.2s;
+}
+.rule-textarea:focus { border-color: var(--mint-soft); }
+.rule-textarea::placeholder { color: var(--sand); }
+.example-words-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+.example-word-input {
+  font-family: 'Nunito Sans', sans-serif; font-size: 12.5px; font-weight: 500;
+  color: var(--text-dark); text-align: center; padding: 6px 7px;
+  border: 1.5px solid var(--warm-gray); border-radius: 8px;
+  background: var(--mint-light); outline: none; transition: border-color 0.2s, background 0.2s;
+}
+.example-word-input:focus { border-color: var(--mint); background: var(--white); }
+.example-word-input::placeholder { color: var(--sage-soft); }
+.add-example-btn {
+  border: 1.5px dashed var(--sage-soft); border-radius: 8px; background: transparent;
+  color: var(--mint-deep); font-family: 'Nunito Sans', sans-serif;
+  font-size: 11px; font-weight: 700; padding: 6px; cursor: pointer; transition: all 0.2s;
+}
+.add-example-btn:hover { border-color: var(--mint); background: var(--mint-light); }
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .pattern-card { grid-template-columns: 1fr; }
+  .pattern-left { grid-row: auto; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .example-words-grid { grid-template-columns: repeat(2, 1fr); }
+  .info-bar { flex-direction: column; }
+  .hero-title { font-size: 30px; }
+  .main { padding: 24px 14px 40px; }
+}
+
+/* Print */
+.no-print {}
+@media print {
+  body { background: white !important; }
+  .no-print, .hero-actions, .site-nav { display: none !important; }
+  .hero { padding: 16px 20px 12px; }
+  .main { max-width: 100%; padding: 12px; }
+  .delete-card-btn, .image-overlay, .add-example-btn { display: none !important; }
+  .pattern-card { border-color: #ddd !important; break-inside: avoid; }
+  .page-footer { padding: 20px; }
+}
+
+/* ── Back-to-toolkit nav ── */
+.rrc-topnav { position: sticky; top: 0; z-index: 999; background: rgba(254,252,250,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #ede6df; padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
+.rrc-topnav a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: "DM Sans", -apple-system, sans-serif; font-size: 13px; font-weight: 600; color: #76706a; transition: color 0.2s, transform 0.2s; }
+.rrc-topnav a:hover { color: #2d2a26; transform: translateX(-2px); }
+.rrc-topnav a svg { width: 14px; height: 14px; fill: currentColor; }
+.rrc-topnav .rrc-topnav-title { margin-left: auto; font-family: "Fraunces", Georgia, serif; font-size: 13px; font-weight: 400; color: #a8a19a; letter-spacing: 0.5px; }
+@media print { .rrc-topnav { display: none; } }
+
+</style>
+</head>
+<body>
+<nav class="rrc-topnav" aria-label="Toolkit navigation">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back to Toolkit</a>
+  <span class="rrc-topnav-title">Rachel&#8217;s Reading Companion</span>
+</nav>
+
+
+<div class="confetti-container" id="confettiContainer"></div>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ===== APP HERO ===== -->
+<header class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-dot"></div>
+    Rachel's Reading Companion
+  </div>
+  <div class="hero-icon-wrap">
+    <img src="https://static.wixstatic.com/media/517494_ef6e2b9328ab4ed5895439d6fd39c71e~mv2.png" alt="Pattern Detective icon" class="hero-app-icon" />
+  </div>
+  <h1 class="hero-title">Pattern <em>Detective</em></h1>
+  <p class="hero-desc">Spot spelling patterns, record the rules, and collect example words. Every pattern is a clue to how English works!</p>
+  <div class="hero-actions no-print">
+    <button class="hero-btn hero-btn-primary" onclick="printPage()">🖨️ Print / Save PDF</button>
+    <button class="hero-btn hero-btn-outline" onclick="clearAll()">Clear All</button>
+  </div>
+</header>
+
+<div class="toast" id="toast"></div>
+
+<main id="main-content" class="main">
+
+  <div class="section-header">
+    <div class="section-icon">✨</div>
+    <h2 class="section-title">Pattern Detective</h2>
+    <span class="section-count" id="pattern-count">0</span>
+  </div>
+  <p class="section-subtitle">Spot spelling patterns, record the rules, and collect example words. Every pattern is a clue to how English works!</p>
+  <div class="info-bar">
+    <div class="info-field"><div class="field-label">Student Name</div><input type="text" class="info-input" id="sp-name" placeholder="Who's detecting patterns?"></div>
+    <div class="info-field" style="max-width:150px;"><div class="field-label">Date</div><input type="date" class="info-input" id="sp-date"></div>
+  </div>
+  <div class="patterns-list" id="patternsList"></div>
+  <button class="add-card-btn no-print" onclick="addPatternCard()" style="margin-top:12px;">+ Add Another Pattern</button>
+
+</main>
+
+<script>
+var CHEERS = [
+  '🌟 Great work!', '⭐ Amazing!', '🎉 Keep going!', '✨ Wonderful!',
+  '💪 So strong!', '🌈 Look at that progress!', '🏆 Champion reader!', '🎊 Fantastic!',
+  '🚀 You\'re on fire!', '💫 Brilliant!', '🌻 Growing every day!', '📚 Word wizard!'
+];
+function shootConfetti() {
+  var c = document.getElementById('confettiContainer');
+  var colors = ['#8cc5a7','#5a9e78','#7aab8a','#93ccb3','#6b9c7d','#5b9977','#b5dbc7','#c2dcc9'];
+  for (var i = 0; i < 50; i++) {
+    var p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left = (Math.random() * 100) + '%';
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.animationDelay = (Math.random() * 0.6) + 's';
+    p.style.animationDuration = (1.8 + Math.random() * 1.5) + 's';
+    p.style.width = (5 + Math.random() * 8) + 'px';
+    p.style.height = (5 + Math.random() * 8) + 'px';
+    p.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+    c.appendChild(p);
+    setTimeout(function(el){ return function(){ el.remove(); }; }(p), 3000);
+  }
+}
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2800);
+}
+function printPage() {
+  try { window.print(); } catch(e) { showToast('Print not available in this view'); }
+}
+
+var patternCount = 0;
+var COLORS = ['#8cc5a7','#5a9e78','#7aab8a','#93ccb3'];
+
+function addPatternCard(data) {
+  patternCount++;
+  var id = 'pat-' + patternCount;
+  var c = COLORS[(patternCount - 1) % 4];
+  var card = document.createElement('div');
+  card.className = 'pattern-card'; card.id = id;
+  var examples = (data && data.examples) ? data.examples : ['','','','','',''];
+  var exHtml = '';
+  for (var i = 0; i < examples.length; i++) {
+    exHtml += '<input type="text" class="example-word-input" placeholder="word" value="' + examples[i] + '">';
+  }
+  card.innerHTML =
+    '<div class="pattern-accent" style="background:' + c + '"></div>' +
+    '<span class="card-num">#' + patternCount + '</span>' +
+    '<button class="delete-card-btn no-print" onclick="removeCard(\'' + id + '\')" title="Remove">✕</button>' +
+    '<div class="pattern-left">' +
+      '<div class="field-label">Pattern</div>' +
+      '<div class="pattern-input-box"><input type="text" class="pattern-input" placeholder="ee, igh…" value="' + ((data && data.pattern) || '') + '"></div>' +
+      '<div class="keyword-drop-zone" id="drop-' + id + '" onclick="triggerUpload(\'' + id + '\')" ondragover="event.preventDefault();this.classList.add(\'drag-over\')" ondragleave="this.classList.remove(\'drag-over\')" ondrop="handleDrop(event,\'' + id + '\')">' +
+        '<span class="drop-icon">📷</span><span class="drop-text">Drag & drop<br>or click</span>' +
+      '</div>' +
+      '<input type="file" class="hidden-input" id="file-' + id + '" accept="image/*" onchange="handleFileSelect(event,\'' + id + '\')">' +
+      '<input type="text" class="keyword-input" placeholder="keyword" value="' + ((data && data.keyword) || '') + '">' +
+    '</div>' +
+    '<div class="rule-section"><div class="field-label">Rule / Notes</div><textarea class="rule-textarea" placeholder="What does this pattern do?">' + ((data && data.rule) || '') + '</textarea></div>' +
+    '<div class="examples-section"><div class="field-label">Example Words</div>' +
+      '<div class="example-words-grid" id="examples-' + id + '">' + exHtml + '</div>' +
+      '<button class="add-example-btn no-print" onclick="addExampleWord(\'' + id + '\')">+ Add Word</button>' +
+    '</div>';
+  document.getElementById('patternsList').appendChild(card);
+  updatePatternCount();
+}
+
+function addExampleWord(cid) {
+  var grid = document.getElementById('examples-' + cid);
+  var inp = document.createElement('input');
+  inp.type = 'text'; inp.className = 'example-word-input'; inp.placeholder = 'word';
+  grid.appendChild(inp); inp.focus();
+}
+function removeCard(id) {
+  var el = document.getElementById(id);
+  if (el) { el.style.opacity = '0'; el.style.transition = 'opacity 0.25s'; setTimeout(function(){ el.remove(); updatePatternCount(); }, 250); }
+}
+function updatePatternCount() {
+  document.getElementById('pattern-count').textContent = document.querySelectorAll('.pattern-card').length;
+}
+function triggerUpload(cid) {
+  var zone = document.getElementById('drop-' + cid);
+  if (!zone || zone.classList.contains('has-image')) return;
+  document.getElementById('file-' + cid).click();
+}
+function handleFileSelect(e, cid) {
+  var file = e.target.files[0];
+  if (file && file.type.startsWith('image/')) { var r = new FileReader(); r.onload = function(ev) { loadImageToZone(cid, ev.target.result); }; r.readAsDataURL(file); }
+}
+function loadImageToZone(cid, src) {
+  var zone = document.getElementById('drop-' + cid);
+  if (!zone) return;
+  zone.classList.add('has-image');
+  zone.innerHTML = '<img src="' + src + '" alt=""><div class="image-overlay"><button class="img-action-btn" onclick="event.stopPropagation();changeImage(\'' + cid + '\')">Change</button><button class="img-action-btn remove" onclick="event.stopPropagation();removeImage(\'' + cid + '\')">Remove</button></div>';
+}
+function changeImage(cid) { document.getElementById('file-' + cid).click(); }
+function removeImage(cid) {
+  var zone = document.getElementById('drop-' + cid);
+  if (!zone) return;
+  zone.classList.remove('has-image');
+  zone.innerHTML = '<span class="drop-icon">📷</span><span class="drop-text">Drag & drop<br>or click</span>';
+  var f = document.getElementById('file-' + cid); if (f) f.value = '';
+}
+function handleDrop(e, cid) {
+  e.preventDefault(); e.currentTarget.classList.remove('drag-over');
+  var files = e.dataTransfer.files;
+  if (files.length > 0 && files[0].type.startsWith('image/')) { var r = new FileReader(); r.onload = function(ev) { loadImageToZone(cid, ev.target.result); }; r.readAsDataURL(files[0]); }
+}
+function clearAll() {
+  patternCount = 0;
+  document.getElementById('patternsList').innerHTML = '';
+  ['sp-name','sp-date'].forEach(function(id) { var el = document.getElementById(id); if (el) el.value = ''; });
+  addPatternCard(); addPatternCard();
+  showToast('All cleared! Fresh start ✨');
+}
+addPatternCard(); addPatternCard();
+
+</script>
+
+<!-- iframe height reporter -->
+<script>
+(function(){
+  if (window.self === window.top) return; // not in iframe, skip
+  function reportHeight() {
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'rrc-resize', height: h }, '*');
+  }
+  window.addEventListener('load', reportHeight);
+  new MutationObserver(reportHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+  window.addEventListener('resize', reportHeight);
+  // Also report on interval for dynamic content
+  setInterval(reportHeight, 1000);
+})();
+</script>
+</body>
+</html>

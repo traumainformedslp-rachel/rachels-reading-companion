@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quick Guide | Rachel's Reading Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fefcfa;
+  --surface: #ffffff;
+  --surface-warm: #fdf9f5;
+  --border: #ede6df;
+  --border-light: #f5f0ea;
+  --ink: #2d2a26;
+  --ink-secondary: #4a4640;
+  --ink-muted: #76706a;
+  --ink-faint: #a8a19a;
+  --pastel-rose: #f4a0b5;
+  --pastel-rose-soft: #fdf0f4;
+  --pastel-rose-deep: #d4718e;
+  --pastel-peach: #f6b889;
+  --pastel-yellow: #f5d98a;
+  --pastel-mint: #8dd4b0;
+  --pastel-sky: #8dc4e8;
+  --pastel-lavender: #b8a0d8;
+  --pastel-lavender-soft: #f3eefa;
+  --pastel-lavender-deep: #8a6cb8;
+  --pastel-lilac: #d4a0d8;
+  --rainbow: linear-gradient(135deg, #f4a0b5 0%, #f6b889 16%, #f5d98a 32%, #8dd4b0 48%, #8dc4e8 64%, #b8a0d8 80%, #d4a0d8 100%);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-md: 0 6px 24px rgba(180,160,140,0.10), 0 2px 8px rgba(180,160,140,0.06);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --white: #ffffff;
+  --offwhite: #fdfcfb;
+  --cream: #f9f6f2;
+  --warm-gray: #f0ece6;
+  --sand: #e4ddd4;
+  --text-dark: #2e2a26;
+  --text-body: #4a4540;
+  --text-muted: #8a8279;
+  --text-light: #b0a89e;
+  --blue: #6ba4c8;
+  --blue-soft: #deedf5;
+  --blue-deep: #4a88af;
+  --blue-bg: #eef5fa;
+  --rose: #d4829e;
+  --rose-soft: #e8a5bc;
+  --rose-light: #f5dce6;
+  --rose-deep: #b86885;
+  --rose-bg: #fdf0f4;
+  --peach: #d4a07a;
+  --peach-soft: #e8c4a5;
+  --peach-light: #faf0e8;
+  --peach-deep: #b87a52;
+  --peach-bg: #fdf3ec;
+  --mint: #7ab89a;
+  --mint-soft: #b5dbc7;
+  --mint-light: #e0f0e8;
+  --mint-deep: #5a9e78;
+  --mint-bg: #eef8f2;
+  --lavender: #9b8cbf;
+  --lavender-soft: #b5a8d1;
+  --lavender-light: #e4ddf0;
+  --lavender-deep: #7e6da8;
+  --lavender-bg: #f5f0f8;
+  --lilac: #b88cbf;
+  --lilac-soft: #d1a8d6;
+  --lilac-light: #f0ddf2;
+  --lilac-deep: #9668a0;
+  --lilac-bg: #f9f0fa;
+  --guide-accent: #8a9cb8;
+  --guide-accent-soft: #d8dfe8;
+  --guide-accent-deep: #6a7f9a;
+  --guide-accent-bg: #f0f3f7;
+  --app-radius: 10px;
+  --app-radius-lg: 14px;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Nunito Sans', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg); color: var(--text-body);
+  min-height: 100vh; -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+.skip-link { position: absolute; top: -100%; left: 16px; background: var(--ink); color: white; padding: 8px 16px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; z-index: 100; text-decoration: none; transition: top 0.2s; }
+.skip-link:focus { top: 16px; }
+:focus-visible { outline: 2px solid var(--pastel-lavender); outline-offset: 3px; border-radius: 2px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--pastel-lavender), var(--pastel-rose)); border-radius: 4px; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes rainbowShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+.hero { background: linear-gradient(170deg, var(--guide-accent-bg) 0%, var(--offwhite) 100%); padding: 36px 32px 28px; text-align: center; border-bottom: 1px solid var(--warm-gray); position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -60px; right: -60px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(138,156,184,0.10) 0%, transparent 70%); }
+.hero::after { content: ''; position: absolute; bottom: -40px; left: -40px; width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, rgba(106,127,154,0.08) 0%, transparent 70%); }
+.hero-eyebrow { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-light); margin-bottom: 10px; justify-content: center; }
+.hero-eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--guide-accent); }
+.hero-icon-wrap { display: flex; justify-content: center; margin-bottom: 10px; }
+.hero-app-icon { width: 72px; height: 72px; object-fit: contain; border-radius: 18px; box-shadow: 0 4px 18px rgba(138,156,184,0.22), 0 1px 4px rgba(106,127,154,0.10); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+.hero-app-icon:hover { transform: scale(1.08) rotate(-3deg); }
+.hero-title { font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif; font-size: 36px; font-weight: 400; color: var(--text-dark); line-height: 1.15; margin-bottom: 8px; }
+.hero-title em { font-style: italic; color: var(--guide-accent-deep); }
+.hero-desc { font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.7; max-width: 540px; margin: 0 auto 14px; }
+.hero-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.hero-btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 20px; border-radius: 8px; font-family: 'Nunito Sans', 'DM Sans', sans-serif; font-size: 12.5px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1.5px solid; }
+.hero-btn-primary { background: var(--guide-accent); border-color: var(--guide-accent); color: white; }
+.hero-btn-primary:hover { background: var(--guide-accent-deep); border-color: var(--guide-accent-deep); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(106,127,154,0.25); }
+@media (max-width: 768px) { .hero-app-icon { width: 60px; height: 60px; border-radius: 14px; } .hero-title { font-size: 30px; } }
+.main { max-width: 920px; margin: 0 auto; padding: 32px 24px 60px; }
+.section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; padding-bottom: 10px; border-bottom: 1.5px solid var(--warm-gray); }
+.section-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; color: white; background: var(--guide-accent); }
+.section-title { font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 500; color: var(--text-dark); flex: 1; }
+.section-subtitle { font-size: 13px; font-weight: 400; color: var(--text-muted); margin: -2px 0 16px 46px; line-height: 1.5; }
+.guide-content { max-width: 760px; margin: 0 auto; }
+.guide-block { background: var(--white); border: 1.5px solid var(--warm-gray); border-radius: var(--app-radius); padding: 20px 24px; margin-bottom: 16px; position: relative; }
+.guide-block-accent { position: absolute; top: 0; left: 0; right: 0; height: 3px; border-radius: var(--app-radius) var(--app-radius) 0 0; }
+.guide-block-title { font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif; font-size: 19px; font-weight: 500; color: var(--text-dark); margin-bottom: 10px; padding-top: 2px; }
+.guide-content p { font-size: 13.5px; color: var(--text-body); line-height: 1.75; margin: 0 0 8px; }
+.guide-content p:last-child { margin-bottom: 0; }
+.guide-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--text-light); margin-top: 14px; margin-bottom: 5px; }
+.guide-label:first-child { margin-top: 0; }
+.guide-steps { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+.guide-step { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; border-radius: var(--app-radius); border: 1px solid var(--warm-gray); }
+.step-num { font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif; font-size: 13px; font-weight: 600; color: white; width: 24px; height: 24px; min-width: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+.guide-step div { font-size: 13px; color: var(--text-body); line-height: 1.65; }
+.guide-tip { margin-top: 10px; padding: 9px 12px; border-radius: var(--app-radius); border-left: 3px solid; font-size: 12.5px; color: var(--text-body); line-height: 1.65; }
+.guide-tip-blue { background: var(--blue-bg); border-left-color: var(--blue); }
+.guide-tip-rose { background: var(--rose-bg); border-left-color: var(--rose); }
+.guide-tip-mint { background: var(--mint-bg); border-left-color: var(--mint); }
+.guide-tip-peach { background: var(--peach-bg); border-left-color: var(--peach); }
+.guide-tip-lavender { background: var(--lavender-bg); border-left-color: var(--lavender); }
+.guide-tip-lilac { background: var(--lilac-bg); border-left-color: var(--lilac); }
+.step-bg-blue { background: var(--blue-bg); }
+.step-bg-rose { background: var(--rose-bg); }
+.step-bg-mint { background: var(--mint-bg); }
+.step-bg-peach { background: var(--peach-bg); }
+.step-bg-lavender { background: var(--lavender-bg); }
+.step-bg-lilac { background: var(--lilac-bg); }
+.guide-callout { margin-top: 12px; padding: 16px 18px; border: 1.5px solid var(--peach-soft); border-radius: var(--app-radius); background: var(--peach-bg); }
+.guide-callout-title { font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif; font-size: 17px; font-weight: 500; color: var(--peach-deep); margin-bottom: 6px; }
+.guide-callout p { font-size: 13px; margin-bottom: 6px; }
+.four-questions { display: flex; flex-direction: column; gap: 6px; }
+.four-q { display: flex; gap: 10px; align-items: flex-start; padding: 8px 10px; background: white; border-radius: 7px; border: 1px solid var(--peach-soft); }
+.q-num { font-size: 10px; font-weight: 700; color: var(--peach-deep); background: var(--peach-light); padding: 3px 7px; border-radius: 5px; white-space: nowrap; margin-top: 1px; }
+.four-q div { font-size: 12.5px; color: var(--text-body); line-height: 1.55; }
+.guide-references { background: var(--cream); }
+.guide-references ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+.guide-references li { font-size: 12px; color: var(--text-body); line-height: 1.6; padding-left: 14px; text-indent: -14px; }
+.guide-references em { font-style: italic; }
+.no-print {}
+@media print { body { background: white !important; } .no-print, .hero-actions, .site-nav { display: none !important; } .hero { padding: 16px 20px 12px; } .main { max-width: 100%; padding: 12px; } .guide-block { break-inside: avoid; } .page-footer { padding: 20px; } .page-footer::before { display: none; } }
+@media (max-width: 768px) { .main { padding: 24px 14px 40px; } .guide-block { padding: 16px 18px; } }
+
+/* ── Back-to-toolkit nav ── */
+.rrc-topnav { position: sticky; top: 0; z-index: 999; background: rgba(254,252,250,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #ede6df; padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
+.rrc-topnav a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: "DM Sans", -apple-system, sans-serif; font-size: 13px; font-weight: 600; color: #76706a; transition: color 0.2s, transform 0.2s; }
+.rrc-topnav a:hover { color: #2d2a26; transform: translateX(-2px); }
+.rrc-topnav a svg { width: 14px; height: 14px; fill: currentColor; }
+.rrc-topnav .rrc-topnav-title { margin-left: auto; font-family: "Fraunces", Georgia, serif; font-size: 13px; font-weight: 400; color: #a8a19a; letter-spacing: 0.5px; }
+@media print { .rrc-topnav { display: none; } }
+
+</style>
+</head>
+<body>
+<nav class="rrc-topnav" aria-label="Toolkit navigation">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back to Toolkit</a>
+  <span class="rrc-topnav-title">Rachel&#8217;s Reading Companion</span>
+</nav>
+
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-dot"></div>
+    Rachel's Reading Companion
+  </div>
+  <div class="hero-icon-wrap">
+    <img src="https://static.wixstatic.com/media/517494_480de32964044d6aab0b3af8c2cdc59b~mv2.png" alt="Quick Guide icon" class="hero-app-icon" />
+  </div>
+  <h1 class="hero-title">Quick <em>Guide</em></h1>
+  <p class="hero-desc">How to get the most out of each tool in the Reading Companion toolkit.</p>
+  <div class="hero-actions no-print">
+    <button class="hero-btn hero-btn-primary" onclick="window.print()">&#128424; Print / Save PDF</button>
+  </div>
+</header>
+
+<main id="main-content" class="main">
+
+  <div class="section-header">
+    <div class="section-icon">&#128203;</div>
+    <h2 class="section-title">Quick Guide</h2>
+  </div>
+  <p class="section-subtitle">How to get the most out of each tool in the Reading Companion toolkit.</p>
+
+  <div class="guide-content">
+
+    <!-- WHY THIS TOOLKIT -->
+    <div class="guide-block">
+      <div class="guide-block-title">Why This Toolkit?</div>
+      <p>Rachel's Reading Companion brings together research-supported approaches to phonics, word study, and fluency practice in one place. Each tool targets a different aspect of literacy, from letter&#8211;sound correspondence to collecting unfamiliar vocabulary, noticing spelling patterns, investigating how words are built from meaningful parts, and building reading fluency through varied practice drills.</p>
+      <p>These activities work across ages and abilities. Meta-analyses consistently show that morphological instruction produces significant gains in reading, spelling, and vocabulary, with younger and less-skilled readers benefiting the most (Bowers, Kirby, &amp; Deacon, 2010; Breadmore, Olson, &amp; Bowers, 2024). Structured Word Inquiry, the approach used in the Word Scientist tool, has been shown to improve literacy outcomes including spelling accuracy and vocabulary depth in both typically developing students and those with language-based learning difficulties (Bowers &amp; Kirby, 2010; Colenbrander, Parsons, Bowers, &amp; Davis, 2021; Ng, Bowers, &amp; Bowers, 2022).</p>
+      <p>Fluency research similarly supports the multi-method approach used in the Fluency Lab: repeated reading produces robust gains in reading rate and accuracy (Therrien, 2004; Maki &amp; Hammerschmidt-Snidarich, 2022), sight-word automaticity training supports orthographic mapping (Ehri, 2020), and phrase-level practice builds the prosody essential to comprehension (Rasinski &amp; Young, 2023). Duke, Cartwright, and Burns (2021) identify fluency as a key bridging process between word recognition and comprehension in their Active View of Reading model, underscoring why fluency instruction deserves dedicated attention. Where applicable, the toolkit incorporates the most current evidence-based word lists, including the CPB Sight Words, a new high-frequency wordlist derived from over 2,000 children&#8217;s picture books using modern corpus-linguistics methods (Green, Keogh, &amp; Prout, 2024).</p>
+    </div>
+
+    <!-- MYSTERY LETTERS -->
+    <div class="guide-block">
+      <div class="guide-block-accent" style="background: var(--blue);"></div>
+      <div class="guide-block-title">&#128153; Mystery Letters</div>
+      <p>An interactive letter-identification game where students look at images packed with objects that share the same initial letter, then guess the mystery letter. Three difficulty levels (Easy, Medium, Hard) adjust the number of choices from 2 to 26 letters, with built-in scoring, streak tracking, and celebration animations to keep learners engaged.</p>
+      <p>This activity targets letter&#8211;sound correspondence and initial phoneme awareness, foundational skills identified as critical predictors of later reading success (National Reading Panel, 2000; Ehri, 2020). The visual &#8220;I Spy&#8221; format leverages picture-based cues that support dual coding and strengthen associations between letters and their most common sounds (Paivio, 1986).</p>
+      <div class="guide-tip guide-tip-blue"><strong>Tip:</strong> Start on Easy (2 choices) for emergent readers. Move to Medium once accuracy is consistent, and use Hard mode as a challenge for students ready to scan all 26 options. The streak counter is great for goal-setting: &#8220;Let&#8217;s try to beat your record of 5 in a row!&#8221;</div>
+    </div>
+
+    <!-- WORD COLLECTOR -->
+    <div class="guide-block">
+      <div class="guide-block-accent" style="background: var(--rose);"></div>
+      <div class="guide-block-title">&#127800; Word Collector</div>
+      <p>An A&#8211;Z word bank where students record interesting, tricky, or unfamiliar words encountered during authentic reading. Word count badges track growth over time. Before reading, tell your student: <em>&#8220;If you come across a word you don&#8217;t know or find interesting, we&#8217;ll collect it.&#8221;</em></p>
+      <p>Research on incidental vocabulary acquisition shows that wide reading paired with explicit word-learning strategies produces the deepest vocabulary gains (Stahl &amp; Nagy, 2006). The alphabetical organization promotes phonemic awareness by drawing attention to initial sounds, while revisiting collected words in future sessions supports the multiple exposures needed for robust word learning, typically 10 to 12 encounters for full ownership of a new word (McKeown, Beck, Omanson, &amp; Pople, 1985).</p>
+      <div class="guide-tip guide-tip-rose"><strong>Tip:</strong> This works as a running record across sessions; students can build their collection over weeks or across an entire book. Revisit collected words by asking students to use them in sentences, sort them by category, or investigate them further in Word Scientist.</div>
+    </div>
+
+    <!-- PATTERN DETECTIVE -->
+    <div class="guide-block">
+      <div class="guide-block-accent" style="background: var(--mint);"></div>
+      <div class="guide-block-title">&#127807; Pattern Detective</div>
+      <p>Cards for recording spelling patterns with keyword images, pattern rules, and example words. The keyword image activates dual coding, connecting a visual cue with the phonics pattern to strengthen memory and retrieval (Paivio, 1986). Students can add multiple examples per pattern and use the drop zone for custom keyword images.</p>
+      <p>Systematic phonics instruction that teaches students to detect and generalize spelling patterns produces significant gains in word reading and spelling (National Reading Panel, 2000; Ehri, Nunes, Stahl, &amp; Willows, 2001). Pattern-based approaches are particularly effective because they help students move from decoding individual words to recognizing orthographic regularities across the writing system (Treiman &amp; Kessler, 2014).</p>
+      <div class="guide-tip guide-tip-mint"><strong>Tip:</strong> When a word &#8220;breaks&#8221; a pattern, that&#8217;s an ideal entry point for the Word Scientist tool. There&#8217;s often a morphological or etymological explanation for the unexpected spelling (e.g., <em>sign</em> keeps its &lt;g&gt; because of its relationship to <em>signal</em>).</div>
+    </div>
+
+    <!-- WORD SCIENTIST -->
+    <div class="guide-block">
+      <div class="guide-block-accent" style="background: var(--peach);"></div>
+      <div class="guide-block-title">&#127825; Word Scientist</div>
+      <p>In-depth word investigation using Structured Word Inquiry (SWI). Each card features the <strong>word matrix</strong>, the nested diagram that maps a word family, along with <strong>word sums</strong>, meaning fields, and etymology notes. SWI builds understanding through the interrelation of morphology, etymology, and phonology (Bowers &amp; Kirby, 2010; Kirby &amp; Bowers, 2017).</p>
+      <p>The word matrix, a key instructional tool of SWI, has been identified as a particularly effective way to make morphological structure visible to learners. Ng, Bowers, and Bowers (2022) found that matrices promote generative word learning: students who understand the structure of one word can independently decode and spell dozens of related forms. This generative capacity is what makes morphological instruction so efficient; learning the base &lt;struct&gt; unlocks <em>construct, destruction, instructing, restructure</em>, and more. Colenbrander, Parsons, Bowers, and Davis (2021) further demonstrated in a randomized controlled trial that SWI can improve reading and spelling outcomes for students in Grades 3 and 5 with reading and spelling difficulties.</p>
+      <div class="guide-callout">
+        <div class="guide-callout-title">The Four Questions of SWI</div>
+        <div class="four-questions">
+          <div class="four-q"><span class="q-num">Q1</span><div><strong>What does it mean?</strong> Start with meaning, the foundation of all word study.</div></div>
+          <div class="four-q"><span class="q-num">Q2</span><div><strong>How is it built?</strong> Identify the base element, prefixes, and suffixes.</div></div>
+          <div class="four-q"><span class="q-num">Q3</span><div><strong>What are its relatives?</strong> Find morphological relatives sharing the same base.</div></div>
+          <div class="four-q"><span class="q-num">Q4</span><div><strong>What are the sounds?</strong> Examine grapheme&#8211;phoneme correspondences in context.</div></div>
+        </div>
+      </div>
+      <div class="guide-tip guide-tip-peach"><strong>Tip:</strong> Always begin with meaning (Q1). Students who understand <em>why</em> a word is spelled the way it is, not just <em>how</em>, develop deeper and more durable orthographic knowledge.</div>
+    </div>
+
+    <!-- FLUENCY LAB -->
+    <div class="guide-block">
+      <div class="guide-block-accent" style="background: var(--lavender);"></div>
+      <div class="guide-block-title">&#128156; Fluency Lab</div>
+      <p>Four research-backed fluency activities designed to build automaticity, speed, accuracy, and prosody, the key components of fluent reading (Rasinski &amp; Young, 2023). Duke, Cartwright, and Burns (2021) identify fluency as a bridging process to comprehension whose effect sizes are substantially larger than those for word decoding alone:</p>
+      <div class="guide-steps">
+        <div class="guide-step step-bg-lavender"><span class="step-num" style="background:var(--lavender);">1</span><div><strong>Sight Word Flash Cards</strong> &#8211; Timed flashcard practice with preset word lists (Fry, Dolch, and CPB Sight Words) or custom words. Track which words are known vs. need more practice. Supports the orthographic mapping process that transforms unfamiliar words into instantly recognized sight words (Ehri, 2020). The CPB Sight Words, derived from a corpus of over 2,000 children&#8217;s picture books, provide a more current and methodologically rigorous alternative to legacy lists, with frequency rankings weighted by dispersion across texts to better reflect the words children actually encounter during early reading (Green, Keogh, &amp; Prout, 2024).</div></div>
+        <div class="guide-step step-bg-lavender"><span class="step-num" style="background:var(--lavender);">2</span><div><strong>Repeated Reading Timer</strong> &#8211; Paste a passage, time multiple reads, and watch WPM improve. Therrien&#8217;s (2004) meta-analysis of 33 studies found a mean effect size of <em>d</em> = 0.83 for repeated reading interventions on fluency, making it one of the most effective approaches available. More recent meta-analytic work confirms that fluency interventions, including repeated reading, continue to show robust effects on oral reading fluency growth (Maki &amp; Hammerschmidt-Snidarich, 2022).</div></div>
+        <div class="guide-step step-bg-lavender"><span class="step-num" style="background:var(--lavender);">3</span><div><strong>Word Grid Sprint</strong> &#8211; Random word grids for rapid naming practice. Builds automaticity with high-frequency words through timed reads, targeting the fast, accurate word recognition that frees cognitive resources for comprehension (LaBerge &amp; Samuels, 1974).</div></div>
+        <div class="guide-step step-bg-lavender"><span class="step-num" style="background:var(--lavender);">4</span><div><strong>Phrase Fluency Strips</strong> &#8211; Break text into natural phrases for prosody practice. Helps students read with proper phrasing and expression, which is strongly associated with comprehension (Rasinski &amp; Young, 2023; Schwanenflugel &amp; Benjamin, 2012).</div></div>
+      </div>
+      <div class="guide-tip guide-tip-lavender"><strong>Tip:</strong> Combine tools for maximum impact: use Flash Cards to pre-teach key vocabulary, Repeated Reading for passage-level fluency, and Phrase Strips to polish expression. Log at least 3 attempts in Repeated Reading to show students their own growth; it&#8217;s incredibly motivating! The CPB preset lists are organized in groups of 25, making them easy to use for weekly or bi-weekly practice sets.</div>
+    </div>
+
+    <!-- PHONICS FRIEND -->
+    <div class="guide-block">
+      <div class="guide-block-accent" style="background: var(--lilac);"></div>
+      <div class="guide-block-title">&#128156; Phonics Friend</div>
+      <p>A comprehensive phonics instruction tool for systematic letter&#8211;sound learning. Phonics Friend provides an organized reference of grapheme&#8211;phoneme correspondences across six categories (single consonants, short vowels, long vowels, consonant digraphs, vowel teams, and r-controlled vowels) with an interactive card for every pattern.</p>
+      <p>Each card includes the grapheme, its phoneme (IPA notation), a keyword with emoji cue, example words that highlight the target pattern, a mouth-position description for articulation guidance, and a teaching tip. Students can explore cards in a browsable reference mode or practice in flashcard-style sessions that shuffle the deck and use a reveal-then-rate flow to build recall.</p>
+      <p>Systematic, explicit phonics instruction, teaching letter&#8211;sound correspondences in a structured sequence, is one of the most well-established findings in reading research (National Reading Panel, 2000; Ehri, Nunes, Stahl, &amp; Willows, 2001; Ehri, 2020). The inclusion of articulatory cues (mouth-position descriptions) draws on evidence that phonemic awareness is strengthened when students attend to how sounds are physically produced, not just how they sound (Boyer &amp; Ehri, 2011). Keyword mnemonics leverage dual coding theory by pairing each grapheme with a concrete visual referent, which significantly improves letter&#8211;sound retention (Ehri, Deffner, &amp; Wilce, 1984; Paivio, 1986).</p>
+      <div class="guide-steps">
+        <div class="guide-step step-bg-lilac"><span class="step-num" style="background:var(--lilac);">1</span><div><strong>Explore Mode</strong> &#8211; Browse all grapheme&#8211;phoneme cards organized by category. Tap any card to see its full detail panel with example words, mouth position, and teaching tip. Use the category tabs to focus on a specific pattern type (e.g., just vowel teams or just digraphs).</div></div>
+        <div class="guide-step step-bg-lilac"><span class="step-num" style="background:var(--lilac);">2</span><div><strong>Practice Mode</strong> &#8211; Flashcard-style drill that shuffles cards from the selected category. Students see the grapheme, try to recall its sound and keyword, then reveal the answer. Rate each card as &#8220;Still Learning&#8221; or &#8220;Got It&#8221; to track progress through the deck.</div></div>
+        <div class="guide-step step-bg-lilac"><span class="step-num" style="background:var(--lilac);">3</span><div><strong>Mastery Tracking</strong> &#8211; Each card can be marked with a mastery level (New, Learning, Known, Mastered) shown as a colored dot. This lets clinicians or teachers track which correspondences a student has secured and which need continued practice.</div></div>
+      </div>
+      <div class="guide-tip guide-tip-lilac"><strong>Tip:</strong> Phonics Friend pairs naturally with Pattern Detective. When a student encounters a spelling pattern in Pattern Detective, they can look up its grapheme&#8211;phoneme card in Phonics Friend for the full articulatory and keyword support. For emerging readers, start with single consonants and short vowels before moving to digraphs and vowel teams. In practice mode, keep sessions short (5 to 10 cards) and frequent rather than long and infrequent; distributed practice produces stronger retention than massed practice (Cepeda, Pashler, Vul, Wixted, &amp; Rohrer, 2006).</div>
+    </div>
+
+    <!-- REFERENCES -->
+    <div class="guide-block guide-references">
+      <div class="guide-block-title">Selected References</div>
+      <ul>
+        <li>Bowers, P. N. &amp; Kirby, J. R. (2010). Effects of morphological instruction on vocabulary acquisition. <em>Reading and Writing, 23</em>(5), 515&#8211;537.</li>
+        <li>Bowers, P. N., Kirby, J. R., &amp; Deacon, S. H. (2010). The effects of morphological instruction on literacy skills: A systematic review of the literature. <em>Review of Educational Research, 80</em>(2), 144&#8211;179.</li>
+        <li>Boyer, N. &amp; Ehri, L. C. (2011). Contribution of phonemic segmentation instruction with letters and articulation pictures to word reading and spelling in beginners. <em>Scientific Studies of Reading, 15</em>(5), 440&#8211;470.</li>
+        <li>Breadmore, H. L., Olson, A., &amp; Bowers, P. N. (2024). The effects of morphological instruction on literacy outcomes for children in English-speaking countries: A systematic review and meta-analysis. <em>Educational Psychology Review, 36</em>, Article 119.</li>
+        <li>Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T., &amp; Rohrer, D. (2006). Distributed practice in verbal recall tasks: A review and quantitative synthesis. <em>Psychological Bulletin, 132</em>(3), 354&#8211;380.</li>
+        <li>Colenbrander, D., Parsons, L., Bowers, J. S., &amp; Davis, C. J. (2021). Assessing the effectiveness of Structured Word Inquiry for students in Grades 3 and 5 with reading and spelling difficulties: A randomized controlled trial. <em>Reading Research Quarterly, 57</em>(1), 255&#8211;277.</li>
+        <li>Duke, N. K., Cartwright, K. B., &amp; Burns, M. K. (2021). The Active View of Reading: Seeking a better alignment of reading instruction with the science. <em>Literacy Today, 39</em>(2), 22&#8211;25.</li>
+        <li>Ehri, L. C. (2020). The science of learning to read words: A case for systematic phonics instruction. <em>Reading Research Quarterly, 55</em>(S1), S45&#8211;S68.</li>
+        <li>Ehri, L. C., Deffner, N. D., &amp; Wilce, L. S. (1984). Pictorial mnemonics for phonics. <em>Journal of Educational Psychology, 76</em>(5), 880&#8211;893.</li>
+        <li>Ehri, L. C., Nunes, S. R., Stahl, S. A., &amp; Willows, D. M. (2001). Systematic phonics instruction helps students learn to read: Evidence from the National Reading Panel&#8217;s meta-analysis. <em>Review of Educational Research, 71</em>(3), 393&#8211;447.</li>
+        <li>Green, C., Keogh, K., &amp; Prout, J. (2024). The CPB sight words: A new research-based high-frequency wordlist for early reading instruction. <em>The Reading Teacher, 78</em>(1), 56&#8211;64.</li>
+        <li>Hall, C., Steinle, P. K., &amp; Vaughn, S. (2023). Forty years of reading intervention research for elementary students with or at risk for dyslexia: A systematic review and meta-analysis. <em>Reading Research Quarterly, 58</em>(2), 285&#8211;312.</li>
+        <li>Kirby, J. R. &amp; Bowers, P. N. (2017). Morphological instruction and literacy. In K. Cain, D. Compton, &amp; R. Parrila (Eds.), <em>Theories of Reading Development</em> (pp. 437&#8211;462). John Benjamins.</li>
+        <li>LaBerge, D. &amp; Samuels, S. J. (1974). Toward a theory of automatic information processing in reading. <em>Cognitive Psychology, 6</em>(2), 293&#8211;323.</li>
+        <li>Maki, K. &amp; Hammerschmidt-Snidarich, S. (2022). Reading fluency intervention dosage: A novel meta-analysis and research synthesis. <em>Learning Disabilities Research &amp; Practice, 37</em>(4), 291&#8211;305.</li>
+        <li>McKeown, M. G., Beck, I. L., Omanson, R. C., &amp; Pople, M. T. (1985). Some effects of the nature and frequency of vocabulary instruction on the knowledge and use of words. <em>Reading Research Quarterly, 20</em>(5), 522&#8211;535.</li>
+        <li>National Reading Panel (2000). <em>Teaching Children to Read: An Evidence-Based Assessment of the Scientific Research Literature on Reading and Its Implications for Reading Instruction.</em> NIH Pub. No. 00-4769.</li>
+        <li>Ng, M. M. R., Bowers, P. N., &amp; Bowers, J. S. (2022). A promising new tool for literacy instruction: The morphological matrix. <em>PLOS ONE, 17</em>(1), e0262260.</li>
+        <li>Paivio, A. (1986). <em>Mental Representations: A Dual Coding Approach.</em> Oxford University Press.</li>
+        <li>Rasinski, T. V. &amp; Young, C. (2023). <em>Build Reading Fluency: Practice and Performance with Reader&#8217;s Theater and More</em> (2nd ed.). Shell Education.</li>
+        <li>Samuels, S. J. (1979). The method of repeated readings. <em>The Reading Teacher, 32</em>(4), 403&#8211;408.</li>
+        <li>Schwanenflugel, P. J. &amp; Benjamin, R. G. (2012). Reading expressiveness: The neglected aspect of reading fluency. In T. Rasinski, C. Blachowicz, &amp; K. Lems (Eds.), <em>Fluency Instruction</em> (2nd ed., pp. 35&#8211;54). Guilford Press.</li>
+        <li>Stahl, S. A. &amp; Nagy, W. E. (2006). <em>Teaching Word Meanings.</em> Lawrence Erlbaum Associates.</li>
+        <li>Therrien, W. J. (2004). Fluency and comprehension gains as a result of repeated reading: A meta-analysis. <em>Remedial and Special Education, 25</em>(4), 252&#8211;261.</li>
+        <li>Treiman, R. &amp; Kessler, B. (2014). <em>How Children Learn to Write Words.</em> Oxford University Press.</li>
+      </ul>
+    </div>
+
+  </div>
+</main>
+
+<script>
+</script>
+
+<!-- iframe height reporter -->
+<script>
+(function(){
+  if (window.self === window.top) return; // not in iframe, skip
+  function reportHeight() {
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'rrc-resize', height: h }, '*');
+  }
+  window.addEventListener('load', reportHeight);
+  new MutationObserver(reportHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+  window.addEventListener('resize', reportHeight);
+  // Also report on interval for dynamic content
+  setInterval(reportHeight, 1000);
+})();
+</script>
+</body>
+</html>

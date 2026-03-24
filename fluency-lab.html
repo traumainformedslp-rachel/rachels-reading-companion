@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluency Lab | Rachel's Reading Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Nunito+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ========================================
+   PASTEL RAINBOW DESIGN SYSTEM
+   ======================================== */
+:root {
+  --bg: #fefcfa;
+  --surface: #ffffff;
+  --surface-warm: #fdf9f5;
+  --border: #ede6df;
+  --border-light: #f5f0ea;
+  --ink: #2d2a26;
+  --ink-secondary: #4a4640;
+  --ink-muted: #76706a;
+  --ink-faint: #a8a19a;
+  --pastel-rose: #f4a0b5;
+  --pastel-rose-soft: #fdf0f4;
+  --pastel-rose-deep: #d4718e;
+  --pastel-peach: #f6b889;
+  --pastel-yellow: #f5d98a;
+  --pastel-mint: #8dd4b0;
+  --pastel-mint-soft: #eefaf3;
+  --pastel-mint-deep: #5aaf80;
+  --pastel-sky: #8dc4e8;
+  --pastel-lavender: #b8a0d8;
+  --pastel-lavender-soft: #f3eefa;
+  --pastel-lavender-deep: #8a6cb8;
+  --pastel-lilac: #d4a0d8;
+  --rainbow: linear-gradient(135deg, var(--pastel-rose) 0%, var(--pastel-peach) 16%, var(--pastel-yellow) 32%, var(--pastel-mint) 48%, var(--pastel-sky) 64%, var(--pastel-lavender) 80%, var(--pastel-lilac) 100%);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --shadow-sm: 0 2px 8px rgba(180,160,140,0.08), 0 1px 3px rgba(180,160,140,0.06);
+  --shadow-md: 0 6px 24px rgba(180,160,140,0.10), 0 2px 8px rgba(180,160,140,0.06);
+  --shadow-lg: 0 12px 40px rgba(180,160,140,0.12), 0 4px 12px rgba(180,160,140,0.06);
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* App-specific (lavender/violet theme) */
+  --white: #ffffff;
+  --offwhite: #fdfcfb;
+  --cream: #f9f6f2;
+  --warm-gray: #f0ece6;
+  --sand: #e4ddd4;
+  --text-dark: #2e2a26;
+  --text-body: #4a4540;
+  --text-muted: #8a8279;
+  --text-light: #b0a89e;
+  --lavender: #9b8cbf;
+  --lavender-soft: #b5a8d1;
+  --lavender-light: #e4ddf0;
+  --lavender-deep: #7e6da8;
+  --lavender-bg: #f5f0f8;
+  --violet: #8b7bb5;
+  --violet-soft: #c0b3d8;
+  --violet-deep: #6a5a96;
+  --iris: #9588c4;
+  --iris-soft: #cdc5e2;
+  --wisteria: #a899cc;
+  --wisteria-soft: #d4cce5;
+  --plum: #8470a8;
+  --plum-soft: #beb2d4;
+  --amethyst: #9c8dbe;
+  --orchid: #b094c8;
+  --orchid-soft: #ddd2ec;
+  --grape: #715e94;
+  --mauve: #c4a8d4;
+  --mauve-soft: #e8daf0;
+  --heather: #a494c0;
+  --heather-soft: #d0c8e0;
+  --lilac: #c8b8e0;
+  --lilac-soft: #e8e0f4;
+  --periwinkle: #8b9fd4;
+  --mint: #8cc5a7;
+  --mint-soft: #b5dbc7;
+  --pink: #d4829e;
+  --pink-soft: #e8a5bc;
+  --pink-light: #f3d1df;
+  --app-radius: 10px;
+  --app-radius-lg: 14px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Nunito Sans', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text-body);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.skip-link {
+  position: absolute; top: -100%; left: 16px;
+  background: var(--ink); color: white;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 600; z-index: 100;
+  text-decoration: none; transition: top 0.2s;
+}
+.skip-link:focus { top: 16px; }
+:focus-visible { outline: 2px solid var(--pastel-lavender); outline-offset: 3px; border-radius: 2px; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--pastel-lavender), var(--pastel-rose)); border-radius: 4px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+/* ========================================
+   CONFETTI
+   ======================================== */
+.confetti-container {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; z-index: 9999; overflow: hidden;
+}
+.confetti-piece {
+  position: absolute; width: 8px; height: 8px; border-radius: 2px;
+  animation: confetti-fall 2.5s ease-out forwards; opacity: 0;
+}
+@keyframes confetti-fall {
+  0% { opacity: 1; transform: translateY(-20px) rotate(0deg) scale(1); }
+  70% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(100vh) rotate(720deg) scale(0.3); }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes rainbowShift { 0%,100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+
+/* ========================================
+   FLASH CARD ANIMATIONS
+   ======================================== */
+@keyframes flashCardBounceIn {
+  0% { opacity: 0; transform: scale(0.3) rotate(-8deg); }
+  50% { opacity: 1; transform: scale(1.08) rotate(2deg); }
+  70% { transform: scale(0.95) rotate(-1deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes flashCardPulse {
+  0%, 100% { box-shadow: 0 8px 32px rgba(155,140,191,0.20), 0 0 0 0 rgba(155,140,191,0.0); }
+  50% { box-shadow: 0 12px 48px rgba(155,140,191,0.30), 0 0 0 12px rgba(155,140,191,0.06); }
+}
+@keyframes wordPopIn {
+  0% { opacity: 0; transform: scale(0.4) translateY(20px); letter-spacing: 12px; }
+  60% { opacity: 1; transform: scale(1.1) translateY(-4px); letter-spacing: -1px; }
+  80% { transform: scale(0.97) translateY(2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); letter-spacing: 0; }
+}
+@keyframes wordExit {
+  0% { opacity: 1; transform: scale(1) translateY(0); }
+  100% { opacity: 0; transform: scale(0.6) translateY(-30px) rotate(5deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes floatEmoji {
+  0% { opacity: 0; transform: translateY(0) scale(0.5); }
+  20% { opacity: 1; transform: translateY(-20px) scale(1); }
+  100% { opacity: 0; transform: translateY(-80px) scale(0.8); }
+}
+@keyframes progressGlow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+@keyframes correctBounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.15); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+@keyframes wrongShake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-8px) rotate(-2deg); }
+  30% { transform: translateX(8px) rotate(2deg); }
+  45% { transform: translateX(-6px) rotate(-1deg); }
+  60% { transform: translateX(6px) rotate(1deg); }
+  75% { transform: translateX(-3px); }
+}
+@keyframes starBurst {
+  0% { opacity: 1; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+  100% { opacity: 0; transform: scale(0.5) rotate(360deg); }
+}
+@keyframes bgColorCycle {
+  0% { background: linear-gradient(170deg, #f5f0f8 0%, #fdfcfb 100%); }
+  25% { background: linear-gradient(170deg, #f0f5f8 0%, #fbfdfc 100%); }
+  50% { background: linear-gradient(170deg, #f8f0f5 0%, #fdfbfc 100%); }
+  75% { background: linear-gradient(170deg, #f5f8f0 0%, #fcfdfb 100%); }
+  100% { background: linear-gradient(170deg, #f5f0f8 0%, #fdfcfb 100%); }
+}
+@keyframes chipBounceIn {
+  0% { opacity: 0; transform: scale(0.3); }
+  60% { transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ========================================
+   HERO / APP HEADER
+   ======================================== */
+.hero {
+  background: linear-gradient(170deg, var(--lavender-bg) 0%, var(--offwhite) 100%);
+  padding: 36px 32px 28px; text-align: center;
+  border-bottom: 1px solid var(--warm-gray);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 180px; height: 180px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(155,140,191,0.10) 0%, transparent 70%);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -40px; left: -40px;
+  width: 140px; height: 140px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(176,148,200,0.08) 0%, transparent 70%);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--text-light); margin-bottom: 10px;
+  justify-content: center;
+}
+.hero-eyebrow-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--lavender); }
+.hero-icon-wrap { display: flex; justify-content: center; margin-bottom: 10px; }
+.hero-app-icon {
+  width: 72px; height: 72px; object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 4px 18px rgba(155,140,191,0.25), 0 1px 4px rgba(126,109,168,0.12);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.hero-app-icon:hover { transform: scale(1.08) rotate(-3deg); }
+.hero-title {
+  font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  font-size: 36px; font-weight: 400; color: var(--text-dark);
+  line-height: 1.15; margin-bottom: 8px;
+}
+.hero-title em { font-style: italic; color: var(--lavender-deep); }
+.hero-desc {
+  font-size: 14px; font-weight: 300; color: var(--text-muted);
+  line-height: 1.7; max-width: 540px; margin: 0 auto 14px;
+}
+.hero-actions { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.hero-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: 8px;
+  font-family: 'Nunito Sans', 'DM Sans', sans-serif;
+  font-size: 12.5px; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; border: 1.5px solid;
+}
+.hero-btn-primary { background: var(--lavender); border-color: var(--lavender); color: white; }
+.hero-btn-primary:hover { background: var(--lavender-deep); border-color: var(--lavender-deep); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(126,109,168,0.25); }
+.hero-btn-outline { background: var(--white); border-color: var(--warm-gray); color: var(--text-muted); }
+.hero-btn-outline:hover { border-color: var(--violet-soft); color: var(--violet-deep); background: var(--offwhite); }
+
+@media (max-width: 768px) {
+  .hero-app-icon { width: 60px; height: 60px; border-radius: 14px; }
+}
+
+/* ========================================
+   MAIN APP CONTENT
+   ======================================== */
+.main { max-width: 920px; margin: 0 auto; padding: 32px 24px 60px; }
+.section-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 8px; padding-bottom: 10px;
+  border-bottom: 1.5px solid var(--warm-gray);
+}
+.section-icon {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; color: white;
+  background: var(--violet);
+}
+.section-title {
+  font-family: 'Cormorant Garamond', 'Fraunces', Georgia, serif;
+  font-size: 24px; font-weight: 500; color: var(--text-dark); flex: 1;
+}
+.section-subtitle {
+  font-size: 13px; font-weight: 400; color: var(--text-muted);
+  margin: -2px 0 16px 46px; line-height: 1.5;
+}
+.info-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
+.info-field { flex: 1; min-width: 150px; display: flex; flex-direction: column; gap: 4px; }
+.field-label {
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--text-light);
+}
+.info-input {
+  font-family: 'Nunito Sans', sans-serif; font-size: 14px; font-weight: 500;
+  padding: 8px 11px; border: 1.5px solid var(--warm-gray); border-radius: 8px;
+  background: var(--white); color: var(--text-dark); outline: none;
+  transition: border-color 0.2s;
+}
+.info-input:focus { border-color: var(--lavender-soft); }
+.info-input::placeholder { color: var(--sand); }
+.hidden-input { display: none; }
+.add-card-btn {
+  width: 100%; padding: 14px;
+  border: 1.5px dashed var(--wisteria-soft); border-radius: var(--app-radius);
+  background: transparent; font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px; font-weight: 600; color: var(--text-muted);
+  cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.add-card-btn:hover { border-color: var(--lavender); color: var(--lavender-deep); background: var(--lavender-light); }
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--text-dark); color: white;
+  padding: 11px 22px; border-radius: var(--app-radius);
+  font-family: 'Fredoka', 'Nunito Sans', sans-serif;
+  font-size: 14px; font-weight: 500; z-index: 1000; opacity: 0;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none; display: flex; align-items: center; gap: 8px; max-width: 90vw;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+/* ========================================
+   FLUENCY LAB PANELS
+   ======================================== */
+.fluency-tabs {
+  display: flex; gap: 6px; margin-bottom: 20px;
+  border-bottom: 1.5px solid var(--warm-gray);
+  padding-bottom: 10px; overflow-x: auto;
+}
+.fluency-tab-btn {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+  padding: 7px 14px; border-radius: 20px;
+  border: 1.5px solid var(--warm-gray);
+  background: var(--white); cursor: pointer;
+  transition: all 0.2s; white-space: nowrap;
+}
+.fluency-tab-btn:hover { border-color: var(--lavender); color: var(--lavender-deep); }
+.fluency-tab-btn.active { background: var(--lavender); border-color: var(--lavender); color: white; }
+.fluency-panel { display: none; animation: fadeIn 0.3s ease; }
+.fluency-panel.active { display: block; }
+
+.fluency-card {
+  background: var(--white); border: 1.5px solid var(--warm-gray);
+  border-radius: var(--app-radius-lg); padding: 20px; margin-bottom: 16px;
+}
+.fluency-card-title {
+  font-family: 'Fredoka', 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px; font-weight: 600; color: var(--text-dark); margin-bottom: 4px;
+}
+.fluency-card-desc {
+  font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.6;
+}
+
+/* ========================================
+   FLASH CARDS — ENHANCED
+   ======================================== */
+.flash-word-input-row { display: flex; gap: 8px; margin-bottom: 12px; }
+.flash-word-field {
+  flex: 1; font-family: 'Fredoka', 'Nunito Sans', sans-serif;
+  font-size: 16px; padding: 10px 14px;
+  border: 2px solid var(--warm-gray); border-radius: 12px;
+  outline: none; transition: all 0.25s;
+  background: var(--white);
+}
+.flash-word-field:focus { border-color: var(--lavender); box-shadow: 0 0 0 4px rgba(155,140,191,0.12); }
+.flash-add-btn {
+  font-family: 'Fredoka', sans-serif; font-size: 14px; font-weight: 600;
+  padding: 10px 22px; border-radius: 12px;
+  border: 2px solid var(--violet); background: var(--violet);
+  color: white; cursor: pointer; transition: all 0.25s; white-space: nowrap;
+}
+.flash-add-btn:hover { background: var(--violet-deep); border-color: var(--violet-deep); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(106,90,150,0.3); }
+.flash-add-btn:active { transform: translateY(0) scale(0.97); }
+.preset-row {
+  display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; align-items: center;
+}
+.preset-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-light); margin-right: 4px; }
+.preset-btn {
+  font-family: 'Fredoka', sans-serif; font-size: 11px; font-weight: 500;
+  padding: 5px 12px; border-radius: 8px; border: 1.5px solid var(--warm-gray);
+  background: var(--white); color: var(--text-muted); cursor: pointer; transition: all 0.2s;
+}
+.preset-btn:hover { border-color: var(--lavender); color: var(--lavender-deep); background: var(--lavender-bg); transform: translateY(-1px); }
+.word-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; min-height: 32px; }
+.word-chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: var(--lavender-light); border: 1.5px solid var(--wisteria-soft);
+  border-radius: 24px; padding: 5px 14px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 14px; font-weight: 500; color: var(--text-dark);
+  animation: chipBounceIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  transition: all 0.2s;
+}
+.word-chip:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(155,140,191,0.15); }
+.word-chip .chip-x {
+  font-size: 13px; color: var(--text-light); cursor: pointer;
+  transition: all 0.2s; font-weight: 700; margin-left: 2px;
+  width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+}
+.word-chip .chip-x:hover { color: white; background: var(--pink); }
+.word-chip.known { background: #ddf5e6; border-color: var(--mint-soft); }
+.word-chip.practice { background: #fce8ef; border-color: var(--pink-light); }
+.flash-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.flash-play-btn {
+  font-family: 'Fredoka', sans-serif; font-size: 15px; font-weight: 600;
+  padding: 12px 28px; border-radius: 14px; border: none; cursor: pointer; transition: all 0.25s;
+  letter-spacing: 0.3px;
+}
+.flash-play-btn.start { background: var(--lavender); color: white; }
+.flash-play-btn.start:hover { background: var(--lavender-deep); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(126,109,168,0.3); }
+.flash-play-btn.start:active { transform: translateY(0) scale(0.97); }
+.flash-play-btn.stop { background: var(--pink); color: white; }
+.flash-play-btn.stop:hover { background: #c06e88; }
+.speed-control {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 12px; font-weight: 500; color: var(--text-muted);
+}
+.speed-control input[type="range"] { width: 80px; accent-color: var(--lavender); }
+
+/* Flash Display - THE BIG CARD */
+.flash-display {
+  display: none; text-align: center; padding: 50px 24px 44px;
+  background: linear-gradient(170deg, var(--lavender-bg) 0%, var(--offwhite) 100%);
+  border-radius: 24px;
+  border: 3px solid var(--lavender-soft);
+  margin-top: 18px; position: relative;
+  overflow: hidden;
+  animation: bgColorCycle 12s ease infinite;
+}
+.flash-display.active {
+  display: block;
+  animation: flashCardBounceIn 0.5s cubic-bezier(0.34,1.56,0.64,1), bgColorCycle 12s ease infinite;
+}
+.flash-display::before {
+  content: ''; position: absolute; top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 50%, rgba(155,140,191,0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 70% 50%, rgba(176,148,200,0.05) 0%, transparent 50%);
+  animation: shimmer 6s ease infinite;
+  pointer-events: none;
+}
+
+/* Counter / emoji floaters container */
+.flash-display .float-emoji {
+  position: absolute; font-size: 28px; pointer-events: none;
+  animation: floatEmoji 1.2s ease forwards;
+}
+
+.flash-word-display {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 88px; font-weight: 700; color: var(--text-dark);
+  margin: 24px 0 32px; min-height: 110px;
+  transition: opacity 0.15s;
+  position: relative; z-index: 1;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+}
+.flash-word-display.pop-in {
+  animation: wordPopIn 0.55s cubic-bezier(0.34,1.56,0.64,1);
+}
+.flash-word-display.exit {
+  animation: wordExit 0.25s ease forwards;
+}
+.flash-word-display.correct-flash {
+  animation: correctBounce 0.4s ease;
+  color: var(--mint);
+}
+.flash-word-display.wrong-flash {
+  animation: wrongShake 0.45s ease;
+  color: var(--pink);
+}
+
+.flash-progress-text {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 14px; font-weight: 500; color: var(--text-muted);
+  margin-bottom: 10px; position: relative; z-index: 1;
+}
+.flash-progress-bar {
+  width: 100%; max-width: 360px; height: 8px;
+  background: rgba(228,221,240,0.6); border-radius: 4px;
+  overflow: hidden; margin: 0 auto 24px; position: relative; z-index: 1;
+}
+.flash-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--lavender), var(--orchid), var(--pastel-rose));
+  background-size: 200% 100%;
+  border-radius: 4px;
+  transition: width 0.4s cubic-bezier(0.4,0,0.2,1);
+  animation: progressGlow 2s ease infinite;
+}
+.flash-response-btns { display: flex; gap: 14px; justify-content: center; position: relative; z-index: 1; }
+.flash-resp-btn {
+  font-family: 'Fredoka', sans-serif; font-size: 17px; font-weight: 600;
+  padding: 16px 36px; border-radius: 16px; border: 3px solid;
+  cursor: pointer; transition: all 0.25s; min-width: 150px;
+  letter-spacing: 0.3px;
+  position: relative; overflow: hidden;
+}
+.flash-resp-btn::after {
+  content: ''; position: absolute; top: 50%; left: 50%;
+  width: 0; height: 0; border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+.flash-resp-btn:active::after { width: 200px; height: 200px; }
+.flash-resp-btn.got-it { border-color: var(--mint); color: var(--mint); background: white; }
+.flash-resp-btn.got-it:hover {
+  background: var(--mint); color: white;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(140,197,167,0.4);
+}
+.flash-resp-btn.practice { border-color: var(--pink); color: var(--pink); background: white; }
+.flash-resp-btn.practice:hover {
+  background: var(--pink); color: white;
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(212,130,158,0.4);
+}
+
+/* Flash Results */
+.flash-results {
+  display: none; text-align: center; padding: 36px 24px;
+  background: linear-gradient(170deg, var(--lavender-light) 0%, #f0eaf6 100%);
+  border-radius: 24px;
+  border: 2px solid var(--wisteria-soft); margin-top: 18px;
+}
+.flash-results.active { display: block; animation: flashCardBounceIn 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+.results-title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 30px; font-weight: 700; color: var(--text-dark); margin-bottom: 20px;
+}
+.results-stats { display: flex; gap: 28px; justify-content: center; margin-bottom: 20px; }
+.result-stat { text-align: center; }
+.stat-num { font-family: 'Fredoka', sans-serif; font-size: 48px; font-weight: 700; line-height: 1.1; }
+.stat-num.green { color: var(--mint); }
+.stat-num.pink { color: var(--pink); }
+.stat-label { font-family: 'Fredoka', sans-serif; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-light); }
+
+/* Streak counter */
+.streak-display {
+  font-family: 'Fredoka', sans-serif; font-size: 14px; font-weight: 600;
+  color: var(--lavender-deep); margin-bottom: 8px; position: relative; z-index: 1;
+  min-height: 22px;
+}
+.streak-display .streak-fire {
+  display: inline-block; transition: transform 0.2s;
+}
+.streak-display .streak-fire.bump {
+  animation: correctBounce 0.3s ease;
+}
+
+/* Repeated Reading */
+.passage-area {
+  font-family: 'Nunito Sans', sans-serif; font-size: 14px; color: var(--text-dark);
+  border: 1.5px solid var(--warm-gray); border-radius: var(--app-radius);
+  padding: 12px 14px; background: var(--white); outline: none;
+  resize: vertical; min-height: 120px; line-height: 1.8; width: 100%;
+  transition: border-color 0.2s;
+}
+.passage-area:focus { border-color: var(--iris-soft); }
+.passage-area::placeholder { color: var(--sand); }
+.timer-display {
+  text-align: center; padding: 20px; background: var(--lavender-light);
+  border-radius: var(--app-radius-lg); border: 1.5px solid var(--wisteria-soft); margin: 14px 0;
+}
+.timer-clock {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 56px; font-weight: 600; color: var(--text-dark);
+  letter-spacing: 2px; margin-bottom: 6px; font-variant-numeric: tabular-nums;
+}
+.timer-clock.running { color: var(--violet); }
+.timer-wpm { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 12px; }
+.timer-btns { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.timer-btn {
+  font-family: 'Nunito Sans', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 10px 22px; border-radius: 8px; border: 1.5px solid; cursor: pointer; transition: all 0.2s;
+}
+.timer-btn.start-btn { background: var(--iris); border-color: var(--iris); color: white; }
+.timer-btn.start-btn:hover { background: var(--violet-deep); border-color: var(--violet-deep); transform: translateY(-1px); }
+.timer-btn.stop-btn { background: var(--pink); border-color: var(--pink); color: white; }
+.timer-btn.stop-btn:hover { background: #c06e88; }
+.timer-btn.reset-btn { background: var(--white); border-color: var(--warm-gray); color: var(--text-muted); }
+.timer-btn.reset-btn:hover { border-color: var(--sand); color: var(--text-dark); }
+.attempts-list { margin-top: 14px; }
+.attempt-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 14px; background: var(--white);
+  border: 1px solid var(--warm-gray); border-radius: 8px;
+  margin-bottom: 5px; animation: slideIn 0.3s ease;
+}
+.attempt-num {
+  font-family: 'Cormorant Garamond', Georgia, serif; font-size: 16px; font-weight: 600;
+  color: white; background: var(--iris); width: 28px; height: 28px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.attempt-info { flex: 1; }
+.attempt-wpm { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+.attempt-wpm span { font-size: 11px; font-weight: 600; color: var(--text-muted); }
+.attempt-time { font-size: 11px; color: var(--text-light); }
+.attempt-improve { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+.attempt-improve.up { color: var(--mint); background: #e3f2e8; }
+.attempt-improve.first { color: var(--violet); background: var(--lavender-light); }
+
+/* Word Grid */
+.grid-setup { display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap; align-items: flex-end; }
+.grid-field { display: flex; flex-direction: column; gap: 4px; }
+.grid-select {
+  font-family: 'Nunito Sans', sans-serif; font-size: 13px; padding: 8px 10px;
+  border: 1.5px solid var(--warm-gray); border-radius: 8px;
+  background: var(--white); color: var(--text-dark); outline: none; cursor: pointer;
+}
+.grid-select:focus { border-color: var(--wisteria); }
+.grid-gen-btn {
+  font-family: 'Nunito Sans', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 9px 18px; border-radius: 8px; border: 1.5px solid var(--wisteria);
+  background: var(--wisteria); color: white; cursor: pointer; transition: all 0.2s;
+}
+.grid-gen-btn:hover { background: var(--plum); border-color: var(--plum); transform: translateY(-1px); }
+.word-grid-display { display: grid; gap: 6px; padding: 20px; background: var(--lavender-light); border-radius: var(--app-radius-lg); border: 1.5px solid var(--wisteria-soft); }
+.grid-word-cell {
+  text-align: center; padding: 12px 8px;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 22px; font-weight: 500; color: var(--text-dark);
+  background: var(--white); border-radius: 8px; border: 1.5px solid var(--warm-gray);
+  transition: all 0.15s; cursor: pointer; user-select: none;
+}
+.grid-word-cell:hover { border-color: var(--lavender); background: var(--lavender-bg); transform: scale(1.02); }
+.grid-word-cell.tapped { background: var(--lavender); color: white; border-color: var(--lavender); transform: scale(0.97); }
+.grid-timer-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 12px; padding: 10px 14px; background: var(--white);
+  border: 1.5px solid var(--warm-gray); border-radius: 8px;
+}
+.grid-timer-clock {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 28px; font-weight: 600; color: var(--text-dark); font-variant-numeric: tabular-nums;
+}
+.grid-timer-clock.running { color: var(--violet); }
+
+/* Phrase Strips */
+.phrase-input-area {
+  font-family: 'Nunito Sans', sans-serif; font-size: 14px; color: var(--text-dark);
+  border: 1.5px solid var(--warm-gray); border-radius: var(--app-radius);
+  padding: 12px 14px; background: var(--white); outline: none;
+  resize: vertical; min-height: 80px; line-height: 1.8; width: 100%; transition: border-color 0.2s;
+}
+.phrase-input-area:focus { border-color: var(--orchid-soft); }
+.phrase-input-area::placeholder { color: var(--sand); }
+.phrase-build-btn {
+  font-family: 'Nunito Sans', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 9px 18px; border-radius: 8px; border: 1.5px solid var(--orchid);
+  background: var(--orchid); color: white; cursor: pointer; transition: all 0.2s; margin-top: 8px;
+}
+.phrase-build-btn:hover { background: var(--plum); border-color: var(--plum); }
+.phrase-strips-container { margin-top: 16px; }
+.phrase-strip {
+  display: flex; align-items: center; gap: 10px; padding: 14px 18px; margin-bottom: 8px;
+  background: var(--white); border: 1.5px solid var(--warm-gray); border-radius: var(--app-radius);
+  border-left: 4px solid var(--wisteria); transition: all 0.2s; animation: slideIn 0.3s ease;
+}
+.phrase-strip:hover { background: var(--lavender-bg); box-shadow: 0 2px 8px rgba(126,109,168,0.06); }
+.phrase-strip-num {
+  font-family: 'Cormorant Garamond', Georgia, serif; font-size: 14px; font-weight: 600;
+  color: white; background: var(--wisteria); width: 26px; height: 26px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.phrase-strip-text {
+  font-family: 'Cormorant Garamond', Georgia, serif; font-size: 22px; font-weight: 500;
+  color: var(--text-dark); flex: 1; line-height: 1.4;
+}
+.phrase-strip-scoop { height: 4px; background: var(--lilac-soft); border-radius: 0 0 8px 8px; margin: -6px 44px 10px; }
+.phrase-practice-btn {
+  font-family: 'Nunito Sans', sans-serif; font-size: 12px; font-weight: 700;
+  padding: 9px 18px; border-radius: 8px; border: 1.5px solid var(--wisteria);
+  background: var(--white); color: var(--wisteria); cursor: pointer; transition: all 0.2s; margin-top: 10px;
+}
+.phrase-practice-btn:hover { background: var(--wisteria); color: white; }
+.phrase-practice-display {
+  display: none; text-align: center; padding: 40px 20px; margin-top: 14px;
+  background: linear-gradient(170deg, var(--lavender-bg) 0%, var(--offwhite) 100%);
+  border-radius: var(--app-radius-lg); border: 2px solid var(--lavender-soft);
+}
+.phrase-practice-display.active { display: block; animation: fadeIn 0.3s ease; }
+.phrase-practice-word {
+  font-family: 'Cormorant Garamond', Georgia, serif; font-size: 48px; font-weight: 500;
+  color: var(--text-dark); margin: 20px 0; transition: opacity 0.2s;
+}
+.phrase-nav-btns { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }
+.phrase-nav-btn {
+  font-family: 'Nunito Sans', sans-serif; font-size: 13px; font-weight: 700;
+  padding: 10px 20px; border-radius: 8px; border: 1.5px solid var(--wisteria); cursor: pointer; transition: all 0.2s;
+}
+.phrase-nav-btn.outline { background: white; color: var(--wisteria); }
+.phrase-nav-btn.outline:hover { background: var(--wisteria); color: white; }
+.phrase-nav-btn.filled { background: var(--wisteria); color: white; border-color: var(--wisteria); }
+.phrase-nav-btn.filled:hover { background: var(--plum); }
+
+.empty-state { text-align: center; padding: 40px 20px; color: var(--text-light); }
+.empty-icon { font-size: 40px; margin-bottom: 8px; opacity: 0.4; }
+.empty-text { font-size: 14px; font-weight: 500; margin-bottom: 4px; color: var(--text-muted); }
+.empty-hint { font-size: 12.5px; color: var(--text-light); }
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+@media (max-width: 768px) {
+  .flash-word-display { font-size: 56px !important; min-height: 80px !important; }
+  .flash-display { padding: 36px 16px 32px; }
+  .flash-resp-btn { min-width: 120px; padding: 14px 24px; font-size: 15px; }
+  .flash-response-btns { gap: 10px; }
+  .phrase-practice-word { font-size: 34px; }
+  .hero-title { font-size: 30px; }
+  .main { padding: 24px 14px 40px; }
+  .stat-num { font-size: 40px; }
+  .results-title { font-size: 24px; }
+}
+
+@media (max-width: 480px) {
+  .flash-word-display { font-size: 44px !important; }
+  .flash-resp-btn { min-width: 100px; padding: 12px 18px; font-size: 14px; }
+}
+
+/* Print */
+.no-print {}
+@media print {
+  body { background: white !important; }
+  .no-print, .hero-actions, .site-nav { display: none !important; }
+  .hero { padding: 16px 20px 12px; }
+  .main { max-width: 100%; padding: 12px; }
+  .flash-controls, .timer-btns, .grid-gen-btn, .phrase-build-btn,
+  .phrase-practice-btn, .fluency-tabs { display: none !important; }
+  .fluency-panel { display: block !important; }
+  .fluency-card { border-color: #ddd !important; break-inside: avoid; }
+  .page-footer { padding: 20px; }
+  .page-footer::before { display: none; }
+}
+
+/* ── Back-to-toolkit nav ── */
+.rrc-topnav { position: sticky; top: 0; z-index: 999; background: rgba(254,252,250,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid #ede6df; padding: 10px 24px; display: flex; align-items: center; gap: 10px; }
+.rrc-topnav a { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-family: "DM Sans", -apple-system, sans-serif; font-size: 13px; font-weight: 600; color: #76706a; transition: color 0.2s, transform 0.2s; }
+.rrc-topnav a:hover { color: #2d2a26; transform: translateX(-2px); }
+.rrc-topnav a svg { width: 14px; height: 14px; fill: currentColor; }
+.rrc-topnav .rrc-topnav-title { margin-left: auto; font-family: "Fraunces", Georgia, serif; font-size: 13px; font-weight: 400; color: #a8a19a; letter-spacing: 0.5px; }
+@media print { .rrc-topnav { display: none; } }
+
+</style>
+</head>
+<body>
+<nav class="rrc-topnav" aria-label="Toolkit navigation">
+  <a href="index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>Back to Toolkit</a>
+  <span class="rrc-topnav-title">Rachel&#8217;s Reading Companion</span>
+</nav>
+
+
+<div class="confetti-container" id="confettiContainer"></div>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- ===== APP HERO ===== -->
+<header class="hero">
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-dot"></div>
+    Rachel's Reading Companion
+  </div>
+  <div class="hero-icon-wrap">
+    <img src="https://static.wixstatic.com/media/517494_ad220780535a4d38a3c602e0d911de71~mv2.png" alt="Fluency Lab icon" class="hero-app-icon" />
+  </div>
+  <h1 class="hero-title">Fluency <em>Lab</em></h1>
+  <p class="hero-desc">Build reading speed, accuracy, and expression with hands-on drills.</p>
+  <div class="hero-actions no-print">
+    <button class="hero-btn hero-btn-primary" onclick="printPage()">🖨️ Print / Save PDF</button>
+    <button class="hero-btn hero-btn-outline" onclick="clearAll()">Clear All</button>
+  </div>
+</header>
+
+<div class="toast" id="toast"></div>
+
+<main id="main-content" class="main">
+
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <h2 class="section-title">Fluency Lab</h2>
+  </div>
+  <p class="section-subtitle">Build reading speed, accuracy, and expression with hands-on drills. Choose a practice type below!</p>
+
+  <div class="fluency-tabs no-print">
+    <button class="fluency-tab-btn active" data-fpanel="flash">🃏 Sight Word Flash</button>
+    <button class="fluency-tab-btn" data-fpanel="reading">📖 Repeated Reading</button>
+    <button class="fluency-tab-btn" data-fpanel="grid">🔢 Word Grid Sprint</button>
+    <button class="fluency-tab-btn" data-fpanel="phrases">🎵 Phrase Fluency</button>
+  </div>
+
+  <!-- FLASH CARDS -->
+  <div class="fluency-panel active" id="fpanel-flash">
+    <div class="fluency-card">
+      <div class="fluency-card-title">Sight Word Flash Cards</div>
+      <div class="fluency-card-desc">Add words to practice, then run through them as timed flash cards. Mark each word as "Got it!" or "Practice more" to track progress.</div>
+      <div class="flash-word-input-row">
+        <input type="text" class="flash-word-field" id="flashWordInput" placeholder="Type a word and press Enter or Add…" onkeydown="if(event.key==='Enter') addFlashWord()">
+        <button class="flash-add-btn" onclick="addFlashWord()">+ Add</button>
+      </div>
+      <div class="preset-row">
+        <span class="preset-label">Quick add:</span>
+<button class="preset-btn" onclick="loadPreset('cpb25')">CPB 1–25</button>
+<button class="preset-btn" onclick="loadPreset('cpb50')">CPB 26–50</button>
+<button class="preset-btn" onclick="loadPreset('cpb75')">CPB 51–75</button>
+<button class="preset-btn" onclick="loadPreset('cpb100')">CPB 76–100</button>
+<button class="preset-btn" onclick="loadPreset('cpbTop100')">CPB 1–100</button>
+        <button class="preset-btn" onclick="loadPreset('fry25')">Fry 1–25</button>
+        <button class="preset-btn" onclick="loadPreset('fry50')">Fry 26–50</button>
+        <button class="preset-btn" onclick="loadPreset('fry100')">Fry 51–100</button>
+        <button class="preset-btn" onclick="loadPreset('dolch-pre')">Dolch Pre-Primer</button>
+        <button class="preset-btn" onclick="loadPreset('dolch-primer')">Dolch Primer</button>
+        <button class="preset-btn" onclick="loadPreset('dolch1')">Dolch 1st Grade</button>
+        <button class="preset-btn" onclick="loadPreset('dolch2')">Dolch 2nd Grade</button>
+        <button class="preset-btn" onclick="loadPreset('dolch3')">Dolch 3rd Grade</button>
+      </div>
+      <div class="word-chips" id="flashWordChips"></div>
+      <div class="flash-controls" id="flashControls">
+        <button class="flash-play-btn start" id="flashPlayBtn" onclick="startFlashCards()">▶ Start Practice</button>
+        <div class="speed-control">
+          <span>Speed:</span>
+          <input type="range" id="flashSpeed" min="1" max="10" value="5">
+          <span id="flashSpeedLabel">3s</span>
+        </div>
+        <label style="font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:4px;cursor:pointer;font-family:'Fredoka',sans-serif;">
+          <input type="checkbox" id="flashShuffle" checked> Shuffle
+        </label>
+      </div>
+      <div class="flash-display" id="flashDisplay">
+        <div class="flash-progress-text" id="flashProgressText">Word 1 of 10</div>
+        <div class="flash-progress-bar"><div class="flash-progress-fill" id="flashProgressFill"></div></div>
+        <div class="streak-display" id="streakDisplay"></div>
+        <div class="flash-word-display" id="flashWordShow"></div>
+        <div class="flash-response-btns">
+          <button class="flash-resp-btn got-it" onclick="flashResponse('known')">✓ Got it!</button>
+          <button class="flash-resp-btn practice" onclick="flashResponse('practice')">✗ Practice more</button>
+        </div>
+      </div>
+      <div class="flash-results" id="flashResults">
+        <div class="results-title">Session Complete! 🎉</div>
+        <div class="results-stats">
+          <div class="result-stat"><div class="stat-num green" id="flashKnownCount">0</div><div class="stat-label">Known</div></div>
+          <div class="result-stat"><div class="stat-num pink" id="flashPracticeCount">0</div><div class="stat-label">Practice</div></div>
+        </div>
+        <div class="word-chips" id="flashResultChips" style="justify-content:center;"></div>
+        <button class="flash-play-btn start" onclick="startFlashCards()" style="margin-top:14px;">🔄 Practice Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- REPEATED READING -->
+  <div class="fluency-panel" id="fpanel-reading">
+    <div class="fluency-card">
+      <div class="fluency-card-title">Repeated Reading Timer</div>
+      <div class="fluency-card-desc">Paste a passage below, then time multiple reads. Watch words-per-minute improve with each attempt — research shows repeated reading builds fluency, speed, and expression!</div>
+      <div class="field-label">Passage</div>
+      <textarea class="passage-area" id="rrPassage" placeholder="Paste or type the reading passage here…" oninput="countPassageWords()"></textarea>
+      <div style="font-size:11px;color:var(--text-light);margin-top:4px;" id="rrWordCount">0 words</div>
+      <div class="timer-display">
+        <div class="timer-clock" id="rrClock">0:00</div>
+        <div class="timer-wpm" id="rrWpm">Start reading and time it!</div>
+        <div class="timer-btns">
+          <button class="timer-btn start-btn" id="rrStartBtn" onclick="toggleTimer()">▶ Start</button>
+          <button class="timer-btn reset-btn" onclick="resetTimer()">Reset</button>
+          <button class="timer-btn reset-btn" onclick="logAttempt()" id="rrLogBtn" style="display:none;">📝 Log This Read</button>
+        </div>
+      </div>
+      <div class="attempts-list" id="rrAttempts">
+        <div class="field-label">Reading Attempts</div>
+        <div id="rrAttemptRows"></div>
+        <div class="empty-state" id="rrEmpty" style="padding:20px;">
+          <div class="empty-icon">📊</div>
+          <div class="empty-text">No attempts yet</div>
+          <div class="empty-hint">Start the timer, read the passage, then log your time to track improvement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WORD GRID -->
+  <div class="fluency-panel" id="fpanel-grid">
+    <div class="fluency-card">
+      <div class="fluency-card-title">Word Grid Sprint</div>
+      <div class="fluency-card-desc">Build a grid of words for rapid-fire reading practice. Tap each word as you read it aloud — race the clock! Great for building automaticity with high-frequency words.</div>
+      <div class="field-label">Words (enter words separated by commas, or use a preset)</div>
+      <textarea class="passage-area" id="gridWordsInput" placeholder="the, and, is, was, for, that, with, his, they, this, have, from…" style="min-height:60px;"></textarea>
+      <div class="grid-setup" style="margin-top:10px;">
+        <div class="grid-field">
+          <div class="field-label">Grid Size</div>
+          <select class="grid-select" id="gridSize">
+            <option value="3">3 × 3 (9 words)</option>
+            <option value="4" selected>4 × 4 (16 words)</option>
+            <option value="5">5 × 5 (25 words)</option>
+            <option value="6">6 × 6 (36 words)</option>
+          </select>
+        </div>
+        <button class="grid-gen-btn" onclick="generateGrid()">🎲 Generate Grid</button>
+        <button class="grid-gen-btn" onclick="generateGrid()" style="background:var(--white);color:var(--wisteria);border-color:var(--wisteria);">🔀 Shuffle</button>
+      </div>
+      <div id="gridDisplay" style="display:none;">
+        <div class="word-grid-display" id="wordGrid"></div>
+        <div class="grid-timer-row">
+          <div>
+            <div class="grid-timer-clock" id="gridClock">0:00</div>
+            <div style="font-size:11px;color:var(--text-light);" id="gridTapCount">0 / 0 words tapped</div>
+          </div>
+          <div>
+            <button class="timer-btn start-btn" id="gridTimerBtn" onclick="toggleGridTimer()">▶ Start</button>
+            <button class="timer-btn reset-btn" onclick="resetGrid()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHRASE FLUENCY -->
+  <div class="fluency-panel" id="fpanel-phrases">
+    <div class="fluency-card">
+      <div class="fluency-card-title">Phrase Fluency Strips</div>
+      <div class="fluency-card-desc">Break text into natural phrases for prosody practice. Students read phrase-by-phrase to build smooth, expressive reading with proper phrasing and intonation.</div>
+      <div class="field-label">Enter Phrases (one per line)</div>
+      <textarea class="phrase-input-area" id="phraseInput" placeholder="Once upon a time&#10;there was a little bear&#10;who lived in a cozy cave&#10;deep in the forest…"></textarea>
+      <button class="phrase-build-btn" onclick="buildPhrases()">📝 Build Phrase Strips</button>
+      <div class="phrase-strips-container" id="phraseStrips"></div>
+      <div class="phrase-practice-display" id="phrasePractice">
+        <div class="flash-progress-text" id="phraseProgressText">Phrase 1 of 5</div>
+        <div class="flash-progress-bar"><div class="flash-progress-fill" id="phraseProgressFill"></div></div>
+        <div class="phrase-practice-word" id="phrasePracticeText"></div>
+        <div class="phrase-nav-btns">
+          <button class="phrase-nav-btn outline" onclick="phraseNav(-1)">← Back</button>
+          <button class="phrase-nav-btn filled" onclick="phraseNav(1)">Next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+var CHEERS = ['🌟 Great work!','⭐ Amazing!','🎉 Keep going!','✨ Wonderful!','💪 So strong!','🌈 Look at that progress!','🏆 Champion reader!','🎊 Fantastic!','🚀 You\'re on fire!','💫 Brilliant!','🌻 Growing every day!','📚 Word wizard!'];
+var EMOJIS_CORRECT = ['⭐','🌟','✨','💫','🎉','🌈','💪','🔥','👏','💖'];
+var EMOJIS_STREAK = ['🔥','⚡','💥','🌟','🏆'];
+
+function shootConfetti() {
+  var c = document.getElementById('confettiContainer');
+  var colors = ['#9b8cbf','#7e6da8','#8b7bb5','#9588c4','#a899cc','#8470a8','#b094c8','#c4a8d4','#8cc5a7','#f4a0b5','#f5d98a'];
+  for (var i = 0; i < 60; i++) {
+    var p = document.createElement('div'); p.className = 'confetti-piece';
+    p.style.left = (Math.random()*100)+'%'; p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDelay = (Math.random()*0.6)+'s'; p.style.animationDuration = (1.8+Math.random()*1.5)+'s';
+    p.style.width = (5+Math.random()*10)+'px'; p.style.height = (5+Math.random()*10)+'px';
+    p.style.borderRadius = Math.random()>0.5?'50%':'2px'; c.appendChild(p);
+    setTimeout(function(el){return function(){el.remove()};}(p),3500);
+  }
+}
+function showToast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+function printPage(){try{window.print();}catch(e){showToast('Print not available in this view');}}
+
+// Floating emoji effect on the flash card
+function spawnFloatEmoji(container, emoji) {
+  var el = document.createElement('div');
+  el.className = 'float-emoji';
+  el.textContent = emoji;
+  el.style.left = (20 + Math.random() * 60) + '%';
+  el.style.top = '50%';
+  container.appendChild(el);
+  setTimeout(function() { el.remove(); }, 1300);
+}
+
+// Fluency sub-tabs
+document.querySelectorAll('.fluency-tab-btn').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.fluency-tab-btn').forEach(function(b){b.classList.remove('active');});
+    btn.classList.add('active');
+    document.querySelectorAll('.fluency-panel').forEach(function(p){p.classList.remove('active');});
+    document.getElementById('fpanel-'+btn.dataset.fpanel).classList.add('active');
+  });
+});
+
+// ===== FLASH CARDS =====
+var flashWords=[];
+var flashState={active:false,index:0,known:[],practice:[],timer:null,streak:0};
+var PRESETS={
+  'cpb25': ['the','and','a','to','i','you','in','of','it','he','is','was','for','on','that','with','but','his','all','they','my','so','be','she','up'],
+  'cpb50': ['at','are','one','said','what','this','when','we','me','have','as','do','like','out','can','her','not','then','your','no','there','day','just',"it's",'see'],
+  'cpb75': ['little','time','from','had','now','will',"i'm",'go','were','too','them','him','some','big','get','if','good',"don't",'down','by','how','know','an','oh','more'],
+  'cpb100': ['their','could','about','back','who','or','make','into','look','very','would','right','here','love','way','night','did','new','come','our','two','want','made','over','around'],
+  'cpbTop100': ['the','and','a','to','i','you','in','of','it','he','is','was','for','on','that','with','but','his','all','they','my','so','be','she','up','at','are','one','said','what','this','when','we','me','have','as','do','like','out','can','her','not','then','your','no','there','day','just',"it's",'see','little','time','from','had','now','will',"i'm",'go','were','too','them','him','some','big','get','if','good',"don't",'down','by','how','know','an','oh','more','their','could','about','back','who','or','make','into','look','very','would','right','here','love','way','night','did','new','come','our','two','want','made','over','around'],
+  'fry25':'the,of,and,a,to,in,is,you,that,it,he,was,for,on,are,as,with,his,they,I,at,be,this,have,from'.split(','),
+  'fry50':'or,one,had,by,word,but,not,what,all,were,we,when,your,can,said,there,use,an,each,which,she,do,how,their,if'.split(','),
+  'fry100':'will,up,other,about,out,many,then,them,these,so,some,her,would,make,like,him,into,time,has,look,two,more,write,go,see,number,no,way,could,people'.split(','),
+  'dolch-pre':'a,and,away,big,blue,can,come,down,find,for,funny,go,help,here,I,in,is,it,jump,little,look,make,me,my,not,one,play,red,run,said,see,the,three,to,two,up,we,where,yellow,you'.split(','),
+  'dolch-primer':'all,am,are,at,ate,be,black,brown,but,came,did,do,eat,four,get,good,have,he,into,like,must,new,no,now,on,our,out,please,pretty,ran,ride,saw,say,she,so,soon,that,there,they,this,too,under,want,was,well,went,what,white,who,will,with,yes'.split(','),
+  'dolch1':'after,again,an,any,ask,as,by,could,every,fly,from,give,going,had,has,her,him,his,how,just,know,let,live,may,of,old,once,open,over,put,round,some,stop,take,thank,them,then,think,walk,were,when'.split(','),
+  'dolch2':"always,around,because,been,before,best,both,buy,call,cold,does,don't,fast,first,five,found,gave,goes,green,its,made,many,off,or,pull,read,right,sing,sit,sleep,tell,their,these,those,upon,us,use,very,wash,which,why,wish,work,would,write,your".split(','),
+  'dolch3':'about,better,bring,carry,clean,cut,done,draw,drink,eight,fall,far,full,got,grow,hold,hot,hurt,if,keep,kind,laugh,light,long,much,myself,never,only,own,pick,seven,shall,show,six,small,start,ten,today,together,try,warm'.split(','),
+};
+function addFlashWord(){var inp=document.getElementById('flashWordInput');var word=inp.value.trim();if(word&&!flashWords.includes(word.toLowerCase())){flashWords.push(word.toLowerCase());renderFlashChips();inp.value='';inp.focus();}}
+function loadPreset(key){
+  var words = PRESETS[key] || [];
+  words.forEach(function(w){
+    var lw = String(w).toLowerCase();
+    if(!flashWords.includes(lw)) flashWords.push(lw);
+  });
+  renderFlashChips();
+  showToast('Added '+words.length+' words from preset!');
+}
+
+function renderFlashChips(){var el=document.getElementById('flashWordChips');el.innerHTML=flashWords.map(function(w,i){return'<div class="word-chip">'+w+'<span class="chip-x" onclick="flashWords.splice('+i+',1);renderFlashChips();">✕</span></div>';}).join('');}
+
+function startFlashCards(){
+  if(flashWords.length===0){showToast('Add some words first!');return;}
+  flashState={active:true,index:0,known:[],practice:[],timer:null,streak:0,order:[]};
+  var order=[].concat(flashWords);
+  if(document.getElementById('flashShuffle').checked) order.sort(function(){return Math.random()-0.5;});
+  flashState.order=order;
+  document.getElementById('flashDisplay').classList.add('active');
+  document.getElementById('flashResults').classList.remove('active');
+  document.getElementById('flashControls').style.display='none';
+  document.getElementById('streakDisplay').textContent='';
+  showFlashWord();
+}
+
+function showFlashWord(){
+  var s=flashState;
+  if(s.index>=s.order.length){endFlashCards();return;}
+  var wordEl = document.getElementById('flashWordShow');
+  // Remove old animation classes
+  wordEl.classList.remove('pop-in','exit','correct-flash','wrong-flash');
+  // Force reflow to restart animation
+  void wordEl.offsetWidth;
+  wordEl.textContent=s.order[s.index];
+  wordEl.classList.add('pop-in');
+  document.getElementById('flashProgressText').textContent='Word '+(s.index+1)+' of '+s.order.length;
+  document.getElementById('flashProgressFill').style.width=((s.index/s.order.length)*100)+'%';
+}
+
+function flashResponse(type){
+  var wordEl = document.getElementById('flashWordShow');
+  var display = document.getElementById('flashDisplay');
+  var word=flashState.order[flashState.index];
+
+  // Remove previous animation classes
+  wordEl.classList.remove('pop-in','exit','correct-flash','wrong-flash');
+  void wordEl.offsetWidth;
+
+  if(type==='known'){
+    flashState.known.push(word);
+    flashState.streak++;
+    wordEl.classList.add('correct-flash');
+    // Float emoji
+    spawnFloatEmoji(display, EMOJIS_CORRECT[Math.floor(Math.random()*EMOJIS_CORRECT.length)]);
+    // Update streak
+    if(flashState.streak >= 3){
+      var streakEl = document.getElementById('streakDisplay');
+      var fireEmoji = EMOJIS_STREAK[Math.min(Math.floor(flashState.streak/3), EMOJIS_STREAK.length-1)];
+      streakEl.innerHTML = '<span class="streak-fire bump">' + fireEmoji + '</span> ' + flashState.streak + ' in a row!';
+      // Mini confetti burst at milestones
+      if(flashState.streak % 5 === 0) shootConfetti();
+    }
+  } else {
+    flashState.practice.push(word);
+    flashState.streak = 0;
+    wordEl.classList.add('wrong-flash');
+    document.getElementById('streakDisplay').textContent='';
+  }
+
+  // Short delay for the animation, then advance
+  setTimeout(function(){
+    wordEl.classList.remove('correct-flash','wrong-flash');
+    wordEl.classList.add('exit');
+    setTimeout(function(){
+      flashState.index++;
+      showFlashWord();
+    }, 200);
+  }, 350);
+}
+
+function endFlashCards(){
+  flashState.active=false;
+  document.getElementById('flashDisplay').classList.remove('active');
+  document.getElementById('flashControls').style.display='flex';
+  document.getElementById('flashResults').classList.add('active');
+  document.getElementById('flashKnownCount').textContent=flashState.known.length;
+  document.getElementById('flashPracticeCount').textContent=flashState.practice.length;
+  var chips=flashState.known.map(function(w){return'<div class="word-chip known">'+w+' ✓</div>';})
+    .concat(flashState.practice.map(function(w){return'<div class="word-chip practice">'+w+' ✗</div>';}));
+  document.getElementById('flashResultChips').innerHTML=chips.join('');
+  if(flashState.known.length>=flashState.order.length){
+    shootConfetti();
+    showToast('🎉 Perfect score! Every word known!');
+  } else if(flashState.known.length>flashState.practice.length) {
+    shootConfetti();
+    showToast(CHEERS[Math.floor(Math.random()*CHEERS.length)]);
+  } else {
+    showToast(CHEERS[Math.floor(Math.random()*CHEERS.length)]);
+  }
+}
+
+document.getElementById('flashSpeed').addEventListener('input',function(){var speeds=[8,6,5,4,3.5,3,2.5,2,1.5,1];document.getElementById('flashSpeedLabel').textContent=speeds[this.value-1]+'s';});
+
+// ===== REPEATED READING =====
+var rrTimer={running:false,seconds:0,interval:null,attempts:[]};
+function countPassageWords(){var text=document.getElementById('rrPassage').value.trim();var count=text?text.split(/\s+/).length:0;document.getElementById('rrWordCount').textContent=count+' words';}
+function toggleTimer(){if(rrTimer.running)stopTimer();else startTimer();}
+function startTimer(){clearInterval(rrTimer.interval);rrTimer.running=true;rrTimer.seconds=0;document.getElementById('rrStartBtn').textContent='⏸ Stop';document.getElementById('rrStartBtn').className='timer-btn stop-btn';document.getElementById('rrClock').classList.add('running');document.getElementById('rrLogBtn').style.display='none';document.getElementById('rrClock').textContent='0:00';document.getElementById('rrWpm').textContent='Reading…';rrTimer.interval=setInterval(function(){rrTimer.seconds++;document.getElementById('rrClock').textContent=formatTime(rrTimer.seconds);updateWpm();},1000);}
+function stopTimer(){clearInterval(rrTimer.interval);rrTimer.interval=null;rrTimer.running=false;document.getElementById('rrStartBtn').textContent='▶ Start';document.getElementById('rrStartBtn').className='timer-btn start-btn';document.getElementById('rrClock').classList.remove('running');if(rrTimer.seconds>0)document.getElementById('rrLogBtn').style.display='inline-flex';}
+function resetTimer(){clearInterval(rrTimer.interval);rrTimer.interval=null;rrTimer.running=false;rrTimer.seconds=0;document.getElementById('rrStartBtn').textContent='▶ Start';document.getElementById('rrStartBtn').className='timer-btn start-btn';document.getElementById('rrClock').classList.remove('running');document.getElementById('rrClock').textContent='0:00';document.getElementById('rrWpm').textContent='Start reading and time it!';document.getElementById('rrLogBtn').style.display='none';}
+function formatTime(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0');}
+function updateWpm(){var text=document.getElementById('rrPassage').value.trim();var wc=text?text.split(/\s+/).length:0;if(wc>0&&rrTimer.seconds>0){var wpm=Math.round((wc/rrTimer.seconds)*60);document.getElementById('rrWpm').textContent=wpm+' words per minute';}}
+function logAttempt(){var text=document.getElementById('rrPassage').value.trim();var wc=text?text.split(/\s+/).length:0;var savedSeconds=rrTimer.seconds;if(wc===0||savedSeconds===0){showToast('Add a passage and complete a timed read first!');return;}var wpm=Math.round((wc/savedSeconds)*60);rrTimer.attempts.push({time:savedSeconds,wpm:wpm,wc:wc});renderAttempts();resetTimer();if(rrTimer.attempts.length>=3){var first=rrTimer.attempts[0].wpm;var last=rrTimer.attempts[rrTimer.attempts.length-1].wpm;if(last>first){shootConfetti();showToast('🚀 WPM improved from '+first+' to '+last+'!');}else showToast(CHEERS[Math.floor(Math.random()*CHEERS.length)]);}else showToast('📝 Read '+rrTimer.attempts.length+' logged — '+wpm+' WPM!');}
+function renderAttempts(){var el=document.getElementById('rrAttemptRows');document.getElementById('rrEmpty').style.display=rrTimer.attempts.length?'none':'block';el.innerHTML=rrTimer.attempts.map(function(a,i){var improve='';if(i===0)improve='<span class="attempt-improve first">Baseline</span>';else{var diff=a.wpm-rrTimer.attempts[i-1].wpm;improve=diff>0?'<span class="attempt-improve up">+'+diff+' WPM ↑</span>':'<span class="attempt-improve" style="color:var(--text-light);">'+diff+' WPM</span>';}return'<div class="attempt-row"><div class="attempt-num">'+(i+1)+'</div><div class="attempt-info"><div class="attempt-wpm">'+a.wpm+' <span>WPM</span></div><div class="attempt-time">'+formatTime(a.time)+' · '+a.wc+' words</div></div>'+improve+'</div>';}).join('');}
+
+// ===== WORD GRID =====
+var gridTimer={running:false,seconds:0,interval:null,tapped:0,total:0};
+function generateGrid(){var input=document.getElementById('gridWordsInput').value.trim();if(!input){showToast('Enter some words first!');return;}var words=input.split(/[,\n]+/).map(function(w){return w.trim();}).filter(function(w){return w;});var size=parseInt(document.getElementById('gridSize').value);var total=size*size;var pool=[];while(pool.length<total)pool=pool.concat(words);pool=pool.slice(0,total).sort(function(){return Math.random()-0.5;});gridTimer.tapped=0;gridTimer.total=total;var grid=document.getElementById('wordGrid');grid.style.gridTemplateColumns='repeat('+size+', 1fr)';grid.innerHTML=pool.map(function(w,i){return'<div class="grid-word-cell" onclick="tapGridWord(this,'+i+')">'+w+'</div>';}).join('');document.getElementById('gridDisplay').style.display='block';document.getElementById('gridTapCount').textContent='0 / '+total+' words tapped';resetGridTimer();}
+function tapGridWord(el){if(el.classList.contains('tapped'))return;el.classList.add('tapped');gridTimer.tapped++;document.getElementById('gridTapCount').textContent=gridTimer.tapped+' / '+gridTimer.total+' words tapped';if(gridTimer.tapped>=gridTimer.total){stopGridTimer();shootConfetti();showToast('⚡ Grid complete in '+formatTime(gridTimer.seconds)+'!');}}
+function toggleGridTimer(){if(gridTimer.running)stopGridTimer();else startGridTimer();}
+function startGridTimer(){clearInterval(gridTimer.interval);gridTimer.running=true;gridTimer.seconds=0;document.getElementById('gridTimerBtn').textContent='⏸ Stop';document.getElementById('gridTimerBtn').className='timer-btn stop-btn';document.getElementById('gridClock').classList.add('running');gridTimer.interval=setInterval(function(){gridTimer.seconds++;document.getElementById('gridClock').textContent=formatTime(gridTimer.seconds);},1000);}
+function stopGridTimer(){clearInterval(gridTimer.interval);gridTimer.interval=null;gridTimer.running=false;document.getElementById('gridTimerBtn').textContent='▶ Start';document.getElementById('gridTimerBtn').className='timer-btn start-btn';document.getElementById('gridClock').classList.remove('running');}
+function resetGrid(){stopGridTimer();gridTimer.seconds=0;gridTimer.tapped=0;document.getElementById('gridClock').textContent='0:00';document.querySelectorAll('.grid-word-cell').forEach(function(c){c.classList.remove('tapped');});document.getElementById('gridTapCount').textContent='0 / '+gridTimer.total+' words tapped';}
+function resetGridTimer(){stopGridTimer();gridTimer.seconds=0;document.getElementById('gridClock').textContent='0:00';}
+
+// ===== PHRASE STRIPS =====
+var phraseList=[];
+var phraseIndex=0;
+function buildPhrases(){var text=document.getElementById('phraseInput').value.trim();if(!text){showToast('Enter some phrases first!');return;}phraseList=text.split('\n').map(function(p){return p.trim();}).filter(function(p){return p;});var el=document.getElementById('phraseStrips');el.innerHTML=phraseList.map(function(p,i){return'<div class="phrase-strip"><div class="phrase-strip-num">'+(i+1)+'</div><div class="phrase-strip-text">'+p+'</div></div><div class="phrase-strip-scoop"></div>';}).join('');el.innerHTML+='<button class="phrase-practice-btn no-print" onclick="startPhrasePractice()">▶ Practice One at a Time</button>';}
+function startPhrasePractice(){if(phraseList.length===0)return;phraseIndex=0;document.getElementById('phrasePractice').classList.add('active');showPhrase();}
+function showPhrase(){document.getElementById('phrasePracticeText').textContent=phraseList[phraseIndex];document.getElementById('phraseProgressText').textContent='Phrase '+(phraseIndex+1)+' of '+phraseList.length;document.getElementById('phraseProgressFill').style.width=(((phraseIndex+1)/phraseList.length)*100)+'%';}
+function phraseNav(dir){phraseIndex+=dir;if(phraseIndex<0)phraseIndex=0;if(phraseIndex>=phraseList.length){document.getElementById('phrasePractice').classList.remove('active');shootConfetti();showToast('🎵 All phrases complete! Great expression!');return;}showPhrase();}
+
+function clearAll(){flashWords=[];rrTimer={running:false,seconds:0,interval:null,attempts:[]};document.getElementById('flashWordChips').innerHTML='';document.getElementById('rrAttemptRows').innerHTML='';document.getElementById('rrEmpty').style.display='block';document.getElementById('flashResults').classList.remove('active');document.getElementById('flashDisplay').classList.remove('active');document.getElementById('flashControls').style.display='flex';resetTimer();showToast('All cleared! Fresh start ✨');}
+
+</script>
+
+<!-- iframe height reporter -->
+<script>
+(function(){
+  if (window.self === window.top) return; // not in iframe, skip
+  function reportHeight() {
+    var h = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'rrc-resize', height: h }, '*');
+  }
+  window.addEventListener('load', reportHeight);
+  new MutationObserver(reportHeight).observe(document.body, { childList: true, subtree: true, attributes: true });
+  window.addEventListener('resize', reportHeight);
+  // Also report on interval for dynamic content
+  setInterval(reportHeight, 1000);
+})();
+</script>
+</body>
+</html>
